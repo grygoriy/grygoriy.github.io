@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-08T16:08:01+03:00</updated>
+  <updated>2013-10-08T19:01:54+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -12,6 +12,152 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Add version to your web application]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application/"/>
+    <updated>2013-09-02T18:12:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application</id>
+    <content type="html"><![CDATA[<p>For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.</p>
+
+<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href="http://grails.org/plugin/build-info">http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more.</p>
+
+<!--more-->
+
+
+<p>Ok, so we will start with maven web project. Assuming you have one.
+We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. You can pick up any file name you want, this name will be used to access file with URL. Content of my file is:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Project version - ${project.version}
+</span><span class='line'>Last commit hash - ${buildNumber}
+</span><span class='line'>Build at - ${buildDate}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is template which we will be filtering with maven. So here is maven config.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- Configuration for Git VCS to grab commit hash --&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;scm&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;connection&gt;</span>scm:git:file://.<span class="nt">&lt;/connection&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;developerconnection&gt;</span>scm:git:file://.<span class="nt">&lt;/developerconnection&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;url&gt;</span>scm:git:file://.<span class="nt">&lt;/url&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/scm&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;build&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;plugins&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- Plugin is used to generate build time --&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;groupid&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupid&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;artifactid&gt;</span>buildnumber-maven-plugin<span class="nt">&lt;/artifactid&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;phase&gt;</span>generate-resources<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>                            <span class="nt">&lt;goal&gt;</span>create<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;timestampformat&gt;</span>{0, date, yyyy-MM-dd HH:mm:ss}<span class="nt">&lt;/timestampformat&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
+</span><span class='line'>            <span class="c">&lt;!-- We need to include version.txt file into filter list. So maven will filter it when will be building *.war --&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;groupid&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupid&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;artifactid&gt;</span>maven-war-plugin<span class="nt">&lt;/artifactid&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;version&gt;</span>2.3<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;webresources&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;resource&gt;</span>
+</span><span class='line'>                            <span class="nt">&lt;filtering&gt;</span>true<span class="nt">&lt;/filtering&gt;</span>
+</span><span class='line'>                            <span class="nt">&lt;directory&gt;</span>src/main/webapp<span class="nt">&lt;/directory&gt;</span>
+</span><span class='line'>                            <span class="nt">&lt;includes&gt;</span>
+</span><span class='line'>                                <span class="nt">&lt;include&gt;</span>version.txt<span class="nt">&lt;/include&gt;</span>
+</span><span class='line'>                            <span class="nt">&lt;/includes&gt;</span>
+</span><span class='line'>                        <span class="nt">&lt;/resource&gt;</span>
+</span><span class='line'>                    <span class="nt">&lt;/webresources&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nt">&lt;/plugins&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/build&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;properties&gt;</span>
+</span><span class='line'>        <span class="c">&lt;!-- Properties to format date output --&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;maven</span> <span class="na">.build.timestamp.format=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>dd-MM-yy_HH:mm<span class="nt">&lt;/maven&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;builddate&gt;</span>${maven.build.timestamp}<span class="nt">&lt;/builddate&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/properties&gt;</span>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is it. Now you can build your application</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mvn package</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Deploy and check under url <a href="http://localhost:8080/version.txt">http://localhost:8080/version.txt</a></p>
+
+<p>Output should look like this
+<img src="http://grygoriy.github.io/images/2013-09-02-add-version-to-your-web-application/version_view.png">
+Enjoy.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
@@ -354,6 +500,392 @@ Enjoy :)</p>
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[How to filter blogger rss]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/"/>
+    <updated>2012-10-04T18:51:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss</id>
+    <content type="html"><![CDATA[<p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required.
+Few tips how to hack RSS in <a href="http://blogger.com">blogger.com</a>
+To get all posts with specific label use <a href="http://blog.blogspot.com/feeds/posts/default/-/labelname">http://blog.blogspot.com/feeds/posts/default/-/labelname</a></p>
+
+<p>Other nice things that can be done with url can be found on <a href="http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933">official google page</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Awesomeness of groovy named parameters]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/"/>
+    <updated>2012-02-13T18:33:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
+    <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>typical java call would be</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;greetings&quot;</span><span class="o">,</span> <span class="s2">&quot;Hello Goodbye&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
+Groovy allows us to pass parameters as map without []. If we pass map into method groovy set it to the first parameter. Let&rsquo;s look into other exampl</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">body:</span><span class="s2">&quot;Hello Goodbye&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Much more readable as for me. And method will looks like</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
+    <updated>2012-02-06T18:30:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
+    <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
+
+<p>So we can change port with command <br/>
+<strong>grails run-app -Dserver.port=8081</strong></p>
+
+<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br/>
+<strong>grails.server.port.http=&ldquo;8081&rdquo;</strong></p>
+
+<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br/>
+<strong>app.context=/</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Drop all foreing key for MS SQL tables]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/"/>
+    <updated>2012-01-09T18:55:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables</id>
+    <content type="html"><![CDATA[<p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
+
+<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
+For MS SQL I&rsquo;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br />
+can be deleted without any errors&lt;</p>
+
+<p>Here is stored procedure</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">drop_foreign_keys</span>
+</span><span class='line'><span class="o">@</span><span class="k">table</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mf">50</span><span class="p">)</span>
+</span><span class='line'><span class="k">AS</span>
+</span><span class='line'>    <span class="k">DECLARE</span> <span class="n">tables_cursor</span> <span class="k">CURSOR</span>
+</span><span class='line'>    <span class="k">FOR</span>
+</span><span class='line'>      <span class="k">SELECT</span>
+</span><span class='line'>        <span class="s1">&#39;ALTER TABLE &#39;</span> <span class="o">+</span> <span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">parent_object_id</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39; DROP CONSTRAINT &#39;</span> <span class="o">+</span> <span class="k">name</span> <span class="k">as</span> <span class="n">dropkey</span>
+</span><span class='line'>      <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">foreign_keys</span>
+</span><span class='line'>    <span class="k">WHERE</span> <span class="n">referenced_object_id</span> <span class="o">=</span> <span class="n">object_id</span><span class="p">(</span><span class="o">@</span><span class="k">table</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">OPEN</span> <span class="n">tables_cursor</span><span class="p">;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    DECLARE @dropkey sysname;</span>
+</span><span class='line'><span class="go">    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
+</span><span class='line'><span class="go">    BEGIN;</span>
+</span><span class='line'><span class="go">      EXECUTE (@dropkey);</span>
+</span><span class='line'><span class="go">      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    END;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    CLOSE tables_cursor;</span>
+</span><span class='line'><span class="go">    DEALLOCATE tables_cursor;</span>
+</span><span class='line'><span class="go">GO</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And how to use it</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">EXECUTE</span> <span class="n">drop_foreign_keys</span> <span class="n">N</span><span class="s1">&#39;TableТame&#39;</span>
+</span><span class='line'><span class="k">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mf">1</span> <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">objects</span> <span class="k">WHERE</span> <span class="n">OBJECT_ID</span> <span class="o">=</span> <span class="n">OBJECT_ID</span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;TableТame&#39;</span><span class="p">)</span> <span class="k">AND</span> <span class="k">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="s1">&#39;U&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">TableName</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[use Grails Domain with string type id]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/"/>
+    <updated>2012-01-03T18:41:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id</id>
+    <content type="html"><![CDATA[<p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
+
+<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
+
+<p>But there is at least one case with very strange behaviour. When we define key as String type</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the first look it works fine Foo.get(‘someKey’)
+returns exact object I was looking. But when we try to use string that looks like a number</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="err">&#39;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>we will get</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
+It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
+Workaround is to add explicitly id field to domain class</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">id</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is mentioned in documentation but now grails knows what type to use.
+There is issue in grails jira which was closed with resolution Not A Bug.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code Quality Tools for Groovy at itBooze]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/"/>
+    <updated>2011-08-26T18:53:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze</id>
+    <content type="html"><![CDATA[<iframe src="http://player.vimeo.com/video/28185557?title=0&amp;byline=0&amp;portrait=0" width="500" height="275" frameborder="0"></iframe>
+
+
+
+
+<iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/9015391" width="425"></iframe>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails at Ubuntu rep]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/"/>
+    <updated>2011-08-20T16:51:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep</id>
+    <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
+
+<p>First of all we need to add Grails repo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
+</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
+
+<p>So here is list of available Grails versions
+sudo aptitude search grails <br/>
+p grails &ndash; A rapid web development platform built on Groovy <br/>
+p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
+Grails, a rapid web development platform built on Groovy</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mute Skype notifications at Linux]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/"/>
+    <updated>2011-08-09T18:24:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux</id>
+    <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&rsquo;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype.
+Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skype command you can find here <a href="https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles">https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My presentation at it booze about some features of Groovy]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
+    <updated>2011-08-07T18:28:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy</id>
+    <content type="html"><![CDATA[<iframe frameborder="0" height="275" src="http://player.vimeo.com/video/28189112?title=0&amp;byline=0&amp;portrait=0" width="500"></iframe>
+
+
+<p><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/itbooze-groovy-in-daily-use-by-grygoriy-mykhalyunyo" target="_blank" title="itBooze: Groovy in daily use by Grygoriy Mykhalyunyo">itBooze: Groovy in daily use by Grygoriy Mykhalyunyo</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/8778146" width="425"></iframe> <br /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[gradle використання groovy i java в одному проекті]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/"/>
+    <updated>2010-11-12T16:42:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti</id>
+    <content type="html"><![CDATA[<p>gradle using groovy and java in single project.</p>
+
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
+Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[team organizations or how to build team from scratch]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/"/>
+    <updated>2010-11-06T16:49:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch</id>
+    <content type="html"><![CDATA[<iframe allowfullscreen="" frameborder="0" height="330" src="http://player.vimeo.com/video/31713498" webkitallowfullscreen="" width="600"></iframe>
+
+
+<div id="__ss_5542596" style="width: 425px;">
+<strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/teamwork-5542596" target="_blank" title="Teamwork">Teamwork</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/5542596" width="425"></iframe> <br />
+<div style="padding: 5px 0 12px;">
+<br /></div>
+</div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails schema-export]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
+    <updated>2010-08-27T16:40:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
+    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс
+grails schema-export</p>
+
+<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+
+<p>Якщо виконати
+grails schema-export
+то схема бази даних буде екпортована у target/ddl.sql
+Можна екпортувати окремі доменні класи</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[swiching aces card trick]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/"/>
+    <updated>2010-08-20T16:37:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
+    <content type="html"><![CDATA[<iframe width="640" height="360" src="http://grygoriy.github.io//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Квота місця на ext2/3/4]]></title>
     <link href="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/"/>
     <updated>2009-10-08T12:04:00+03:00</updated>
@@ -458,7 +990,7 @@ Find and fix this group</p>
     <link href="http://grygoriy.github.io/blog/2008/01/20/goto-is-cool/"/>
     <updated>2008-01-20T09:49:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2008/01/20/goto-is-cool</id>
-    <content type="html"><![CDATA[<p><img src="http://2.bp.blogspot.com/_wXHz4-t8Ahk/R57alGIR-zI/AAAAAAAAAKk/uW9JpQ4kmaA/s1600/SoThenITypedGoto500.jpg"></p>
+    <content type="html"><![CDATA[<p><img src="http://grygoriy.github.io/images/SoThenITypedGoto500.jpg"></p>
 ]]></content>
   </entry>
   

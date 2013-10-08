@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tricks | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/tricks/atom.xml" rel="self"/>
+  <link href="http://grygoriy.github.io/"/>
+  <updated>2013-10-08T19:01:54+03:00</updated>
+  <id>http://grygoriy.github.io/</id>
+  <author>
+    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[swiching aces card trick]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/"/>
+    <updated>2010-08-20T16:37:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
+    <content type="html"><![CDATA[<iframe width="640" height="360" src="http://grygoriy.github.io//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+</feed>

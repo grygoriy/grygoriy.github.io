@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Grygoriy Mykhalyuno</title>
+  <meta name="author" content="Grygoriy Mykhalyuno">
+
+  
+  <meta name="description" content="Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo; &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grygoriy.github.io/blog/page/4">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
+  
+    <h2>Thoughts to share</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grygoriy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/20/grails-at-ubuntu-rep/">Grails at Ubuntu Rep</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-20T16:51:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
+
+<p>First of all we need to add Grails repo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
+</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
+
+<p>So here is list of available Grails versions
+sudo aptitude search grails <br/>
+p grails &ndash; A rapid web development platform built on Groovy <br/>
+p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
+Grails, a rapid web development platform built on Groovy</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/09/mute-skype-notifications-at-linux/">Mute Skype Notifications at Linux</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-09T18:24:00+03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&rsquo;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype.
+Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skype command you can find here <a href="https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles">https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/">My Presentation at It Booze About Some Features of Groovy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-07T18:28:00+03:00" pubdate data-updated="true">Aug 7<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><iframe frameborder="0" height="275" src="http://player.vimeo.com/video/28189112?title=0&amp;byline=0&amp;portrait=0" width="500"></iframe>
+
+
+<p><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/itbooze-groovy-in-daily-use-by-grygoriy-mykhalyunyo" target="_blank" title="itBooze: Groovy in daily use by Grygoriy Mykhalyunyo">itBooze: Groovy in daily use by Grygoriy Mykhalyunyo</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/8778146" width="425"></iframe> <br /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/5/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/3/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grygoriy Mykhalyuno -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grygoriy';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

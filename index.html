@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about &hellip;">
+  <meta name="description" content="For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/09/02/add-version-to-your-web-application/">Add Version to Your Web Application</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-02T18:12:00+03:00" pubdate data-updated="true">Sep 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.</p>
+
+<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href="http://grails.org/plugin/build-info">http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/09/02/add-version-to-your-web-application/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -460,197 +503,9 @@ Enjoy :)</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/">Квота місця на Ext2/3/4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-08T12:04:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
-
-<p>Змінити це можна командою tune2fs</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
-
-<p>цікавиити нас будуть два параметри
--m reserved-blocks-percentage
--r  reserved-blocks-count</p>
-
-<p>-m вказує відсоток блоків у відсотках
--r вказує їх абсолютну величину</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>змінить ліміт до двох відотків</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/">How Access SVN Though HTTP When You Are Under Proxy</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-28T10:14:00+03:00" pubdate data-updated="true">Aug 28<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You need to configure subversion &ldquo;server&rdquo; file
-You can find it:</p>
-
-<p>At windows platform</p>
-
-<p>at Linux based platform
-If you want common proxy setting for all SVN servers
-Find and fix this group</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[global]
-</span><span class='line'>http-proxy-host=proxyhost
-</span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you want separed proxy setting for each svn server</p>
-
-<p>Find group called</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add new line</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add new group with name groupName (previously added)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groupName]
-</span><span class='line'>http-proxy-host = proxy1.some-domain-name.com
-</span><span class='line'>http-proxy-port = 80
-</span><span class='line'>http-proxy-username = blah
-</span><span class='line'>http-proxy-password = doubleblah
-</span><span class='line'>http-timeout = 60
-</span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all, just save your file and use it</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2008/01/20/goto-is-cool/">GOTO Is Cool</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-01-20T09:49:00+02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2008</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://2.bp.blogspot.com/_wXHz4-t8Ahk/R57alGIR-zI/AAAAAAAAAKk/uW9JpQ4kmaA/s1600/SoThenITypedGoto500.jpg"></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -663,15 +518,15 @@ Find and fix this group</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/">Квота місця на ext2/3/4</a>
       </li>
     
   </ul>

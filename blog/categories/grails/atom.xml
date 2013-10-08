@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Grails | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/grails/atom.xml" rel="self"/>
+  <link href="http://grygoriy.github.io/"/>
+  <updated>2013-10-08T19:01:54+03:00</updated>
+  <id>http://grygoriy.github.io/</id>
+  <author>
+    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
+    <updated>2012-02-06T18:30:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
+    <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
+
+<p>So we can change port with command <br/>
+<strong>grails run-app -Dserver.port=8081</strong></p>
+
+<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br/>
+<strong>grails.server.port.http=&ldquo;8081&rdquo;</strong></p>
+
+<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br/>
+<strong>app.context=/</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[use Grails Domain with string type id]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/"/>
+    <updated>2012-01-03T18:41:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id</id>
+    <content type="html"><![CDATA[<p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
+
+<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
+
+<p>But there is at least one case with very strange behaviour. When we define key as String type</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">code</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="nl">column:</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">code</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;,</span> <span class="nl">type:</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="n">string</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="o">;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>For the first look it works fine Foo.get(‘someKey’)
+returns exact object I was looking. But when we try to use string that looks like a number</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(&amp;</span><span class="n">lsquo</span><span class="o">;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+we will get</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
+It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
+Workaround is to add explicitly id field to domain class</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">id</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;p&gt;  static mapping = {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>It is mentioned in documentation but now grails knows what type to use.
+There is issue in grails jira which was closed with resolution Not A Bug.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails at Ubuntu rep]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/"/>
+    <updated>2011-08-20T16:51:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep</id>
+    <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
+
+<p>First of all we need to add Grails repo</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
+</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure></notextile></div>
+That&rsquo;s all,  now you can install latest stable release of Grails
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
+
+<p>So here is list of available Grails versions
+sudo aptitude search grails <br/>
+p grails &ndash; A rapid web development platform built on Groovy <br/>
+p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
+Grails, a rapid web development platform built on Groovy</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grails schema-export]]></title>
+    <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
+    <updated>2010-08-27T16:40:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
+    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс
+grails schema-export</p>
+
+<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+
+<p>Якщо виконати
+grails schema-export
+то схема бази даних буде екпортована у target/ddl.sql
+Можна екпортувати окремі доменні класи
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Presentations | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/presentations/atom.xml" rel="self"/>
+  <link href="http://grygoriy.github.io/"/>
+  <updated>2013-10-08T19:01:54+03:00</updated>
+  <id>http://grygoriy.github.io/</id>
+  <author>
+    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Code Quality Tools for Groovy at itBooze]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/"/>
+    <updated>2011-08-26T18:53:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze</id>
+    <content type="html"><![CDATA[<iframe src="http://player.vimeo.com/video/28185557?title=0&amp;byline=0&amp;portrait=0" width="500" height="275" frameborder="0"></iframe>
+
+
+
+
+<iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/9015391" width="425"></iframe>
+
+
+<p></p>
+]]></content>
+  </entry>
+  
+</feed>

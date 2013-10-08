@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Presetation | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/presetation/atom.xml" rel="self"/>
+  <link href="http://grygoriy.github.io/"/>
+  <updated>2013-10-08T19:01:54+03:00</updated>
+  <id>http://grygoriy.github.io/</id>
+  <author>
+    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My presentation at it booze about some features of Groovy]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
+    <updated>2011-08-07T18:28:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy</id>
+    <content type="html"><![CDATA[<iframe frameborder="0" height="275" src="http://player.vimeo.com/video/28189112?title=0&amp;byline=0&amp;portrait=0" width="500"></iframe>
+
+
+<p><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/itbooze-groovy-in-daily-use-by-grygoriy-mykhalyunyo" target="_blank" title="itBooze: Groovy in daily use by Grygoriy Mykhalyunyo">itBooze: Groovy in daily use by Grygoriy Mykhalyunyo</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/8778146" width="425"></iframe> <br /></p>
+]]></content>
+  </entry>
+  
+</feed>
