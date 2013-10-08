@@ -57,6 +57,10 @@
         <lastmod>2013-10-08T18:54:48+03:00</lastmod>
     </url>
     <url>
+        <loc>http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball/</loc>
+        <lastmod>2013-10-08T19:17:26+03:00</lastmod>
+    </url>
+    <url>
         <loc>
             http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/
         </loc>
@@ -112,7 +116,7 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/archives/</loc>
-        <lastmod>2013-10-08T19:07:47+03:00</lastmod>
+        <lastmod>2013-10-08T19:17:26+03:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/search.html</loc>
@@ -120,6 +124,6 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/</loc>
-        <lastmod>2013-10-08T19:07:47+03:00</lastmod>
+        <lastmod>2013-10-08T19:17:26+03:00</lastmod>
     </url>
 </urlset>

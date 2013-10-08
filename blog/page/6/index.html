@@ -9,8 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Для себе виявив цікавий скрипт у грейлс
-grails schema-export Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. &hellip;">
+  <meta name="description" content=" Teamwork ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,52 @@ grails schema-export Власне все що він робить &ndash; це �
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/">Team Organizations or How to Build Team From Scratch</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-06T16:49:00+02:00" pubdate data-updated="true">Nov 6<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><iframe allowfullscreen="" frameborder="0" height="330" src="http://player.vimeo.com/video/31713498" webkitallowfullscreen="" width="600"></iframe>
+
+
+<div id="__ss_5542596" style="width: 425px;">
+<strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/teamwork-5542596" target="_blank" title="Teamwork">Teamwork</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/5542596" width="425"></iframe> <br />
+<div style="padding: 5px 0 12px;">
+<br /></div>
+</div>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -146,75 +191,6 @@ grails schema-export
 
 
   <div class="entry-content"><iframe width="640" height="360" src="//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/">Квота місця на Ext2/3/4</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-10-08T12:04:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2009</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
-
-<p>Змінити це можна командою tune2fs</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
-
-<p>цікавиити нас будуть два параметри
--m reserved-blocks-percentage
--r  reserved-blocks-count</p>
-
-<p>-m вказує відсоток блоків у відсотках
--r вказує їх абсолютну величину</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>змінить ліміт до двох відотків</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul>
 
 </div>
   
