@@ -81,6 +81,12 @@
         <lastmod>2013-10-08T18:38:16+03:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/
+        </loc>
+        <lastmod>2013-10-08T19:07:47+03:00</lastmod>
+    </url>
+    <url>
         <loc>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/</loc>
         <lastmod>2013-10-08T18:52:38+03:00</lastmod>
     </url>
@@ -94,7 +100,7 @@
         <loc>
             http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/
         </loc>
-        <lastmod>2013-10-08T15:57:08+03:00</lastmod>
+        <lastmod>2013-10-08T19:04:00+03:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application/</loc>
@@ -106,7 +112,7 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/archives/</loc>
-        <lastmod>2013-10-08T19:00:10+03:00</lastmod>
+        <lastmod>2013-10-08T19:07:47+03:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/search.html</loc>
@@ -114,6 +120,6 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/</loc>
-        <lastmod>2013-10-08T19:00:10+03:00</lastmod>
+        <lastmod>2013-10-08T19:07:47+03:00</lastmod>
     </url>
 </urlset>

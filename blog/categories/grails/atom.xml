@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grails | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/grails/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-08T19:01:54+03:00</updated>
+  <updated>2013-10-08T19:08:21+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -12,6 +12,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
+    <updated>2012-10-24T15:52:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
+    <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
+Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
+Implementation of controller usually looks like
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def deleteComment() {</span>
+</span><span class='line'><span class="s">    def commentId = params.long(&#39;id&#39;)</span>
+</span><span class='line'><span class="s">    def comment = Comment.findById(commentId)</span>
+</span><span class='line'><span class="s">    comment?.delete()</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
+Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
+Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def grailsApplication</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">def init = { servletContext -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">    grailsApplication.domainClasses.each {def domain -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">        domain.metaClass.static.deleteById = {def id -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">            executeUpdate(&quot;delete from ${domain.name} where id = :id&quot;, [id:id])</span>
+</span><span class='line'><span class="s">        }</span>
+</span><span class='line'><span class="s">    }</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Now each of your domain class has the method deleteById, and our example became
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def deleteComment() {</span>
+</span><span class='line'><span class="s">    def commentId = params.long(&#39;id&#39;)</span>
+</span><span class='line'><span class="s">    Comment.deleteById(commentId)</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Working with more then one grails version on same environment]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/"/>
+    <updated>2012-09-23T19:04:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment</id>
+    <content type="html"><![CDATA[<p>Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go.</p>
+
+<p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
+
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu).
+Usually I install all applications to /usr/local/. Let&rsquo;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period)
+So after unpacking we have
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;/usr/local/grails-2.0.0
+</span><span class='line'>/usr/local/grails-2.1.1
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Let&rsquo;s create link to any version of Grails
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;blockquote&gt;&lt;p&gt;ln -s /usr/local/grails-2.1.1 grails
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Now we have
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class="nv">$ </span>ls -ld grails*
+</span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails &amp;ndash;&amp;gt; /usr/local/grails-2.1.1
+</span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
+</span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
+</span></code></pre></td></tr></table></div></figure></notextile></div></p></blockquote>
+
+<p>and variable</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="nv">$GRAILS_HOME</span>
+</span><span class='line'>/usr/local/grails
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Let&rsquo;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Script <span class="k">for </span>changing grails version&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;grailsVersion<span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">rootPath</span><span class="o">=</span>&amp;ldquo;/usr/local&amp;rdquo;
+</span><span class='line'><span class="nv">grailsLinkPath</span><span class="o">=</span><span class="nv">$rootPath</span><span class="s2">&quot;/grails&quot;</span>
+</span><span class='line'><span class="nv">grailsPath</span><span class="o">=</span><span class="nv">$grailsLinkPath</span><span class="err">&quot;</span>&amp;ndash;&amp;ldquo;<span class="nv">$grailsVersion</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;echo stitching to version <span class="nv">$1</span>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;Check <span class="k">if </span>directory with new grails version exists before doing anything&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;<span class="o">[</span> -d <span class="nv">$grailsPath</span> <span class="o">]</span> &amp;amp;&amp;amp; rm <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class="nv">$grailsPath</span> <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; <span class="nb">echo</span> &amp;ldquo;version switched to &amp;rdquo;<span class="nv">$grailsVersion</span> <span class="o">||</span> <span class="nb">echo</span> &amp;lsquo;Directory &amp;rsquo;<span class="nv">$grailsPath</span><span class="s1">&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
@@ -136,25 +305,6 @@ p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
 p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
 p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
 Grails, a rapid web development platform built on Groovy</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Grails schema-export]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
-    <updated>2010-08-27T16:40:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
-    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс
-grails schema-export</p>
-
-<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
-
-<p>Якщо виконати
-grails schema-export
-то схема бази даних буде екпортована у target/ddl.sql
-Можна екпортувати окремі доменні класи
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 ]]></content>
   </entry>
   

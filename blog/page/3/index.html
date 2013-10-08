@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. &hellip;">
+  <meta name="description" content="Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/06/how-to-run-grails-application-on-separate-port/">How to Run Grails Application on Separate Port</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-06T18:30:00+02:00" pubdate data-updated="true">Feb 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
+
+<p>So we can change port with command <br/>
+<strong>grails run-app -Dserver.port=8081</strong></p>
+
+<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br/>
+<strong>grails.server.port.http=&ldquo;8081&rdquo;</strong></p>
+
+<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br/>
+<strong>app.context=/</strong></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -255,50 +300,6 @@ Workaround is to add explicitly id field to domain class</p>
 
 <p>It is mentioned in documentation but now grails knows what type to use.
 There is issue in grails jira which was closed with resolution Not A Bug.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/">Code Quality Tools for Groovy at itBooze</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-26T18:53:00+03:00" pubdate data-updated="true">Aug 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><iframe src="http://player.vimeo.com/video/28185557?title=0&amp;byline=0&amp;portrait=0" width="500" height="275" frameborder="0"></iframe>
-
-
-
-
-<iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/9015391" width="425"></iframe>
-
-
-<p></p>
 </div>
   
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-08T19:01:54+03:00</updated>
+  <updated>2013-10-08T19:08:21+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -12,6 +12,91 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
+    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
+    <updated>2012-10-24T15:52:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
+    <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
+Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
+Implementation of controller usually looks like
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def deleteComment() {</span>
+</span><span class='line'><span class="s">    def commentId = params.long(&#39;id&#39;)</span>
+</span><span class='line'><span class="s">    def comment = Comment.findById(commentId)</span>
+</span><span class='line'><span class="s">    comment?.delete()</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
+Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
+Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def grailsApplication</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">def init = { servletContext -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">    grailsApplication.domainClasses.each {def domain -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">        domain.metaClass.static.deleteById = {def id -&amp;amp;gt;</span>
+</span><span class='line'><span class="s">            executeUpdate(&quot;delete from ${domain.name} where id = :id&quot;, [id:id])</span>
+</span><span class='line'><span class="s">        }</span>
+</span><span class='line'><span class="s">    }</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Now each of your domain class has the method deleteById, and our example became
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def deleteComment() {</span>
+</span><span class='line'><span class="s">    def commentId = params.long(&#39;id&#39;)</span>
+</span><span class='line'><span class="s">    Comment.deleteById(commentId)</span>
+</span><span class='line'><span class="s">}</span>
+</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Awesomeness of groovy named parameters]]></title>
@@ -34,7 +119,7 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 typical java call would be
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#x6f;&amp;#x3a;&amp;#106;&amp;#111;&amp;#104;&amp;#x6e;&amp;#x40;&amp;#x65;&amp;#120;&amp;#97;&amp;#x6d;&amp;#x70;&amp;#x6c;&amp;#x65;&amp;#46;&amp;#99;&amp;#x6f;&amp;#109;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="n">x6a</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x68</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6e</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x40</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">120</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">97</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x70</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">108</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x63</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;, &amp;ldquo;&lt;a href=&quot;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#x3a;&amp;#x6d;&amp;#105;&amp;#107;&amp;#x65;&amp;#x40;&amp;#x65;&amp;#120;&amp;#x61;&amp;#109;&amp;#112;&amp;#108;&amp;#x65;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#x6d;&quot;&gt;&amp;#109;&amp;#x69;&amp;#x6b;&amp;#101;&amp;#x40;&amp;#101;&amp;#120;&amp;#97;&amp;#109;&amp;#x70;&amp;#x6c;&amp;#x65;&amp;#46;&amp;#x63;&amp;#111;&amp;#x6d;&lt;/</span><span class="n">a</span><span class="o">&gt;&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;)</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#x6f;&amp;#x3a;&amp;#x6a;&amp;#111;&amp;#x68;&amp;#110;&amp;#64;&amp;#x65;&amp;#120;&amp;#x61;&amp;#x6d;&amp;#x70;&amp;#108;&amp;#x65;&amp;#46;&amp;#x63;&amp;#x6f;&amp;#x6d;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="n">x6a</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">104</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">110</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x78</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x61</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x70</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6c</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">99</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;, &amp;ldquo;&lt;a href=&quot;&amp;#x6d;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#109;&amp;#x69;&amp;#107;&amp;#101;&amp;#64;&amp;#x65;&amp;#x78;&amp;#x61;&amp;#109;&amp;#112;&amp;#x6c;&amp;#101;&amp;#46;&amp;#99;&amp;#x6f;&amp;#x6d;&quot;&gt;&amp;#x6d;&amp;#x69;&amp;#107;&amp;#x65;&amp;#x40;&amp;#x65;&amp;#120;&amp;#x61;&amp;#109;&amp;#112;&amp;#x6c;&amp;#x65;&amp;#46;&amp;#99;&amp;#x6f;&amp;#109;&lt;/</span><span class="n">a</span><span class="o">&gt;&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
@@ -48,7 +133,7 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#97;&amp;#105;&amp;#108;&amp;#x74;&amp;#111;&amp;#x3a;&amp;#106;&amp;#x6f;&amp;#104;&amp;#x6e;&amp;#64;&amp;#x65;&amp;#x78;&amp;#97;&amp;#109;&amp;#112;&amp;#x6c;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="mi">106</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x68</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6e</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x78</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x61</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x70</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">108</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x2e</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">99</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;,&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#x61;&amp;#105;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#58;&amp;#106;&amp;#111;&amp;#x68;&amp;#110;&amp;#64;&amp;#101;&amp;#x78;&amp;#97;&amp;#x6d;&amp;#112;&amp;#108;&amp;#101;&amp;#46;&amp;#x63;&amp;#111;&amp;#x6d;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="n">x6a</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x68</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">110</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x78</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x61</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">112</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6c</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x63</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;,&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
 </span><span class='line'> <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
@@ -176,44 +261,6 @@ There is issue in grails jira which was closed with resolution Not A Bug.</p>
 
 
 <p></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Grails at Ubuntu rep]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/"/>
-    <updated>2011-08-20T16:51:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep</id>
-    <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
-
-<p>First of all we need to add Grails repo</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
-</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure></notextile></div>
-That&rsquo;s all,  now you can install latest stable release of Grails
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
-
-<p>So here is list of available Grails versions
-sudo aptitude search grails <br/>
-p grails &ndash; A rapid web development platform built on Groovy <br/>
-p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
-Grails, a rapid web development platform built on Groovy</p>
 ]]></content>
   </entry>
   
