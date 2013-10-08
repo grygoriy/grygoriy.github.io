@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How access SVN though HTTP when you are under proxy - Grygoriy Mykhalyuno</title>
+  <title>Квота місця на ext2/3/4 - Grygoriy Mykhalyuno</title>
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="You need to configure subversion &ldquo;server&rdquo; file
-You can find it: At windows platform at Linux based platform
-If you want common proxy &hellip;">
+  <meta name="description" content="Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ If you want common proxy &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy">
+  <link rel="canonical" href="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
@@ -70,7 +68,7 @@ If you want common proxy &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How Access SVN Though HTTP When You Are Under Proxy</h1>
+      <h1 class="entry-title">Квота місця на Ext2/3/4</h1>
     
     
       <p class="meta">
@@ -86,63 +84,47 @@ If you want common proxy &hellip;">
   
 
 
-<time datetime="2008-08-28T10:14:00+03:00" pubdate data-updated="true">Aug 28<span>th</span>, 2008</time>
+<time datetime="2009-10-08T12:04:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2009</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>You need to configure subversion &ldquo;server&rdquo; file
-You can find it:</p>
+<div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
 
-<p>At windows platform</p>
-
-<p>at Linux based platform
-If you want common proxy setting for all SVN servers
-Find and fix this group</p>
+<p>Змінити це можна командою tune2fs</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[global]
-</span><span class='line'>http-proxy-host=proxyhost
-</span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you want separed proxy setting for each svn server</p>
+<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
 
-<p>Find group called</p>
+<p>цікавиити нас будуть два параметри
+-m reserved-blocks-percentage
+-r  reserved-blocks-count</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add new line</p>
+<p>-m вказує відсоток блоків у відсотках
+-r вказує їх абсолютну величину</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Add new group with name groupName (previously added)</p>
+<ul>
+<li>змінить ліміт до двох відотків</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groupName]
-</span><span class='line'>http-proxy-host = proxy1.some-domain-name.com
-</span><span class='line'>http-proxy-port = 80
-</span><span class='line'>http-proxy-username = blah
-</span><span class='line'>http-proxy-password = doubleblah
-</span><span class='line'>http-timeout = 60
-</span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
 
 
-<p>That&rsquo;s all, just save your file and use it</p>
+<ul>
+<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
+</ul>
+
 </div>
 
 
@@ -165,21 +147,15 @@ Find and fix this group</p>
   
 
 
-<time datetime="2008-08-28T10:14:00+03:00" pubdate data-updated="true">Aug 28<span>th</span>, 2008</time>
+<time datetime="2009-10-08T12:04:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2009</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/svn/'>SVN</a>, <a class='category' href='/blog/categories/vcs/'>VCS</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/" data-via="" data-counturl="http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/" data-via="" data-counturl="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -192,10 +168,8 @@ Find and fix this group</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2008/01/20/goto-is-cool/" title="Previous Post: GOTO is Cool">&laquo; GOTO is Cool</a>
+        <a class="basic-alignment left" href="/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/" title="Previous Post: How access SVN though HTTP when you are under proxy">&laquo; How access SVN though HTTP when you are under proxy</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/" title="Next Post: Квота місця на ext2/3/4">Квота місця на ext2/3/4 &raquo;</a>
       
     </p>
   </footer>
@@ -253,8 +227,8 @@ Find and fix this group</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/';
-        var disqus_url = 'http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/';
+        var disqus_identifier = 'http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/';
+        var disqus_url = 'http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/';
         var disqus_script = 'embed.js';
       
     (function () {
