@@ -1,88 +1,97 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Grygoriy Mykhalyuno]]></title>
-  <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
-  <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-08T16:02:54+03:00</updated>
-  <id>http://grygoriy.github.io/</id>
-  <author>
-    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Prevent brute force attack with Spring Security - Grygoriy Mykhalyuno</title>
+  <meta name="author" content="Grygoriy Mykhalyuno">
+
+  
+  <meta name="description" content="Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
+  
+    <h2>Thoughts to share</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grygoriy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
     
-  </author>
-  <generator uri="http://octopress.org/">Octopress</generator>
+      <h1 class="entry-title">Prevent Brute Force Attack With Spring Security</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
 
   
-  <entry>
-    <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
-    <updated>2012-10-24T15:52:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
-    <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
-Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
-Implementation of controller usually looks like</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
 
 
-<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
-Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
-Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">init</span> <span class="o">=</span> <span class="o">{</span> <span class="n">servletContext</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>        <span class="n">grailsApplication</span><span class="o">.</span><span class="na">domainClasses</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span><span class="kt">def</span> <span class="n">domain</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>            <span class="n">domain</span><span class="o">.</span><span class="na">metaClass</span><span class="o">.</span><span class="na">static</span><span class="o">.</span><span class="na">deleteById</span> <span class="o">=</span> <span class="o">{</span><span class="kt">def</span> <span class="n">id</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>                <span class="n">executeUpdate</span><span class="o">(</span><span class="s2">&quot;delete from ${domain.name} where id = :id&quot;</span><span class="o">,</span> <span class="o">[</span><span class="nl">id:</span><span class="n">id</span><span class="o">])</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<time datetime="2012-10-06T15:58:00+03:00" pubdate data-updated="true">Oct 6<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
 
 
-<p>Now each of your domain class has the method deleteById, and our example became</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/"/>
-    <updated>2012-10-06T15:58:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
-    <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
+<div class="entry-content"><p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
 <p>Let me show you little guide how to do this for Grails application.</p>
 
@@ -350,116 +359,161 @@ More about caching with Google guava</p>
 <p>Grails users can simple use this plugin <a href="https://github.com/grygoriy/bruteforcedefender">https://github.com/grygoriy/bruteforcedefender</a>
 UPD: Plugin now at <a href="http://grails.org/plugin/bruteforce-defender">http://grails.org/plugin/bruteforce-defender</a>
 Enjoy :)</p>
-]]></content>
-  </entry>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
   
-  <entry>
-    <title type="html"><![CDATA[Квота місця на ext2/3/4]]></title>
-    <link href="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/"/>
-    <updated>2009-10-08T12:04:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4</id>
-    <content type="html"><![CDATA[<p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
 
-<p>Змінити це можна командою tune2fs</p>
+<span class="byline author vcard">Posted by <span class="fn">Grygoriy Mykhalyuno</span></span>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
+      
 
 
-<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
-
-<p>цікавиити нас будуть два параметри
--m reserved-blocks-percentage
--r  reserved-blocks-count</p>
-
-<p>-m вказує відсоток блоків у відсотках
--r вказує їх абсолютну величину</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>змінить ліміт до двох відотків</li>
-</ul>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
 
 
-<ul>
-<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul>
-
-]]></content>
-  </entry>
   
-  <entry>
-    <title type="html"><![CDATA[How access SVN though HTTP when you are under proxy]]></title>
-    <link href="http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/"/>
-    <updated>2008-08-28T10:14:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy</id>
-    <content type="html"><![CDATA[<p>You need to configure subversion &ldquo;server&rdquo; file
-You can find it:</p>
-
-<p>At windows platform</p>
-
-<p>at Linux based platform
-If you want common proxy setting for all SVN servers
-Find and fix this group</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[global]
-</span><span class='line'>http-proxy-host=proxyhost
-</span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
 
 
-<p>If you want separed proxy setting for each svn server</p>
-
-<p>Find group called</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure>
+<time datetime="2012-10-06T15:58:00+03:00" pubdate data-updated="true">Oct 6<span>th</span>, 2012</time>
+      
 
 
-<p>Add new line</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Add new group with name groupName (previously added)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groupName]
-</span><span class='line'>http-proxy-host = proxy1.some-domain-name.com
-</span><span class='line'>http-proxy-port = 80
-</span><span class='line'>http-proxy-username = blah
-</span><span class='line'>http-proxy-password = doubleblah
-</span><span class='line'>http-timeout = 60
-</span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all, just save your file and use it</p>
-]]></content>
-  </entry>
+    </p>
+    
+      <div class="sharing">
   
-  <entry>
-    <title type="html"><![CDATA[GOTO is Cool]]></title>
-    <link href="http://grygoriy.github.io/blog/2008/01/20/goto-is-cool/"/>
-    <updated>2008-01-20T09:49:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2008/01/20/goto-is-cool</id>
-    <content type="html"><![CDATA[<p><img src="http://2.bp.blogspot.com/_wXHz4-t8Ahk/R57alGIR-zI/AAAAAAAAAKk/uW9JpQ4kmaA/s1600/SoThenITypedGoto500.jpg"></p>
-]]></content>
-  </entry>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/" data-via="" data-counturl="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/" >Tweet</a>
   
-</feed>
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/" title="Previous Post: Квота місця на ext2/3/4">&laquo; Квота місця на ext2/3/4</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/" title="Next Post: Deleting grails domain entity without fetching it">Deleting grails domain entity without fetching it &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/">Квота місця на ext2/3/4</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grygoriy Mykhalyuno -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grygoriy';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/';
+        var disqus_url = 'http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
