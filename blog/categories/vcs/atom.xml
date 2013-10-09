@@ -4,7 +4,7 @@
   <title><![CDATA[Category: VCS | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/vcs/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T10:23:02+03:00</updated>
+  <updated>2013-10-09T15:06:59+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,47 +18,23 @@
     <link href="http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/"/>
     <updated>2008-08-28T10:14:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy</id>
-    <content type="html"><![CDATA[<p>You need to configure subversion &ldquo;server&rdquo; file
-You can find it:</p>
+    <content type="html"><![CDATA[<p>You need to configure subversion &#8220;server&#8221; file You can find it:</p>
 
 <p>At windows platform</p>
 
-<p>at Linux based platform
-If you want common proxy setting for all SVN servers
-Find and fix this group
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[global]
-</span><span class='line'>http-proxy-host=proxyhost
-</span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure></notextile></div>
-If you want separed proxy setting for each svn server</p>
+<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>global&lt;/span> http-proxy-host=proxyhost http-proxy-port=3128</span></code></pre></td></tr></table></div></figure></notextile></div> If you want separed proxy setting for each svn server</p>
 
 <p>Find group called <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>groups&lt;/span>.</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Add new line
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Add new line <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Add new group with name groupName (previously added)
-<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groupName]
-</span><span class='line'>http-proxy-host = proxy1.some-domain-name.com
-</span><span class='line'>http-proxy-port = 80
-</span><span class='line'>http-proxy-username = blah
-</span><span class='line'>http-proxy-password = doubleblah
-</span><span class='line'>http-timeout = 60
-</span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>Add new group with name groupName (previously added) <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>groupName&lt;/span> http-proxy-host = proxy1.some-domain-name.com http-proxy-port = 80 http-proxy-username = blah http-proxy-password = doubleblah http-timeout = 60 neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>That&rsquo;s all, just save your file and use it</p>
-]]></content>
+<p>That&#8217;s all, just save your file and use it</p>]]></content>
   </entry>
   
 </feed>

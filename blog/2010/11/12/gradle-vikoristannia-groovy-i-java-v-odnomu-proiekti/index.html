@@ -9,8 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати &hellip;">
+  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +21,7 @@
   <link rel="canonical" href="http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <link href="http://feeds.feedburner.com/Grygoriy" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -32,11 +31,25 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28214893-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
 <body   class="collapse-sidebar sidebar-footer" >
   <header role="banner"><hgroup>
+<a href="https://github.com/grygoriy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>  
+
   <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
   
     <h2>Thoughts to share</h2>
@@ -45,7 +58,7 @@
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="http://feeds.feedburner.com/Grygoriy" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
@@ -59,6 +72,9 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/presentations/">Presentations</a></li>
+  <li><a href="/blog/categories/magic/">Magic</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
 </nav>
@@ -94,13 +110,11 @@
 
 <div class="entry-content"><p>gradle using groovy and java in single project.</p>
 
-<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
 
-<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
 
-<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
-</div>
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p></div>
 
 
   <footer>

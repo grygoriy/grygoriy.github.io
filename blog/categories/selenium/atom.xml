@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Selenium | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/selenium/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T10:23:02+03:00</updated>
+  <updated>2013-10-09T15:06:59+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,9 +18,7 @@
     <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
     <updated>2013-10-09T09:15:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
-    <content type="html"><![CDATA[<iframe width="640" height="480" src="http://grygoriy.github.io//www.youtube.com/embed/gXBOHVYqN-k" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='640'><param name='movie' value='//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='640' /></object>]]></content>
   </entry>
   
 </feed>

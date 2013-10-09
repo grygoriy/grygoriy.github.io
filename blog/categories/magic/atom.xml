@@ -4,7 +4,7 @@
   <title><![CDATA[Category: magic | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/magic/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T10:23:02+03:00</updated>
+  <updated>2013-10-09T15:06:59+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,9 +18,7 @@
     <link href="http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/"/>
     <updated>2010-08-20T16:37:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
-    <content type="html"><![CDATA[<iframe width="640" height="360" src="http://grygoriy.github.io//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object>]]></content>
   </entry>
   
 </feed>

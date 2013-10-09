@@ -21,7 +21,7 @@
   <link rel="canonical" href="http://grygoriy.github.io/blog/page/2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <link href="http://feeds.feedburner.com/Grygoriy" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -31,11 +31,25 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28214893-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
 
 </head>
 
 <body   class="collapse-sidebar sidebar-footer" >
   <header role="banner"><hgroup>
+<a href="https://github.com/grygoriy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>  
+
   <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
   
     <h2>Thoughts to share</h2>
@@ -44,7 +58,7 @@
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="http://feeds.feedburner.com/Grygoriy" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
@@ -58,6 +72,9 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/presentations/">Presentations</a></li>
+  <li><a href="/blog/categories/magic/">Magic</a></li>
+  <li><a href="/about">About</a></li>
 </ul>
 
 </nav>
@@ -96,274 +113,12 @@
 
   <div class="entry-content"><p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
-<p>Let me show you little guide how to do this for Grails application.</p>
-
-<p>First you have to enable springSecurityEventListener in your Config.groovy
-grails.plugins.springsecurity.useSecurityEventListener = true</p>
-
-<p>then implement listeners
-in /src/bruteforce create classes</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm">Registers all failed attempts to login. Main purpose to count attempts for particular account ant block user</span>
-</span><span class='line'>
-</span><span class='line'><span class="cm">*/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationFailureListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationFailureBadCredentialsEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">failLogin</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>next we have to create listener for successful logins
-in same package</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> Listener for successfull logins. Used for reseting number on unsuccessfull logins for specific account</span>
-</span><span class='line'><span class="cm">*/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationSuccessEventListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span><span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationSuccessEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">loginSuccess</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We were not putting them in our grails-app folder so we need to register these classes as spring beans.
-Add next lines into grails-app/conf/spring/resources.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">beans</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">authenticationFailureListener</span><span class="o">(</span><span class="n">AuthenticationFailureListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">authenticationSuccessEventListener</span><span class="o">(</span><span class="n">AuthenticationSuccessEventListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You&rsquo;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService
-Let&rsquo;s implement it. This would be typical grails service</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">grygoriy</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheBuilder</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheLoader</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.LoadingCache</span>
-</span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.commons.lang.math.NumberUtils</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.annotation.PostConstruct</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">class</span> <span class="nc">LoginAttemptCacheService</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="n">LoadingCache</span> <span class="n">attempts</span><span class="o">;</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kt">int</span> <span class="n">allowedNumberOfAttempts</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="nd">@PostConstruct</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="n">grailsApplication</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">brutforce</span><span class="o">.</span><span class="na">loginAttempts</span><span class="o">.</span><span class="na">allowedNumberOfAttempts</span>
-</span><span class='line'>        <span class="kt">int</span> <span class="n">time</span> <span class="o">=</span> <span class="n">grailsApplication</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">brutforce</span><span class="o">.</span><span class="na">loginAttempts</span><span class="o">.</span><span class="na">time</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">info</span> <span class="s2">&quot;account block configured for $time minutes&quot;</span>
-</span><span class='line'>        <span class="n">attempts</span> <span class="o">=</span> <span class="n">CacheBuilder</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">()</span>
-</span><span class='line'>                   <span class="o">.</span><span class="na">expireAfterWrite</span><span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MINUTES</span><span class="o">)</span>
-</span><span class='line'>                   <span class="o">.</span><span class="na">build</span><span class="o">({</span><span class="mi">0</span><span class="o">}</span> <span class="k">as</span> <span class="n">CacheLoader</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Triggers on each unsuccessful login attempt and increases number of attempts in local accumulator</span>
-</span><span class='line'><span class="cm">     * @param login - username which is trying to login</span>
-</span><span class='line'><span class="cm">     * @return</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="nf">failLogin</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">numberOfAttempts</span> <span class="o">=</span> <span class="n">attempts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;fail login $login previous number for attempts $numberOfAttempts&quot;</span>
-</span><span class='line'>        <span class="n">numberOfAttempts</span><span class="o">++</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">numberOfAttempts</span> <span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">allowedNumberOfAttempts</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">blockUser</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>            <span class="n">attempts</span><span class="o">.</span><span class="na">invalidate</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">attempts</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">login</span><span class="o">,</span> <span class="n">numberOfAttempts</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Triggers on each successful login attempt and resets number of attempts in local accumulator</span>
-</span><span class='line'><span class="cm">     * @param login - username which is login</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="nf">loginSuccess</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;successfull login for $login&quot;</span>
-</span><span class='line'>        <span class="n">attempts</span><span class="o">.</span><span class="na">invalidate</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Disable user account so it would not able to login</span>
-</span><span class='line'><span class="cm">     * @param login - username that has to be disabled</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">blockUser</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;blocking user: $login&quot;</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">user</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">user</span><span class="o">.</span><span class="na">accountLocked</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-</span><span class='line'>            <span class="n">user</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="nl">flush:</span> <span class="kc">true</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="n">dependencies</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">runtime</span> <span class="s1">&#39;com.google.guava:guava:11.0.1&#39;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And the last step we will add service configuration to Config.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">brutforce</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttempts</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">time</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span class='line'>        <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'>    <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That is it, you ready to run you application.
-For typical java project almost everything will be the same. Same listeners and same services.</p>
-
-<p>More about Spring Security Events
-More about caching with Google guava</p>
-
-<p>Grails users can simple use this plugin <a href="https://github.com/grygoriy/bruteforcedefender">https://github.com/grygoriy/bruteforcedefender</a>
-UPD: Plugin now at <a href="http://grails.org/plugin/bruteforce-defender">http://grails.org/plugin/bruteforce-defender</a>
-Enjoy :)</p>
-</div>
+<p>Let me show you little guide how to do this for Grails application. </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -397,12 +152,9 @@ Enjoy :)</p>
   </header>
 
 
-  <div class="entry-content"><p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required.
-Few tips how to hack RSS in <a href="http://blogger.com">blogger.com</a>
-To get all posts with specific label use <a href="http://blog.blogspot.com/feeds/posts/default/-/labelname">http://blog.blogspot.com/feeds/posts/default/-/labelname</a></p>
+  <div class="entry-content"><p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required. Few tips how to hack RSS in <a href='http://blogger.com'>blogger.com</a> To get all posts with specific label use http://blog.blogspot.com/feeds/posts/default/-/labelname</p>
 
-<p>Other nice things that can be done with url can be found on <a href="http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933">official google page</a></p>
-</div>
+<p>Other nice things that can be done with url can be found on <a href='http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933'>official google page</a></p></div>
   
   
 
@@ -441,49 +193,34 @@ To get all posts with specific label use <a href="http://blog.blogspot.com/feeds
 
 <p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
 
-<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu).
-Usually I install all applications to /usr/local/. Let&rsquo;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period)
-So after unpacking we have</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu). Usually I install all applications to /usr/local/. Let&#8217;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period) So after unpacking we have</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local/grails-2.0.0
 </span><span class='line'>/usr/local/grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s create link to any version of Grails</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Let&#8217;s create link to any version of Grails</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt;ln -s /usr/local/grails-2.1.1 grails
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>Now we have</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class="nv">$ </span>ls -ld grails*
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class='nv'>$ </span>ls -ld grails*
 </span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails -&amp;gt; /usr/local/grails-2.1.1
 </span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
 </span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>and variable</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="nv">$GRAILS_HOME</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='nb'>echo</span> <span class='nv'>$GRAILS_HOME</span>
 </span><span class='line'>/usr/local/grails
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Let&#8217;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -494,22 +231,18 @@ So after unpacking we have</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="c">#Script for changing grails version</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='c'>#!/bin/bash</span>
+</span><span class='line'><span class='c'>#Script for changing grails version</span>
 </span><span class='line'>
-</span><span class='line'><span class="nv">grailsVersion</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">rootPath</span><span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span>
-</span><span class='line'><span class="nv">grailsLinkPath</span><span class="o">=</span><span class="nv">$rootPath</span><span class="s2">&quot;/grails&quot;</span>
-</span><span class='line'><span class="nv">grailsPath</span><span class="o">=</span><span class="nv">$grailsLinkPath</span><span class="s2">&quot;-&quot;</span><span class="nv">$grailsVersion</span>
+</span><span class='line'><span class='nv'>grailsVersion</span><span class='o'>=</span><span class='nv'>$1</span>
+</span><span class='line'><span class='nv'>rootPath</span><span class='o'>=</span><span class='s2'>&quot;/usr/local&quot;</span>
+</span><span class='line'><span class='nv'>grailsLinkPath</span><span class='o'>=</span><span class='nv'>$rootPath</span><span class='s2'>&quot;/grails&quot;</span>
+</span><span class='line'><span class='nv'>grailsPath</span><span class='o'>=</span><span class='nv'>$grailsLinkPath</span><span class='s2'>&quot;-&quot;</span><span class='nv'>$grailsVersion</span>
 </span><span class='line'>
-</span><span class='line'><span class="nb">echo </span>stitching to version <span class="nv">$1</span>
-</span><span class='line'><span class="c">#Check if directory with new grails version exists before doing anything</span>
-</span><span class='line'><span class="o">[</span> -d <span class="nv">$grailsPath</span> <span class="o">]</span> &amp;amp;&amp;amp; rm <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class="nv">$grailsPath</span> <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; <span class="nb">echo</span> <span class="s2">&quot;version switched to &quot;</span><span class="nv">$grailsVersion</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;Directory &#39;</span><span class="nv">$grailsPath</span><span class="s1">&#39; not found&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
+</span><span class='line'><span class='nb'>echo </span>stitching to version <span class='nv'>$1</span>
+</span><span class='line'><span class='c'>#Check if directory with new grails version exists before doing anything</span>
+</span><span class='line'><span class='o'>[</span> -d <span class='nv'>$grailsPath</span> <span class='o'>]</span> &amp;amp;&amp;amp; rm <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class='nv'>$grailsPath</span> <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; <span class='nb'>echo</span> <span class='s2'>&quot;version switched to &quot;</span><span class='nv'>$grailsVersion</span> <span class='o'>||</span> <span class='nb'>echo</span> <span class='s1'>&#39;Directory &#39;</span><span class='nv'>$grailsPath</span><span class='s1'>&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure></div>
   
   
 

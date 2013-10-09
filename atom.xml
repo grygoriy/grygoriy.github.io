@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T10:23:02+03:00</updated>
+  <updated>2013-10-09T15:06:59+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,9 +18,7 @@
     <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
     <updated>2013-10-09T09:15:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
-    <content type="html"><![CDATA[<iframe width="640" height="480" src="http://grygoriy.github.io//www.youtube.com/embed/gXBOHVYqN-k" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='640'><param name='movie' value='//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='640' /></object>]]></content>
   </entry>
   
   <entry>
@@ -30,25 +28,15 @@
     <id>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application</id>
     <content type="html"><![CDATA[<p>For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.</p>
 
-<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href="http://grails.org/plugin/build-info">http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more.</p>
-
-<!--more-->
-
-
-<p>Ok, so we will start with maven web project. Assuming you have one.
-We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. You can pick up any file name you want, this name will be used to access file with URL. Content of my file is:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href='http://grails.org/plugin/build-info'>http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more. <!--more--> Ok, so we will start with maven web project. Assuming you have one. We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. You can pick up any file name you want, this name will be used to access file with URL. Content of my file is:</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>Project version - ${project.version}
 </span><span class='line'>Last commit hash - ${buildNumber}
 </span><span class='line'>Build at - ${buildDate}</span></code></pre></td></tr></table></div></figure>
-
-
 <p>This is template which we will be filtering with maven. So here is maven config.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -100,73 +88,65 @@ We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. 
 <span class='line-number'>50</span>
 <span class='line-number'>51</span>
 <span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project&gt;</span>
-</span><span class='line'>    <span class="c">&lt;!-- Configuration for Git VCS to grab commit hash --&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;scm&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;connection&gt;</span>scm:git:file://.<span class="nt">&lt;/connection&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;developerconnection&gt;</span>scm:git:file://.<span class="nt">&lt;/developerconnection&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;url&gt;</span>scm:git:file://.<span class="nt">&lt;/url&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/scm&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;build&gt;</span>
-</span><span class='line'>      <span class="nt">&lt;plugins&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- Plugin is used to generate build time --&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;groupid&gt;</span>org.codehaus.mojo<span class="nt">&lt;/groupid&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;artifactid&gt;</span>buildnumber-maven-plugin<span class="nt">&lt;/artifactid&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;version&gt;</span>1.1<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;executions&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;execution&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;phase&gt;</span>generate-resources<span class="nt">&lt;/phase&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;goals&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;goal&gt;</span>create<span class="nt">&lt;/goal&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;/goals&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;/execution&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/executions&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;timestampformat&gt;</span>{0, date, yyyy-MM-dd HH:mm:ss}<span class="nt">&lt;/timestampformat&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
-</span><span class='line'>            <span class="c">&lt;!-- We need to include version.txt file into filter list. So maven will filter it when will be building *.war --&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;plugin&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;groupid&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupid&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;artifactid&gt;</span>maven-war-plugin<span class="nt">&lt;/artifactid&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;version&gt;</span>2.3<span class="nt">&lt;/version&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;configuration&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;webresources&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;resource&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;filtering&gt;</span>true<span class="nt">&lt;/filtering&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;directory&gt;</span>src/main/webapp<span class="nt">&lt;/directory&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;includes&gt;</span>
-</span><span class='line'>                                <span class="nt">&lt;include&gt;</span>version.txt<span class="nt">&lt;/include&gt;</span>
-</span><span class='line'>                            <span class="nt">&lt;/includes&gt;</span>
-</span><span class='line'>                        <span class="nt">&lt;/resource&gt;</span>
-</span><span class='line'>                    <span class="nt">&lt;/webresources&gt;</span>
-</span><span class='line'>                <span class="nt">&lt;/configuration&gt;</span>
-</span><span class='line'>            <span class="nt">&lt;/plugin&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class='nt'>&lt;project&gt;</span>
+</span><span class='line'>    <span class='c'>&lt;!-- Configuration for Git VCS to grab commit hash --&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;scm&gt;</span>
+</span><span class='line'>        <span class='nt'>&lt;connection&gt;</span>scm:git:file://.<span class='nt'>&lt;/connection&gt;</span>
+</span><span class='line'>        <span class='nt'>&lt;developerconnection&gt;</span>scm:git:file://.<span class='nt'>&lt;/developerconnection&gt;</span>
+</span><span class='line'>        <span class='nt'>&lt;url&gt;</span>scm:git:file://.<span class='nt'>&lt;/url&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;/scm&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;build&gt;</span>
+</span><span class='line'>      <span class='nt'>&lt;plugins&gt;</span>
+</span><span class='line'>            <span class='c'>&lt;!-- Plugin is used to generate build time --&gt;</span>
+</span><span class='line'>            <span class='nt'>&lt;plugin&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;groupid&gt;</span>org.codehaus.mojo<span class='nt'>&lt;/groupid&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;artifactid&gt;</span>buildnumber-maven-plugin<span class='nt'>&lt;/artifactid&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;version&gt;</span>1.1<span class='nt'>&lt;/version&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;executions&gt;</span>
+</span><span class='line'>                    <span class='nt'>&lt;execution&gt;</span>
+</span><span class='line'>                        <span class='nt'>&lt;phase&gt;</span>generate-resources<span class='nt'>&lt;/phase&gt;</span>
+</span><span class='line'>                        <span class='nt'>&lt;goals&gt;</span>
+</span><span class='line'>                            <span class='nt'>&lt;goal&gt;</span>create<span class='nt'>&lt;/goal&gt;</span>
+</span><span class='line'>                        <span class='nt'>&lt;/goals&gt;</span>
+</span><span class='line'>                    <span class='nt'>&lt;/execution&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;/executions&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;configuration&gt;</span>
+</span><span class='line'>                    <span class='nt'>&lt;timestampformat&gt;</span>{0, date, yyyy-MM-dd HH:mm:ss}<span class='nt'>&lt;/timestampformat&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;/configuration&gt;</span>
+</span><span class='line'>            <span class='nt'>&lt;/plugin&gt;</span>
+</span><span class='line'>            <span class='c'>&lt;!-- We need to include version.txt file into filter list. So maven will filter it when will be building *.war --&gt;</span>
+</span><span class='line'>            <span class='nt'>&lt;plugin&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;groupid&gt;</span>org.apache.maven.plugins<span class='nt'>&lt;/groupid&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;artifactid&gt;</span>maven-war-plugin<span class='nt'>&lt;/artifactid&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;version&gt;</span>2.3<span class='nt'>&lt;/version&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;configuration&gt;</span>
+</span><span class='line'>                    <span class='nt'>&lt;webresources&gt;</span>
+</span><span class='line'>                        <span class='nt'>&lt;resource&gt;</span>
+</span><span class='line'>                            <span class='nt'>&lt;filtering&gt;</span>true<span class='nt'>&lt;/filtering&gt;</span>
+</span><span class='line'>                            <span class='nt'>&lt;directory&gt;</span>src/main/webapp<span class='nt'>&lt;/directory&gt;</span>
+</span><span class='line'>                            <span class='nt'>&lt;includes&gt;</span>
+</span><span class='line'>                                <span class='nt'>&lt;include&gt;</span>version.txt<span class='nt'>&lt;/include&gt;</span>
+</span><span class='line'>                            <span class='nt'>&lt;/includes&gt;</span>
+</span><span class='line'>                        <span class='nt'>&lt;/resource&gt;</span>
+</span><span class='line'>                    <span class='nt'>&lt;/webresources&gt;</span>
+</span><span class='line'>                <span class='nt'>&lt;/configuration&gt;</span>
+</span><span class='line'>            <span class='nt'>&lt;/plugin&gt;</span>
 </span><span class='line'>
-</span><span class='line'>      <span class="nt">&lt;/plugins&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/build&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;properties&gt;</span>
-</span><span class='line'>        <span class="c">&lt;!-- Properties to format date output --&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;maven</span> <span class="na">.build.timestamp.format=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>dd-MM-yy_HH:mm<span class="nt">&lt;/maven&gt;</span>
-</span><span class='line'>        <span class="nt">&lt;builddate&gt;</span>${maven.build.timestamp}<span class="nt">&lt;/builddate&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;/properties&gt;</span>
-</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span><span class='line'>      <span class='nt'>&lt;/plugins&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;/build&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;properties&gt;</span>
+</span><span class='line'>        <span class='c'>&lt;!-- Properties to format date output --&gt;</span>
+</span><span class='line'>        <span class='nt'>&lt;maven</span> <span class='na'>.build.timestamp.format=</span><span class='s'>&quot;&quot;</span><span class='nt'>&gt;</span>dd-MM-yy_HH:mm<span class='nt'>&lt;/maven&gt;</span>
+</span><span class='line'>        <span class='nt'>&lt;builddate&gt;</span>${maven.build.timestamp}<span class='nt'>&lt;/builddate&gt;</span>
+</span><span class='line'>    <span class='nt'>&lt;/properties&gt;</span>
+</span><span class='line'><span class='nt'>&lt;/project&gt;</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>This is it. Now you can build your application</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>mvn package</span></code></pre></td></tr></table></div></figure>
+<p>Deploy and check under url <a href='http://localhost:8080/version.txt'>http://localhost:8080/version.txt</a></p>
 
-
-<p>Deploy and check under url <a href="http://localhost:8080/version.txt">http://localhost:8080/version.txt</a></p>
-
-<p>Output should look like this
-<img src="http://grygoriy.github.io/images/2013-09-02-add-version-to-your-web-application/version_view.png">
-Enjoy.</p>
-]]></content>
+<p>Output should look like this <img src='http://grygoriy.github.io/images/2013-09-02-add-version-to-your-web-application/version_view.png' /> Enjoy.</p>]]></content>
   </entry>
   
   <entry>
@@ -174,28 +154,20 @@ Enjoy.</p>
     <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
     <updated>2012-10-24T15:52:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
-    <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
-Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
-Implementation of controller usually looks like</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+    <content type="html"><![CDATA[<p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>comment</span> <span class='o'>=</span> <span class='n'>Comment</span><span class='o'>.</span><span class='na'>findById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
+</span><span class='line'>        <span class='n'>comment</span><span class='o'>?.</span><span class='na'>delete</span><span class='o'>()</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
-Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
-Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -204,33 +176,27 @@ Of cause you would like to write such code whenever you will need to delete enti
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='n'>grailsApplication</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">init</span> <span class="o">=</span> <span class="o">{</span> <span class="n">servletContext</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>        <span class="n">grailsApplication</span><span class="o">.</span><span class="na">domainClasses</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span><span class="kt">def</span> <span class="n">domain</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>            <span class="n">domain</span><span class="o">.</span><span class="na">metaClass</span><span class="o">.</span><span class="na">static</span><span class="o">.</span><span class="na">deleteById</span> <span class="o">=</span> <span class="o">{</span><span class="kt">def</span> <span class="n">id</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="o">;</span>
-</span><span class='line'>                <span class="n">executeUpdate</span><span class="o">(</span><span class="s2">&quot;delete from ${domain.name} where id = :id&quot;</span><span class="o">,</span> <span class="o">[</span><span class="nl">id:</span><span class="n">id</span><span class="o">])</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class='kt'>def</span> <span class='n'>init</span> <span class='o'>=</span> <span class='o'>{</span> <span class='n'>servletContext</span> <span class='o'>-&gt;</span>
+</span><span class='line'>        <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>domainClasses</span><span class='o'>.</span><span class='na'>each</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>domain</span> <span class='o'>-&gt;</span>
+</span><span class='line'>            <span class='n'>domain</span><span class='o'>.</span><span class='na'>metaClass</span><span class='o'>.</span><span class='na'>static</span><span class='o'>.</span><span class='na'>deleteById</span> <span class='o'>=</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>id</span> <span class='o'>-&gt;</span>
+</span><span class='line'>                <span class='n'>executeUpdate</span><span class='o'>(</span><span class='s2'>&quot;delete from ${domain.name} where id = :id&quot;</span><span class='o'>,</span> <span class='o'>[</span><span class='nl'>id:</span><span class='n'>id</span><span class='o'>])</span>
+</span><span class='line'>            <span class='o'>}</span>
+</span><span class='line'>        <span class='o'>}</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>Now each of your domain class has the method deleteById, and our example became</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
+</span><span class='line'>        <span class='n'>Comment</span><span class='o'>.</span><span class='na'>deleteById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
-]]></content>
+<p>You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p>]]></content>
   </entry>
   
   <entry>
@@ -240,15 +206,10 @@ Of cause you would like to write such code whenever you will need to delete enti
     <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
-<p>Let me show you little guide how to do this for Grails application.</p>
+<p>Let me show you little guide how to do this for Grails application. <!--more--> First you have to enable springSecurityEventListener in your Config.groovy grails.plugins.springsecurity.useSecurityEventListener = true</p>
 
-<p>First you have to enable springSecurityEventListener in your Config.groovy
-grails.plugins.springsecurity.useSecurityEventListener = true</p>
-
-<p>then implement listeners
-in /src/bruteforce create classes</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>then implement listeners in /src/bruteforce create classes</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -261,26 +222,22 @@ in /src/bruteforce create classes</p>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm">Registers all failed attempts to login. Main purpose to count attempts for particular account ant block user</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='cm'>/**</span>
+</span><span class='line'><span class='cm'>Registers all failed attempts to login. Main purpose to count attempts for particular account ant block user</span>
 </span><span class='line'>
-</span><span class='line'><span class="cm">*/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationFailureListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span> <span class="o">{</span>
+</span><span class='line'><span class='cm'>*/</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>AuthenticationFailureListener</span> <span class='kd'>implements</span> <span class='n'>ApplicationListener</span> <span class='o'>{</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
+</span><span class='line'>    <span class='n'>LoginAttemptCacheService</span> <span class='n'>loginAttemptCacheService</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationFailureBadCredentialsEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">failLogin</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>    <span class='nd'>@Override</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>onApplicationEvent</span><span class='o'>(</span><span class='n'>AuthenticationFailureBadCredentialsEvent</span> <span class='n'>e</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>loginAttemptCacheService</span><span class='o'>.</span><span class='na'>failLogin</span><span class='o'>(</span><span class='n'>e</span><span class='o'>.</span><span class='na'>authentication</span><span class='o'>.</span><span class='na'>name</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>next we have to create listener for successful logins
-in same package</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>next we have to create listener for successful logins in same package</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -292,25 +249,21 @@ in same package</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="cm">/**</span>
-</span><span class='line'><span class="cm"> Listener for successfull logins. Used for reseting number on unsuccessfull logins for specific account</span>
-</span><span class='line'><span class="cm">*/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationSuccessEventListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span><span class="o">{</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='cm'>/**</span>
+</span><span class='line'><span class='cm'> Listener for successfull logins. Used for reseting number on unsuccessfull logins for specific account</span>
+</span><span class='line'><span class='cm'>*/</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>AuthenticationSuccessEventListener</span> <span class='kd'>implements</span> <span class='n'>ApplicationListener</span><span class='o'>{</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
+</span><span class='line'>    <span class='n'>LoginAttemptCacheService</span> <span class='n'>loginAttemptCacheService</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nd">@Override</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationSuccessEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">loginSuccess</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>    <span class='nd'>@Override</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>onApplicationEvent</span><span class='o'>(</span><span class='n'>AuthenticationSuccessEvent</span> <span class='n'>e</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>loginAttemptCacheService</span><span class='o'>.</span><span class='na'>loginSuccess</span><span class='o'>(</span><span class='n'>e</span><span class='o'>.</span><span class='na'>authentication</span><span class='o'>.</span><span class='na'>name</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>We were not putting them in our grails-app folder so we need to register these classes as spring beans.
-Add next lines into grails-app/conf/spring/resources.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>We were not putting them in our grails-app folder so we need to register these classes as spring beans. Add next lines into grails-app/conf/spring/resources.groovy</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -319,22 +272,18 @@ Add next lines into grails-app/conf/spring/resources.groovy</p>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">beans</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">authenticationFailureListener</span><span class="o">(</span><span class="n">AuthenticationFailureListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>beans</span> <span class='o'>=</span> <span class='o'>{</span>
+</span><span class='line'>    <span class='n'>authenticationFailureListener</span><span class='o'>(</span><span class='n'>AuthenticationFailureListener</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>loginAttemptCacheService</span> <span class='o'>=</span> <span class='n'>ref</span><span class='o'>(</span><span class='s1'>&#39;loginAttemptCacheService&#39;</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">authenticationSuccessEventListener</span><span class="o">(</span><span class="n">AuthenticationSuccessEventListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>    <span class='n'>authenticationSuccessEventListener</span><span class='o'>(</span><span class='n'>AuthenticationSuccessEventListener</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>loginAttemptCacheService</span> <span class='o'>=</span> <span class='n'>ref</span><span class='o'>(</span><span class='s1'>&#39;loginAttemptCacheService&#39;</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>You&rsquo;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService
-Let&rsquo;s implement it. This would be typical grails service</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>You&#8217;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService Let&#8217;s implement it. This would be typical grails service</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -401,112 +350,99 @@ Let&rsquo;s implement it. This would be typical grails service</p>
 <span class='line-number'>65</span>
 <span class='line-number'>66</span>
 <span class='line-number'>67</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">grygoriy</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='kn'>package</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span>
 </span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheBuilder</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheLoader</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.LoadingCache</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.google.common.cache.CacheBuilder</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.google.common.cache.CacheLoader</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.google.common.cache.LoadingCache</span>
 </span><span class='line'>
-</span><span class='line'><span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.commons.lang.math.NumberUtils</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">javax.annotation.PostConstruct</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>java.util.concurrent.TimeUnit</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.apache.commons.lang.math.NumberUtils</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>javax.annotation.PostConstruct</span>
 </span><span class='line'>
-</span><span class='line'><span class="kd">class</span> <span class="nc">LoginAttemptCacheService</span> <span class="o">{</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>LoginAttemptCacheService</span> <span class='o'>{</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="kd">private</span> <span class="n">LoadingCache</span> <span class="n">attempts</span><span class="o">;</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kt">int</span> <span class="n">allowedNumberOfAttempts</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
+</span><span class='line'>    <span class='kd'>private</span> <span class='n'>LoadingCache</span> <span class='n'>attempts</span><span class='o'>;</span>
+</span><span class='line'>    <span class='kd'>private</span> <span class='kt'>int</span> <span class='n'>allowedNumberOfAttempts</span>
+</span><span class='line'>    <span class='kt'>def</span> <span class='n'>grailsApplication</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="nd">@PostConstruct</span>
-</span><span class='line'>    <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="n">grailsApplication</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">brutforce</span><span class="o">.</span><span class="na">loginAttempts</span><span class="o">.</span><span class="na">allowedNumberOfAttempts</span>
-</span><span class='line'>        <span class="kt">int</span> <span class="n">time</span> <span class="o">=</span> <span class="n">grailsApplication</span><span class="o">.</span><span class="na">config</span><span class="o">.</span><span class="na">brutforce</span><span class="o">.</span><span class="na">loginAttempts</span><span class="o">.</span><span class="na">time</span>
+</span><span class='line'>    <span class='nd'>@PostConstruct</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>init</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>allowedNumberOfAttempts</span> <span class='o'>=</span> <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>config</span><span class='o'>.</span><span class='na'>brutforce</span><span class='o'>.</span><span class='na'>loginAttempts</span><span class='o'>.</span><span class='na'>allowedNumberOfAttempts</span>
+</span><span class='line'>        <span class='kt'>int</span> <span class='n'>time</span> <span class='o'>=</span> <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>config</span><span class='o'>.</span><span class='na'>brutforce</span><span class='o'>.</span><span class='na'>loginAttempts</span><span class='o'>.</span><span class='na'>time</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">info</span> <span class="s2">&quot;account block configured for $time minutes&quot;</span>
-</span><span class='line'>        <span class="n">attempts</span> <span class="o">=</span> <span class="n">CacheBuilder</span><span class="o">.</span><span class="na">newBuilder</span><span class="o">()</span>
-</span><span class='line'>                   <span class="o">.</span><span class="na">expireAfterWrite</span><span class="o">(</span><span class="n">time</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MINUTES</span><span class="o">)</span>
-</span><span class='line'>                   <span class="o">.</span><span class="na">build</span><span class="o">({</span><span class="mi">0</span><span class="o">}</span> <span class="k">as</span> <span class="n">CacheLoader</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>        <span class='n'>log</span><span class='o'>.</span><span class='na'>info</span> <span class='s2'>&quot;account block configured for $time minutes&quot;</span>
+</span><span class='line'>        <span class='n'>attempts</span> <span class='o'>=</span> <span class='n'>CacheBuilder</span><span class='o'>.</span><span class='na'>newBuilder</span><span class='o'>()</span>
+</span><span class='line'>                   <span class='o'>.</span><span class='na'>expireAfterWrite</span><span class='o'>(</span><span class='n'>time</span><span class='o'>,</span> <span class='n'>TimeUnit</span><span class='o'>.</span><span class='na'>MINUTES</span><span class='o'>)</span>
+</span><span class='line'>                   <span class='o'>.</span><span class='na'>build</span><span class='o'>({</span><span class='mi'>0</span><span class='o'>}</span> <span class='k'>as</span> <span class='n'>CacheLoader</span><span class='o'>);</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Triggers on each unsuccessful login attempt and increases number of attempts in local accumulator</span>
-</span><span class='line'><span class="cm">     * @param login - username which is trying to login</span>
-</span><span class='line'><span class="cm">     * @return</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="nf">failLogin</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">numberOfAttempts</span> <span class="o">=</span> <span class="n">attempts</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;fail login $login previous number for attempts $numberOfAttempts&quot;</span>
-</span><span class='line'>        <span class="n">numberOfAttempts</span><span class="o">++</span>
+</span><span class='line'>    <span class='cm'>/**</span>
+</span><span class='line'><span class='cm'>     * Triggers on each unsuccessful login attempt and increases number of attempts in local accumulator</span>
+</span><span class='line'><span class='cm'>     * @param login - username which is trying to login</span>
+</span><span class='line'><span class='cm'>     * @return</span>
+</span><span class='line'><span class='cm'>     */</span>
+</span><span class='line'>    <span class='kt'>def</span> <span class='nf'>failLogin</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>login</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>numberOfAttempts</span> <span class='o'>=</span> <span class='n'>attempts</span><span class='o'>.</span><span class='na'>get</span><span class='o'>(</span><span class='n'>login</span><span class='o'>)</span>
+</span><span class='line'>        <span class='n'>log</span><span class='o'>.</span><span class='na'>debug</span> <span class='s2'>&quot;fail login $login previous number for attempts $numberOfAttempts&quot;</span>
+</span><span class='line'>        <span class='n'>numberOfAttempts</span><span class='o'>++</span>
 </span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">numberOfAttempts</span> <span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="n">allowedNumberOfAttempts</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">blockUser</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>            <span class="n">attempts</span><span class="o">.</span><span class="na">invalidate</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">attempts</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">login</span><span class="o">,</span> <span class="n">numberOfAttempts</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>        <span class='k'>if</span> <span class='o'>(</span><span class='n'>numberOfAttempts</span> <span class='o'>&amp;</span><span class='n'>gt</span><span class='o'>;</span> <span class='n'>allowedNumberOfAttempts</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>            <span class='n'>blockUser</span><span class='o'>(</span><span class='n'>login</span><span class='o'>)</span>
+</span><span class='line'>            <span class='n'>attempts</span><span class='o'>.</span><span class='na'>invalidate</span><span class='o'>(</span><span class='n'>login</span><span class='o'>)</span>
+</span><span class='line'>        <span class='o'>}</span> <span class='k'>else</span> <span class='o'>{</span>
+</span><span class='line'>            <span class='n'>attempts</span><span class='o'>.</span><span class='na'>put</span><span class='o'>(</span><span class='n'>login</span><span class='o'>,</span> <span class='n'>numberOfAttempts</span><span class='o'>)</span>
+</span><span class='line'>        <span class='o'>}</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Triggers on each successful login attempt and resets number of attempts in local accumulator</span>
-</span><span class='line'><span class="cm">     * @param login - username which is login</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kt">def</span> <span class="nf">loginSuccess</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;successfull login for $login&quot;</span>
-</span><span class='line'>        <span class="n">attempts</span><span class="o">.</span><span class="na">invalidate</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class='cm'>/**</span>
+</span><span class='line'><span class='cm'>     * Triggers on each successful login attempt and resets number of attempts in local accumulator</span>
+</span><span class='line'><span class='cm'>     * @param login - username which is login</span>
+</span><span class='line'><span class='cm'>     */</span>
+</span><span class='line'>    <span class='kt'>def</span> <span class='nf'>loginSuccess</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>login</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>log</span><span class='o'>.</span><span class='na'>debug</span> <span class='s2'>&quot;successfull login for $login&quot;</span>
+</span><span class='line'>        <span class='n'>attempts</span><span class='o'>.</span><span class='na'>invalidate</span><span class='o'>(</span><span class='n'>login</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="cm">/**</span>
-</span><span class='line'><span class="cm">     * Disable user account so it would not able to login</span>
-</span><span class='line'><span class="cm">     * @param login - username that has to be disabled</span>
-</span><span class='line'><span class="cm">     */</span>
-</span><span class='line'>    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">blockUser</span><span class="o">(</span><span class="n">String</span> <span class="n">login</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">log</span><span class="o">.</span><span class="na">debug</span> <span class="s2">&quot;blocking user: $login&quot;</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="na">findByUsername</span><span class="o">(</span><span class="n">login</span><span class="o">)</span>
-</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">user</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>            <span class="n">user</span><span class="o">.</span><span class="na">accountLocked</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
-</span><span class='line'>            <span class="n">user</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="nl">flush:</span> <span class="kc">true</span><span class="o">)</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>    <span class='cm'>/**</span>
+</span><span class='line'><span class='cm'>     * Disable user account so it would not able to login</span>
+</span><span class='line'><span class='cm'>     * @param login - username that has to be disabled</span>
+</span><span class='line'><span class='cm'>     */</span>
+</span><span class='line'>    <span class='kd'>private</span> <span class='kt'>void</span> <span class='nf'>blockUser</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>login</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>log</span><span class='o'>.</span><span class='na'>debug</span> <span class='s2'>&quot;blocking user: $login&quot;</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>user</span> <span class='o'>=</span> <span class='n'>User</span><span class='o'>.</span><span class='na'>findByUsername</span><span class='o'>(</span><span class='n'>login</span><span class='o'>)</span>
+</span><span class='line'>        <span class='k'>if</span> <span class='o'>(</span><span class='n'>user</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>            <span class='n'>user</span><span class='o'>.</span><span class='na'>accountLocked</span> <span class='o'>=</span> <span class='kc'>true</span><span class='o'>;</span>
+</span><span class='line'>            <span class='n'>user</span><span class='o'>.</span><span class='na'>save</span><span class='o'>(</span><span class='nl'>flush:</span> <span class='kc'>true</span><span class='o'>)</span>
+</span><span class='line'>        <span class='o'>}</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="n">dependencies</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">runtime</span> <span class="s1">&#39;com.google.guava:guava:11.0.1&#39;</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='n'>dependencies</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>runtime</span> <span class='s1'>&#39;com.google.guava:guava:11.0.1&#39;</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>And the last step we will add service configuration to Config.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">brutforce</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttempts</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">time</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span class='line'>        <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>brutforce</span> <span class='o'>{</span>
+</span><span class='line'>    <span class='n'>loginAttempts</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>time</span> <span class='o'>=</span> <span class='mi'>5</span>
+</span><span class='line'>        <span class='n'>allowedNumberOfAttempts</span> <span class='o'>=</span> <span class='mi'>3</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
+<p>That is it, you ready to run you application. For typical java project almost everything will be the same. Same listeners and same services.</p>
 
+<p>More about Spring Security Events More about caching with Google guava</p>
 
-<p>That is it, you ready to run you application.
-For typical java project almost everything will be the same. Same listeners and same services.</p>
-
-<p>More about Spring Security Events
-More about caching with Google guava</p>
-
-<p>Grails users can simple use this plugin <a href="https://github.com/grygoriy/bruteforcedefender">https://github.com/grygoriy/bruteforcedefender</a>
-UPD: Plugin now at <a href="http://grails.org/plugin/bruteforce-defender">http://grails.org/plugin/bruteforce-defender</a>
-Enjoy :)</p>
-]]></content>
+<p>Grails users can simple use this plugin https://github.com/grygoriy/bruteforcedefender UPD: Plugin now at http://grails.org/plugin/bruteforce-defender Enjoy :)</p>]]></content>
   </entry>
   
   <entry>
@@ -514,12 +450,9 @@ Enjoy :)</p>
     <link href="http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/"/>
     <updated>2012-10-04T18:51:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss</id>
-    <content type="html"><![CDATA[<p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required.
-Few tips how to hack RSS in <a href="http://blogger.com">blogger.com</a>
-To get all posts with specific label use <a href="http://blog.blogspot.com/feeds/posts/default/-/labelname">http://blog.blogspot.com/feeds/posts/default/-/labelname</a></p>
+    <content type="html"><![CDATA[<p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required. Few tips how to hack RSS in <a href='http://blogger.com'>blogger.com</a> To get all posts with specific label use http://blog.blogspot.com/feeds/posts/default/-/labelname</p>
 
-<p>Other nice things that can be done with url can be found on <a href="http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933">official google page</a></p>
-]]></content>
+<p>Other nice things that can be done with url can be found on <a href='http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933'>official google page</a></p>]]></content>
   </entry>
   
   <entry>
@@ -531,49 +464,34 @@ To get all posts with specific label use <a href="http://blog.blogspot.com/feeds
 
 <p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
 
-<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu).
-Usually I install all applications to /usr/local/. Let&rsquo;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period)
-So after unpacking we have</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu). Usually I install all applications to /usr/local/. Let&#8217;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period) So after unpacking we have</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local/grails-2.0.0
 </span><span class='line'>/usr/local/grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s create link to any version of Grails</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Let&#8217;s create link to any version of Grails</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt;ln -s /usr/local/grails-2.1.1 grails
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>Now we have</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class="nv">$ </span>ls -ld grails*
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class='nv'>$ </span>ls -ld grails*
 </span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails -&amp;gt; /usr/local/grails-2.1.1
 </span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
 </span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>and variable</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="nv">$GRAILS_HOME</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='nb'>echo</span> <span class='nv'>$GRAILS_HOME</span>
 </span><span class='line'>/usr/local/grails
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Let&rsquo;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Let&#8217;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -584,22 +502,18 @@ So after unpacking we have</p>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="c">#Script for changing grails version</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='c'>#!/bin/bash</span>
+</span><span class='line'><span class='c'>#Script for changing grails version</span>
 </span><span class='line'>
-</span><span class='line'><span class="nv">grailsVersion</span><span class="o">=</span><span class="nv">$1</span>
-</span><span class='line'><span class="nv">rootPath</span><span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span>
-</span><span class='line'><span class="nv">grailsLinkPath</span><span class="o">=</span><span class="nv">$rootPath</span><span class="s2">&quot;/grails&quot;</span>
-</span><span class='line'><span class="nv">grailsPath</span><span class="o">=</span><span class="nv">$grailsLinkPath</span><span class="s2">&quot;-&quot;</span><span class="nv">$grailsVersion</span>
+</span><span class='line'><span class='nv'>grailsVersion</span><span class='o'>=</span><span class='nv'>$1</span>
+</span><span class='line'><span class='nv'>rootPath</span><span class='o'>=</span><span class='s2'>&quot;/usr/local&quot;</span>
+</span><span class='line'><span class='nv'>grailsLinkPath</span><span class='o'>=</span><span class='nv'>$rootPath</span><span class='s2'>&quot;/grails&quot;</span>
+</span><span class='line'><span class='nv'>grailsPath</span><span class='o'>=</span><span class='nv'>$grailsLinkPath</span><span class='s2'>&quot;-&quot;</span><span class='nv'>$grailsVersion</span>
 </span><span class='line'>
-</span><span class='line'><span class="nb">echo </span>stitching to version <span class="nv">$1</span>
-</span><span class='line'><span class="c">#Check if directory with new grails version exists before doing anything</span>
-</span><span class='line'><span class="o">[</span> -d <span class="nv">$grailsPath</span> <span class="o">]</span> &amp;amp;&amp;amp; rm <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class="nv">$grailsPath</span> <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; <span class="nb">echo</span> <span class="s2">&quot;version switched to &quot;</span><span class="nv">$grailsVersion</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;Directory &#39;</span><span class="nv">$grailsPath</span><span class="s1">&#39; not found&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
+</span><span class='line'><span class='nb'>echo </span>stitching to version <span class='nv'>$1</span>
+</span><span class='line'><span class='c'>#Check if directory with new grails version exists before doing anything</span>
+</span><span class='line'><span class='o'>[</span> -d <span class='nv'>$grailsPath</span> <span class='o'>]</span> &amp;amp;&amp;amp; rm <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class='nv'>$grailsPath</span> <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; <span class='nb'>echo</span> <span class='s2'>&quot;version switched to &quot;</span><span class='nv'>$grailsVersion</span> <span class='o'>||</span> <span class='nb'>echo</span> <span class='s1'>&#39;Directory &#39;</span><span class='nv'>$grailsPath</span><span class='s1'>&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure>]]></content>
   </entry>
   
   <entry>
@@ -608,62 +522,47 @@ So after unpacking we have</p>
     <updated>2012-02-13T18:33:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
     <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /></p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${from}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${to}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${subject}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${body}&quot;</span>
-</span><span class='line'><span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>from</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>to</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>subject</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>body</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${from}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${to}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${subject}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${body}&quot;</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>typical java call would be</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;greetings&quot;</span><span class="o">,</span> <span class="s2">&quot;Hello Goodbye&quot;</span><span class="o">)</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='s2'>&quot;john@example.com&quot;</span><span class='o'>,</span> <span class='s2'>&quot;mike@example.com&quot;</span><span class='o'>,</span> <span class='s2'>&quot;greetings&quot;</span><span class='o'>,</span> <span class='s2'>&quot;Hello Goodbye&quot;</span><span class='o'>)</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
-Groovy allows us to pass parameters as map without []. If we pass map into method groovy set it to the first parameter. Let&rsquo;s look into other exampl</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Too many strings, don&#8217;t you think? I have to check java docs all the time I&#8217;m writing this method.<br /> Groovy allows us to pass parameters as map without <span />. If we pass map into method groovy set it to the first parameter. Let&#8217;s look into other exampl</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span>
-</span><span class='line'>     <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
-</span><span class='line'>     <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
-</span><span class='line'>     <span class="nl">body:</span><span class="s2">&quot;Hello Goodbye&quot;</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span> <span class='nl'>from:</span><span class='s2'>&quot;john@example.com&quot;</span><span class='o'>,</span>
+</span><span class='line'>     <span class='nl'>to:</span><span class='s2'>&quot;mike@example.com&quot;</span><span class='o'>,</span>
+</span><span class='line'>     <span class='nl'>subject:</span><span class='s2'>&quot;greetings&quot;</span><span class='o'>,</span>
+</span><span class='line'>     <span class='nl'>body:</span><span class='s2'>&quot;Hello Goodbye&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>Much more readable as for me. And method will looks like</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.from}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.to}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.subject}&quot;</span>
-</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.body}&quot;</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='n'>params</span><span class='o'>)</span> <span class='o'>{</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.from}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.to}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.subject}&quot;</span>
+</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.body}&quot;</span>
+</span><span class='line'><span class='o'>}</span>
+</span></code></pre></td></tr></table></div></figure>]]></content>
   </entry>
   
   <entry>
@@ -671,17 +570,13 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
     <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
     <updated>2012-02-06T18:30:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
-    <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
+    <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&#8217;s allows you to run both applications in same time, work with them and debug</p>
 
-<p>So we can change port with command <br/>
-<strong>grails run-app -Dserver.port=8081</strong></p>
+<p>So we can change port with command <br /> <strong>grails run-app -Dserver.port=8081</strong></p>
 
-<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br/>
-<strong>grails.server.port.http=&ldquo;8081&rdquo;</strong></p>
+<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br /> <strong>grails.server.port.http=&#8221;8081&#8221;</strong></p>
 
-<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br/>
-<strong>app.context=/</strong></p>
-]]></content>
+<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br /> <strong>app.context=/</strong></p>]]></content>
   </entry>
   
   <entry>
@@ -689,15 +584,12 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
     <link href="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/"/>
     <updated>2012-01-09T18:55:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables</id>
-    <content type="html"><![CDATA[<p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
+    <content type="html"><![CDATA[<p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&#8217;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
 
-<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
-For MS SQL I&rsquo;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br />
-can be deleted without any errors&lt;</p>
+<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br /> For MS SQL I&#8217;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br /> can be deleted without any errors&lt;</p>
 
 <p>Here is stored procedure</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -720,45 +612,38 @@ can be deleted without any errors&lt;</p>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">drop_foreign_keys</span>
-</span><span class='line'><span class="o">@</span><span class="k">table</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mf">50</span><span class="p">)</span>
-</span><span class='line'><span class="k">AS</span>
-</span><span class='line'>    <span class="k">DECLARE</span> <span class="n">tables_cursor</span> <span class="k">CURSOR</span>
-</span><span class='line'>    <span class="k">FOR</span>
-</span><span class='line'>      <span class="k">SELECT</span>
-</span><span class='line'>        <span class="s1">&#39;ALTER TABLE &#39;</span> <span class="o">+</span> <span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">parent_object_id</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>        <span class="s1">&#39; DROP CONSTRAINT &#39;</span> <span class="o">+</span> <span class="k">name</span> <span class="k">as</span> <span class="n">dropkey</span>
-</span><span class='line'>      <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">foreign_keys</span>
-</span><span class='line'>    <span class="k">WHERE</span> <span class="n">referenced_object_id</span> <span class="o">=</span> <span class="n">object_id</span><span class="p">(</span><span class="o">@</span><span class="k">table</span><span class="p">)</span>
-</span><span class='line'>    <span class="n">OPEN</span> <span class="n">tables_cursor</span><span class="p">;</span>
-</span><span class='line'><span class="go"> </span>
-</span><span class='line'><span class="go">    DECLARE @dropkey sysname;</span>
-</span><span class='line'><span class="go">    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class="go">    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
-</span><span class='line'><span class="go">    BEGIN;</span>
-</span><span class='line'><span class="go">      EXECUTE (@dropkey);</span>
-</span><span class='line'><span class="go">      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class="go">    END;</span>
-</span><span class='line'><span class="go"> </span>
-</span><span class='line'><span class="go">    CLOSE tables_cursor;</span>
-</span><span class='line'><span class="go">    DEALLOCATE tables_cursor;</span>
-</span><span class='line'><span class="go">GO</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>CREATE</span> <span class='k'>PROCEDURE</span> <span class='n'>drop_foreign_keys</span>
+</span><span class='line'><span class='o'>@</span><span class='k'>table</span> <span class='n'>nvarchar</span><span class='p'>(</span><span class='mf'>50</span><span class='p'>)</span>
+</span><span class='line'><span class='k'>AS</span>
+</span><span class='line'>    <span class='k'>DECLARE</span> <span class='n'>tables_cursor</span> <span class='k'>CURSOR</span>
+</span><span class='line'>    <span class='k'>FOR</span>
+</span><span class='line'>      <span class='k'>SELECT</span>
+</span><span class='line'>        <span class='s1'>&#39;ALTER TABLE &#39;</span> <span class='o'>+</span> <span class='n'>OBJECT_NAME</span><span class='p'>(</span><span class='n'>parent_object_id</span><span class='p'>)</span> <span class='o'>+</span>
+</span><span class='line'>        <span class='s1'>&#39; DROP CONSTRAINT &#39;</span> <span class='o'>+</span> <span class='k'>name</span> <span class='k'>as</span> <span class='n'>dropkey</span>
+</span><span class='line'>      <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>foreign_keys</span>
+</span><span class='line'>    <span class='k'>WHERE</span> <span class='n'>referenced_object_id</span> <span class='o'>=</span> <span class='n'>object_id</span><span class='p'>(</span><span class='o'>@</span><span class='k'>table</span><span class='p'>)</span>
+</span><span class='line'>    <span class='n'>OPEN</span> <span class='n'>tables_cursor</span><span class='p'>;</span>
+</span><span class='line'><span class='go'> </span>
+</span><span class='line'><span class='go'>    DECLARE @dropkey sysname;</span>
+</span><span class='line'><span class='go'>    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class='go'>    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
+</span><span class='line'><span class='go'>    BEGIN;</span>
+</span><span class='line'><span class='go'>      EXECUTE (@dropkey);</span>
+</span><span class='line'><span class='go'>      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class='go'>    END;</span>
+</span><span class='line'><span class='go'> </span>
+</span><span class='line'><span class='go'>    CLOSE tables_cursor;</span>
+</span><span class='line'><span class='go'>    DEALLOCATE tables_cursor;</span>
+</span><span class='line'><span class='go'>GO</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>And how to use it</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">EXECUTE</span> <span class="n">drop_foreign_keys</span> <span class="n">N</span><span class="s1">&#39;TableТame&#39;</span>
-</span><span class='line'><span class="k">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mf">1</span> <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">objects</span> <span class="k">WHERE</span> <span class="n">OBJECT_ID</span> <span class="o">=</span> <span class="n">OBJECT_ID</span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;TableТame&#39;</span><span class="p">)</span> <span class="k">AND</span> <span class="k">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="s1">&#39;U&#39;</span><span class="p">))</span>
-</span><span class='line'><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">TableName</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>EXECUTE</span> <span class='n'>drop_foreign_keys</span> <span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span>
+</span><span class='line'><span class='k'>IF</span> <span class='k'>EXISTS</span><span class='p'>(</span><span class='k'>SELECT</span> <span class='mf'>1</span> <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>objects</span> <span class='k'>WHERE</span> <span class='n'>OBJECT_ID</span> <span class='o'>=</span> <span class='n'>OBJECT_ID</span><span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span><span class='p'>)</span> <span class='k'>AND</span> <span class='k'>type</span> <span class='o'>=</span> <span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;U&#39;</span><span class='p'>))</span>
+</span><span class='line'><span class='k'>DROP</span> <span class='k'>TABLE</span> <span class='n'>TableName</span>
+</span></code></pre></td></tr></table></div></figure>]]></content>
   </entry>
   
   <entry>
@@ -768,62 +653,45 @@ can be deleted without any errors&lt;</p>
     <id>http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id</id>
     <content type="html"><![CDATA[<p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
 
-<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
+<p>In general all you need is described in official docs <a href='http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html'>http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
 
 <p>But there is at least one case with very strange behaviour. When we define key as String type</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
-</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span> <span class='o'>{</span>
+</span><span class='line'> <span class='kd'>static</span> <span class='n'>mapping</span> <span class='o'>=</span> <span class='o'>{</span>
+</span><span class='line'>   <span class='n'>id</span> <span class='nl'>name:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>column:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>type:</span> <span class='s1'>&#39;string&#39;</span>
+</span><span class='line'> <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>For the first look it works fine Foo.get(‘someKey’)
-returns exact object I was looking. But when we try to use string that looks like a number</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="err">&#39;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
+<p>For the first look it works fine Foo.get(‘someKey’) returns exact object I was looking. But when we try to use string that looks like a number</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span><span class='o'>.</span><span class='na'>get</span><span class='o'>(</span><span class='err'>&#39;</span><span class='mi'>4</span><span class='err'>’</span><span class='o'>)</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>we will get</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>org</span><span class='o'>.</span><span class='na'>hibernate</span><span class='o'>.</span><span class='na'>TypeMismatchException</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
-It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
-Workaround is to add explicitly id field to domain class</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property. Workaround is to add explicitly id field to domain class</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">String</span> <span class="n">id</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span> <span class='o'>{</span>
+</span><span class='line'>  <span class='n'>String</span> <span class='n'>id</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
+</span><span class='line'>  <span class='kd'>static</span> <span class='n'>mapping</span> <span class='o'>=</span> <span class='o'>{</span>
+</span><span class='line'>    <span class='n'>id</span> <span class='nl'>name:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>column:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>type:</span> <span class='s1'>&#39;string&#39;</span>
+</span><span class='line'>  <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>It is mentioned in documentation but now grails knows what type to use.
-There is issue in grails jira which was closed with resolution Not A Bug.</p>
-]]></content>
+<p>It is mentioned in documentation but now grails knows what type to use. There is issue in grails jira which was closed with resolution Not A Bug.</p>]]></content>
   </entry>
   
   <entry>
@@ -831,32 +699,27 @@ There is issue in grails jira which was closed with resolution Not A Bug.</p>
     <link href="http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball/"/>
     <updated>2011-09-13T19:09:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball</id>
-    <content type="html"><![CDATA[<p>Цими вихідними пройшли другий і третій етапи проекту &ldquo;sport.itevent&rdquo;. Цього разу захід був присвячений дню програміста, тому зробили одразу кілька ігор: Quest і Paintball, а також додатково для всіх бажаючих &ndash; метання мишок та клавіатур. Дуже приємно відмітити, що цей турнір з кожним разом збирає все більше учасників. В Quest-і прийняло участь 7 команд, серед них були як і бувалі гравці, так і новачки які грали вперше. Paintball, в свою чергу, зібрав 11 команд, а це 55 учасників.
-Дякуємо Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Також велика подяка Івану Дячишину за участь в організації всіх трьох ігор та окремо за авторську гру Quest. Окремо хочемо подякувати Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Звичайно всі учасники вдячні Івану Дячишину за організації всіх трьох ігор та за авторську гру Quest.
-Ми вітаємо команд переможців
-Quest:</p>
-
-<ol>
+    <content type="html"><![CDATA[<p>Цими вихідними пройшли другий і третій етапи проекту &#8220;sport.itevent&#8221;. Цього разу захід був присвячений дню програміста, тому зробили одразу кілька ігор: Quest і Paintball, а також додатково для всіх бажаючих - метання мишок та клавіатур. Дуже приємно відмітити, що цей турнір з кожним разом збирає все більше учасників. В Quest-і прийняло участь 7 команд, серед них були як і бувалі гравці, так і новачки які грали вперше. Paintball, в свою чергу, зібрав 11 команд, а це 55 учасників. Дякуємо Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Також велика подяка Івану Дячишину за участь в організації всіх трьох ігор та окремо за авторську гру Quest. Окремо хочемо подякувати Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Звичайно всі учасники вдячні Івану Дячишину за організації всіх трьох ігор та за авторську гру Quest. Ми вітаємо команд переможців Quest: <ol>
 <li>Жовті коцики</li>
 <li>Енігма SoftServe</li>
 <li>Tornado SoftJourn</li>
-</ol>
+</ol></p>
 
+<p>Пейнтбол</p>
 
-<p>Пейнтбол
-&ndash; бЄшені ЇжАчкі SoftServe
-&ndash; Hell Bells SoftJourn
-&ndash; HomeAway SoftServe
-Фото звіт</p>
+<ul>
+<li>бЄшені ЇжАчкі SoftServe</li>
 
-<p>Quest sport.itevent 2011
-<embed flashvars="host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651454700771619425%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" type="application/x-shockwave-flash" width="600"></embed></p>
+<li>Hell Bells SoftJourn</li>
 
-<p>paintball srpot.itevent
-<embed flashvars="host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651410472176670977%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" type="application/x-shockwave-flash" width="600"></embed></p>
+<li>HomeAway SoftServe Фото звіт</li>
+</ul>
 
-<p>Готуємось до натступної гри :)</p>
-]]></content>
+<p>Quest sport.itevent 2011 <embed flashvars='host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651454700771619425%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB' height='400' pluginspage='http://www.macromedia.com/go/getflashplayer' src='https://picasaweb.google.com/s/c/bin/slideshow.swf' type='application/x-shockwave-flash' width='600' /></p>
+
+<p>paintball srpot.itevent <embed flashvars='host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651410472176670977%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB' height='400' pluginspage='http://www.macromedia.com/go/getflashplayer' src='https://picasaweb.google.com/s/c/bin/slideshow.swf' type='application/x-shockwave-flash' width='600' /></p>
+
+<p>Готуємось до натступної гри :)</p>]]></content>
   </entry>
   
   <entry>
@@ -864,16 +727,7 @@ Quest:</p>
     <link href="http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/"/>
     <updated>2011-08-26T18:53:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze</id>
-    <content type="html"><![CDATA[<iframe src="http://player.vimeo.com/video/28185557?title=0&amp;byline=0&amp;portrait=0" width="500" height="275" frameborder="0"></iframe>
-
-
-
-
-<iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/9015391" width="425"></iframe>
-
-
-<p></p>
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='640'><param name='movie' value='//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US' type='application/x-shockwave-flash' width='640' /></object>]]></content>
   </entry>
   
   <entry>
@@ -881,41 +735,19 @@ Quest:</p>
     <link href="http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/"/>
     <updated>2011-08-20T16:51:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep</id>
-    <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
+    <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&#8217;t have to download Grails manually any more. Now I use &#8220;Ubuntu way&#8221;.</p>
 
 <p>First of all we need to add Grails repo</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
 </span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>That&#8217;s all, now you can install latest stable release of Grails</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
+<p>The thing I&#8217;m exiting a lot is that you can install any version of Grails. Usually you don&#8217;t migrate to new version right after it has been released.</p>
 
-
-<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
-
-<p>So here is list of available Grails versions
-sudo aptitude search grails <br/>
-p grails &ndash; A rapid web development platform built on Groovy <br/>
-p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
-Grails, a rapid web development platform built on Groovy</p>
-]]></content>
+<p>So here is list of available Grails versions sudo aptitude search grails <br /> p grails - A rapid web development platform built on Groovy <br /> p grails-1.2.5 - A rapid web development platform on Groovy <br /> p grails-1.3.0 - A rapid web development platform on Groovy <br /> p grails-1.3.1 - A rapid web development platform on Groovy <br /> p grails-1.3.2 - A rapid web development platform on Groovy <br /> p grails-1.3.3 - A rapid web development platform on Groovy <br /> p grails-1.3.4 - A rapid web development platform on Groovy <br /> p grails-1.3.5 - A rapid web development platform on Groovy <br /> p grails-1.3.6 - A rapid web development platform on Groovy <br /> p grails-1.3.7 - A rapid web development platform on Groovy <br /> p grails-1.4.0 - A rapid web development platform on Groovy <br /> p grails-2.0.0 - A rapid web development platform on Groovy <br /> p grails-bash-completion - Provides bash autocompletion for <br /> Grails, a rapid web development platform built on Groovy</p>]]></content>
   </entry>
   
   <entry>
@@ -923,9 +755,7 @@ Grails, a rapid web development platform built on Groovy</p>
     <link href="http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/"/>
     <updated>2011-08-09T18:24:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux</id>
-    <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&rsquo;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype.
-Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skype command you can find here <a href="https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles">https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</a></p>
-]]></content>
+    <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype - disable notifications. I&#8217;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&#8217;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype. Just type <em>/alertsoff</em> in chat you want to &#8220;mute&#8221;. Other Skype command you can find here https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</p>]]></content>
   </entry>
   
   <entry>
@@ -933,11 +763,7 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
     <link href="http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
     <updated>2011-08-07T18:28:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy</id>
-    <content type="html"><![CDATA[<iframe frameborder="0" height="275" src="http://player.vimeo.com/video/28189112?title=0&amp;byline=0&amp;portrait=0" width="500"></iframe>
-
-
-<p><strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/itbooze-groovy-in-daily-use-by-grygoriy-mykhalyunyo" target="_blank" title="itBooze: Groovy in daily use by Grygoriy Mykhalyunyo">itBooze: Groovy in daily use by Grygoriy Mykhalyunyo</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/8778146" width="425"></iframe> <br /></p>
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object>]]></content>
   </entry>
   
   <entry>
@@ -945,22 +771,17 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
     <link href="http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/"/>
     <updated>2011-06-06T10:00:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04</id>
-    <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
-At startup you will got nice error</p>
-
+    <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04. At startup you will got nice error</p>
 <pre>vesamenu.c32: not a COM32R image
 boot:
 vesamenu.c32: not a COM32R image
 boot:
 (...)</pre>
-
-
 <p>To be honest that tells nothing to me. This comes from backward compatibility so if you want USB stick with ubuntu 10.04 you have to have same version of ubuntu.</p>
 
-<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &ldquo;help&rdquo; in prompt. At help menu hit enter, system should run.</p>
+<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &#8220;help&#8221; in prompt. At help menu hit enter, system should run.</p>
 
-<p>Workaround is more then strange, but it works</p>
-]]></content>
+<p>Workaround is more then strange, but it works</p>]]></content>
   </entry>
   
   <entry>
@@ -970,13 +791,11 @@ boot:
     <id>http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti</id>
     <content type="html"><![CDATA[<p>gradle using groovy and java in single project.</p>
 
-<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
 
-<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
 
-<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
-]]></content>
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>]]></content>
   </entry>
   
   <entry>
@@ -984,18 +803,7 @@ boot:
     <link href="http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/"/>
     <updated>2010-11-06T16:49:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch</id>
-    <content type="html"><![CDATA[<iframe allowfullscreen="" frameborder="0" height="330" src="http://player.vimeo.com/video/31713498" webkitallowfullscreen="" width="600"></iframe>
-
-
-<div id="__ss_5542596" style="width: 425px;">
-<strong style="display: block; margin: 12px 0 4px;"><a href="http://www.slideshare.net/brut13/teamwork-5542596" target="_blank" title="Teamwork">Teamwork</a></strong> <iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/5542596" width="425"></iframe> <br />
-<div style="padding: 5px 0 12px;">
-<br /></div>
-</div>
-
-
-
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' type='application/x-shockwave-flash' width='853' /></object>]]></content>
   </entry>
   
   <entry>
@@ -1003,22 +811,13 @@ boot:
     <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
     <updated>2010-08-27T16:40:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
-    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс
-<em>grails schema-export</em></p>
+    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс <em>grails schema-export</em></p>
 
-<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+<p>Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
 
-<p>Якщо виконати
-<em>grails schema-export</em>
-то схема бази даних буде екпортована у target/ddl.sql
-Можна екпортувати окремі доменні класи</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
+<p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>]]></content>
   </entry>
   
   <entry>
@@ -1026,9 +825,7 @@ boot:
     <link href="http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/"/>
     <updated>2010-08-20T16:37:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
-    <content type="html"><![CDATA[<iframe width="640" height="360" src="http://grygoriy.github.io//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
+    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object>]]></content>
   </entry>
   
 </feed>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Groovy | Grygoriy Mykhalyuno]]></title>
-  <link href="http://grygoriy.github.io/blog/categories/groovy/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Spring | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
   <updated>2013-10-09T15:06:59+03:00</updated>
   <id>http://grygoriy.github.io/</id>
@@ -12,48 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
-    <updated>2013-10-09T09:15:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
-    <content type="html"><![CDATA[<object height='480' width='640'><param name='movie' value='//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='640' /></object>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
-    <updated>2012-10-24T15:52:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
-    <content type="html"><![CDATA[<p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span> <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;</span><span class="n">id</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8217</span><span class="o">;)</span> <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span> <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="n">grailsApplication</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def init = { servletContext -&amp;gt;</span>
-</span><span class='line'><span class="s">    grailsApplication.domainClasses.each {def domain -&amp;gt;</span>
-</span><span class='line'><span class="s">        domain.metaClass.static.deleteById = {def id -&amp;gt;</span>
-</span><span class='line'><span class="s">            executeUpdate(&amp;quot;delete from ${domain.name} where id = :id&amp;quot;, [id:id])</span>
-</span><span class='line'><span class="s">        }</span>
-</span><span class='line'><span class="s">    }</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> Now each of your domain class has the method deleteById, and our example became <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span> <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;</span><span class="n">id</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8217</span><span class="o">;)</span> <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p>]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
@@ -291,40 +249,6 @@
 <p>More about Spring Security Events More about caching with Google guava</p>
 
 <p>Grails users can simple use this plugin https://github.com/grygoriy/bruteforcedefender UPD: Plugin now at http://grails.org/plugin/bruteforce-defender Enjoy :)</p>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Awesomeness of groovy named parameters]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/"/>
-    <updated>2012-02-13T18:33:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
-    <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /> <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">from</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">to</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">subject</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">body</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> typical java call would be <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">john</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">mike</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>Too many strings, don&#8217;t you think? I have to check java docs all the time I&#8217;m writing this method.<br /> Groovy allows us to pass parameters as map without <span />. If we pass map into method groovy set it to the first parameter. Let&#8217;s look into other exampl</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">john</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">to:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">mike</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">subject:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">body:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> Much more readable as for me. And method will looks like <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">from</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">to</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">subject</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">body</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
-    <updated>2012-02-06T18:30:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
-    <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&#8217;s allows you to run both applications in same time, work with them and debug</p>
-
-<p>So we can change port with command <br /> <strong>grails run-app -Dserver.port=8081</strong></p>
-
-<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br /> <strong>grails.server.port.http=&#8221;8081&#8221;</strong></p>
-
-<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br /> <strong>app.context=/</strong></p>]]></content>
   </entry>
   
 </feed>
