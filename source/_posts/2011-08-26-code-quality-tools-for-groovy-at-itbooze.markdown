@@ -6,6 +6,6 @@ comments: true
 categories: [Groovy, Presentations]
 ---
 
-<iframe src="http://player.vimeo.com/video/28185557?title=0&amp;byline=0&amp;portrait=0" width="500" height="275" frameborder="0"></iframe>
+<object width="640" height="480"><param name="movie" value="//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="640" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>
 
-<iframe frameborder="0" height="355" marginheight="0" marginwidth="0" scrolling="no" src="http://www.slideshare.net/slideshow/embed_code/9015391" width="425"></iframe> 
+

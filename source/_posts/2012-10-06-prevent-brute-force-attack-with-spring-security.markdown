@@ -3,12 +3,12 @@ layout: post
 title: "Prevent brute force attack with Spring Security"
 date: 2012-10-06 15:58
 comments: true
-categories: 
+categories: [Groovy, Grails, Security, Spring]
 ---
 Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.
 
 Let me show you little guide how to do this for Grails application.
-
+<!--more-->
 First you have to enable springSecurityEventListener in your Config.groovy
 grails.plugins.springsecurity.useSecurityEventListener = true
 

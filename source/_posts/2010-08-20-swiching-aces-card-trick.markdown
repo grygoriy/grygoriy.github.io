@@ -6,4 +6,4 @@ comments: true
 categories: [magic, tricks]
 ---
 
-<iframe width="640" height="360" src="//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
+<object width="853" height="480"><param name="movie" value="//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="853" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>

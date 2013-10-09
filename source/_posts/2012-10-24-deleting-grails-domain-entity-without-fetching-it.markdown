@@ -22,9 +22,9 @@ Of cause you would like to write such code whenever you will need to delete enti
 {% codeblock lang:groovy %}
     def grailsApplication
 
-    def init = { servletContext -&gt;
-        grailsApplication.domainClasses.each {def domain -&gt;
-            domain.metaClass.static.deleteById = {def id -&gt;
+    def init = { servletContext ->
+        grailsApplication.domainClasses.each {def domain ->
+            domain.metaClass.static.deleteById = {def id ->
                 executeUpdate("delete from ${domain.name} where id = :id", [id:id])
             }
         }
