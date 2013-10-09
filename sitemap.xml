@@ -38,6 +38,12 @@
     </url>
     <url>
         <loc>
+            http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/
+        </loc>
+        <lastmod>2013-10-09T10:02:39+03:00</lastmod>
+    </url>
+    <url>
+        <loc>
             http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/
         </loc>
         <lastmod>2013-10-08T18:30:04+03:00</lastmod>
@@ -112,9 +118,9 @@
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/
+            http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/
         </loc>
-        <lastmod>2013-10-09T09:18:13+03:00</lastmod>
+        <lastmod>2013-10-09T10:04:44+03:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/robots.txt</loc>
@@ -122,7 +128,7 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/archives/</loc>
-        <lastmod>2013-10-09T09:18:13+03:00</lastmod>
+        <lastmod>2013-10-09T10:04:44+03:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/search.html</loc>
@@ -130,6 +136,6 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/</loc>
-        <lastmod>2013-10-09T09:18:13+03:00</lastmod>
+        <lastmod>2013-10-09T10:04:44+03:00</lastmod>
     </url>
 </urlset>

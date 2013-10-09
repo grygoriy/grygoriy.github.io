@@ -9,8 +9,8 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати &hellip;">
+  <meta name="description" content="Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
+At startup you will got &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/">Ubuntu 11.04 to Create Usb Stick for Ubuntu 10.04</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-06-06T10:00:00+03:00" pubdate data-updated="true">Jun 6<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
+At startup you will got nice error</p>
+
+<pre>vesamenu.c32: not a COM32R image
+boot:
+vesamenu.c32: not a COM32R image
+boot:
+(...)</pre>
+
+
+<p>To be honest that tells nothing to me. This comes from backward compatibility so if you want USB stick with ubuntu 10.04 you have to have same version of ubuntu.</p>
+
+<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &ldquo;help&rdquo; in prompt. At help menu hit enter, system should run.</p>
+
+<p>Workaround is more then strange, but it works</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -156,56 +206,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/08/27/grails-schema-export/">Grails Schema-export</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-27T16:40:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс
-<em>grails schema-export</em></p>
-
-<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
-
-<p>Якщо виконати
-<em>grails schema-export</em>
-то схема бази даних буде екпортована у target/ddl.sql
-Можна екпортувати окремі доменні класи</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -223,7 +223,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/">Functiona testing with Selenium and Groovy for ITBooze</a>
+        <a href="/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
       </li>
     
       <li class="post">

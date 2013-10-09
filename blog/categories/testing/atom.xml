@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Testing | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T09:25:23+03:00</updated>
+  <updated>2013-10-09T10:08:18+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Functiona testing with Selenium and Groovy for ITBooze]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/"/>
+    <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
     <updated>2013-10-09T09:15:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze</id>
+    <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
     <content type="html"><![CDATA[<iframe width="640" height="480" src="http://grygoriy.github.io//www.youtube.com/embed/gXBOHVYqN-k" frameborder="0" allowfullscreen></iframe>
 
 ]]></content>

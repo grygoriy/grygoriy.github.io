@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T09:25:23+03:00</updated>
+  <updated>2013-10-09T10:08:18+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Functiona testing with Selenium and Groovy for ITBooze]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/"/>
+    <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
     <updated>2013-10-09T09:15:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze</id>
+    <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
     <content type="html"><![CDATA[<iframe width="640" height="480" src="http://grygoriy.github.io//www.youtube.com/embed/gXBOHVYqN-k" frameborder="0" allowfullscreen></iframe>
 
 ]]></content>
@@ -941,6 +941,29 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[ubuntu 11.04 to create usb stick for ubuntu 10.04]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/"/>
+    <updated>2011-06-06T10:00:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04</id>
+    <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
+At startup you will got nice error</p>
+
+<pre>vesamenu.c32: not a COM32R image
+boot:
+vesamenu.c32: not a COM32R image
+boot:
+(...)</pre>
+
+
+<p>To be honest that tells nothing to me. This comes from backward compatibility so if you want USB stick with ubuntu 10.04 you have to have same version of ubuntu.</p>
+
+<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &ldquo;help&rdquo; in prompt. At help menu hit enter, system should run.</p>
+
+<p>Workaround is more then strange, but it works</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[gradle використання groovy i java в одному проекті]]></title>
     <link href="http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/"/>
     <updated>2010-11-12T16:42:00+02:00</updated>
@@ -1004,48 +1027,6 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
     <updated>2010-08-20T16:37:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
     <content type="html"><![CDATA[<iframe width="640" height="360" src="http://grygoriy.github.io//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Квота місця на ext2/3/4]]></title>
-    <link href="http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/"/>
-    <updated>2009-10-08T12:04:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4</id>
-    <content type="html"><![CDATA[<p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
-
-<p>Змінити це можна командою tune2fs</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
-
-
-<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
-
-<p>цікавиити нас будуть два параметри
--m reserved-blocks-percentage
--r  reserved-blocks-count</p>
-
-<p>-m вказує відсоток блоків у відсотках
--r вказує їх абсолютну величину</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>змінить ліміт до двох відотків</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul>
 
 ]]></content>
   </entry>
