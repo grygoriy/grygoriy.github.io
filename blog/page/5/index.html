@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too &hellip;">
+  <meta name="description" content="Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/20/grails-at-ubuntu-rep/">Grails at Ubuntu Rep</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-20T16:51:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
+
+<p>First of all we need to add Grails repo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
+</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
+
+<p>So here is list of available Grails versions
+sudo aptitude search grails <br/>
+p grails &ndash; A rapid web development platform built on Groovy <br/>
+p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
+Grails, a rapid web development platform built on Groovy</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -142,49 +211,6 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/">Gradle використання Groovy I Java в одному проекті</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-11-12T16:42:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>gradle using groovy and java in single project.</p>
-
-<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
-
-<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
-
-<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -202,15 +228,15 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/">Functiona testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
       </li>
     
   </ul>

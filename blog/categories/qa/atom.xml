@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: QA | Grygoriy Mykhalyuno]]></title>
+  <link href="http://grygoriy.github.io/blog/categories/qa/atom.xml" rel="self"/>
+  <link href="http://grygoriy.github.io/"/>
+  <updated>2013-10-09T09:25:23+03:00</updated>
+  <id>http://grygoriy.github.io/</id>
+  <author>
+    <name><![CDATA[Grygoriy Mykhalyuno]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Functiona testing with Selenium and Groovy for ITBooze]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/"/>
+    <updated>2013-10-09T09:15:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze</id>
+    <content type="html"><![CDATA[<iframe width="640" height="480" src="http://grygoriy.github.io//www.youtube.com/embed/gXBOHVYqN-k" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+</feed>

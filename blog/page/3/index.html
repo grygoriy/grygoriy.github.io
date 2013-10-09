@@ -9,7 +9,13 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing &hellip;">
+  <meta name="description" content="How do you call typical method with few parameters. Lets assume we have method that sends email with signature 1
+2
+3
+4
+5
+6
+send(String from, String &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +71,97 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/02/13/awesomeness-of-groovy-named-parameters/">Awesomeness of Groovy Named Parameters</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-13T18:33:00+02:00" pubdate data-updated="true">Feb 13<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>typical java call would be</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;greetings&quot;</span><span class="o">,</span> <span class="s2">&quot;Hello Goodbye&quot;</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
+Groovy allows us to pass parameters as map without []. If we pass map into method groovy set it to the first parameter. Let&rsquo;s look into other exampl</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">body:</span><span class="s2">&quot;Hello Goodbye&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Much more readable as for me. And method will looks like</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -215,98 +312,6 @@ can be deleted without any errors&lt;</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/03/use-grails-domain-with-string-type-id/">Use Grails Domain With String Type Id</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-03T18:41:00+02:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
-
-<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
-
-<p>But there is at least one case with very strange behaviour. When we define key as String type</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
-</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
-</span><span class='line'> <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>For the first look it works fine Foo.get(‘someKey’)
-returns exact object I was looking. But when we try to use string that looks like a number</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="err">&#39;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>we will get</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
-It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
-Workaround is to add explicitly id field to domain class</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">String</span> <span class="n">id</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It is mentioned in documentation but now grails knows what type to use.
-There is issue in grails jira which was closed with resolution Not A Bug.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -324,15 +329,15 @@ There is issue in grails jira which was closed with resolution Not A Bug.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/">Functiona testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
       </li>
     
   </ul>

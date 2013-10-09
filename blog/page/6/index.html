@@ -9,7 +9,8 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content=" Teamwork ">
+  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
+Захотів я використовувати &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/">Gradle використання Groovy I Java в одному проекті</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-12T16:42:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>gradle using groovy and java in single project.</p>
+
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
+Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -141,12 +185,12 @@
 
 
   <div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс
-grails schema-export</p>
+<em>grails schema-export</em></p>
 
 <p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
 
 <p>Якщо виконати
-grails schema-export
+<em>grails schema-export</em>
 то схема бази даних буде екпортована у target/ddl.sql
 Можна екпортувати окремі доменні класи</p>
 
@@ -154,43 +198,6 @@ grails schema-export
 </pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>
 
 
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/08/20/swiching-aces-card-trick/">Swiching Aces Card Trick</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-20T16:37:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><iframe width="640" height="360" src="//www.youtube.com/embed/ANBTWcXDO6M" frameborder="0" allowfullscreen></iframe>
 
 </div>
   
@@ -216,15 +223,15 @@ grails schema-export
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/">Functiona testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
       </li>
     
   </ul>

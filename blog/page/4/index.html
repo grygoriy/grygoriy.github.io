@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Цими вихідними пройшли другий і третій етапи проекту &ldquo;sport.itevent&rdquo;. Цього разу захід був присвячений дню програміста, тому зробили &hellip;">
+  <meta name="description" content="Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA. In general all you &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,98 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/01/03/use-grails-domain-with-string-type-id/">Use Grails Domain With String Type Id</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-03T18:41:00+02:00" pubdate data-updated="true">Jan 3<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
+
+<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
+
+<p>But there is at least one case with very strange behaviour. When we define key as String type</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For the first look it works fine Foo.get(‘someKey’)
+returns exact object I was looking. But when we try to use string that looks like a number</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="err">&#39;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>we will get</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
+It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
+Workaround is to add explicitly id field to domain class</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">id</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It is mentioned in documentation but now grails knows what type to use.
+There is issue in grails jira which was closed with resolution Not A Bug.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -170,75 +262,6 @@ Quest:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/20/grails-at-ubuntu-rep/">Grails at Ubuntu Rep</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-20T16:51:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
-
-<p>First of all we need to add Grails repo</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
-</span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
-
-<p>So here is list of available Grails versions
-sudo aptitude search grails <br/>
-p grails &ndash; A rapid web development platform built on Groovy <br/>
-p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
-p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
-p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
-Grails, a rapid web development platform built on Groovy</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -256,15 +279,15 @@ Grails, a rapid web development platform built on Groovy</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/09/functiona-testing-with-selenium-and-groovy-for-itbooze/">Functiona testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
       </li>
     
       <li class="post">
         <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/">Prevent brute force attack with Spring Security</a>
       </li>
     
   </ul>
