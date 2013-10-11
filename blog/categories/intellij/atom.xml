@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Intellij | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/intellij/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T01:02:37+03:00</updated>
+  <updated>2013-10-12T01:02:45+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -25,10 +25,10 @@
 <ol>
 <li>run you test <pre>$ mvn test -Dmaven.surefire.debug </pre> maven will prepare environment and will wait for remote connection</li>
 
-<li>connect via Idea {% img /images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/01.png %}</li>
+<li>connect via Idea <img src="/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/01.png"></li>
 
 <li>start debug <br /> <p>
-{% img /images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/02.png %}
+<img src="/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/02.png">
 </p></li>
 
 <li>Now test will stop at your breakpoints. Profit!</li>
