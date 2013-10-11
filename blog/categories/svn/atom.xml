@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SVN | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/svn/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T00:45:47+03:00</updated>
+  <updated>2013-10-12T01:02:37+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -22,17 +22,13 @@
 
 <p>At windows platform</p>
 
-<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>global&lt;/span> http-proxy-host=proxyhost http-proxy-port=3128</span></code></pre></td></tr></table></div></figure></notextile></div> If you want separed proxy setting for each svn server</p>
+<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group {% codeblock %} <span>global</span> http-proxy-host=proxyhost http-proxy-port=3128 {% endcodeblock %} If you want separed proxy setting for each svn server</p>
 
-<p>Find group called <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>groups&lt;/span>.</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>Find group called {% codeblock %}<span>groups</span>.{% endcodeblock %}</p>
 
-<p>Add new line <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>Add new line {% codeblock %} groupName = {% endcodeblock %}</p>
 
-<p>Add new group with name groupName (previously added) <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;span>groupName&lt;/span> http-proxy-host = proxy1.some-domain-name.com http-proxy-port = 80 http-proxy-username = blah http-proxy-password = doubleblah http-timeout = 60 neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>Add new group with name groupName (previously added) {% codeblock %} <span>groupName</span> http-proxy-host = proxy1.some-domain-name.com http-proxy-port = 80 http-proxy-username = blah http-proxy-password = doubleblah http-timeout = 60 neon-debug-mask = 130 {% endcodeblock %}</p>
 
 <p>That&#8217;s all, just save your file and use it</p>]]></content>
   </entry>

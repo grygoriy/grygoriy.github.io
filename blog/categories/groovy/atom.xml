@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T00:45:47+03:00</updated>
+  <updated>2013-10-12T01:02:37+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -26,33 +26,17 @@
     <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
     <updated>2012-10-24T15:52:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
-    <content type="html"><![CDATA[<p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span> <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;</span><span class="n">id</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8217</span><span class="o">;)</span> <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span> <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="n">grailsApplication</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;def init = { servletContext -&amp;gt;</span>
-</span><span class='line'><span class="s">    grailsApplication.domainClasses.each {def domain -&amp;gt;</span>
-</span><span class='line'><span class="s">        domain.metaClass.static.deleteById = {def id -&amp;gt;</span>
-</span><span class='line'><span class="s">            executeUpdate(&amp;quot;delete from ${domain.name} where id = :id&amp;quot;, [id:id])</span>
-</span><span class='line'><span class="s">        }</span>
-</span><span class='line'><span class="s">    }</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> Now each of your domain class has the method deleteById, and our example became <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span> <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;</span><span class="n">id</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8217</span><span class="o">;)</span> <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p>]]></content>
+    <content type="html"><![CDATA[<p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like {% codeblock lang:groovy %} def deleteComment() { def commentId = params.long(&#8216;id&#8217;) def comment = Comment.findById(commentId) comment?.delete() } {% endcodeblock %} So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy {% codeblock lang:groovy %} def grailsApplication</p>
+
+<pre><code>def init = { servletContext -&gt;
+    grailsApplication.domainClasses.each {def domain -&gt;
+        domain.metaClass.static.deleteById = {def id -&gt;
+            executeUpdate(&quot;delete from ${domain.name} where id = :id&quot;, [id:id])
+        }
+    }
+}</code></pre>
+
+<p>{% endcodeblock %} Now each of your domain class has the method deleteById, and our example became {% codeblock lang:groovy %} def deleteComment() { def commentId = params.long(&#8216;id&#8217;) Comment.deleteById(commentId) } {% endcodeblock %} You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p>]]></content>
   </entry>
   
   <entry>
@@ -64,229 +48,112 @@
 
 <p>Let me show you little guide how to do this for Grails application. <!--more--> First you have to enable springSecurityEventListener in your Config.groovy grails.plugins.springsecurity.useSecurityEventListener = true</p>
 
-<p>then implement listeners in /src/bruteforce create classes <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**</span> <span class="n">Registers</span> <span class="n">all</span> <span class="n">failed</span> <span class="n">attempts</span> <span class="n">to</span> <span class="n">login</span><span class="o">.</span> <span class="n">Main</span> <span class="n">purpose</span> <span class="n">to</span> <span class="n">count</span> <span class="n">attempts</span> <span class="k">for</span> <span class="n">particular</span> <span class="n">account</span> <span class="n">ant</span> <span class="n">block</span> <span class="n">user</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;&lt;em&gt;/</span> <span class="kd">class</span> <span class="nc">AuthenticationFailureListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span> <span class="o">{&lt;</span><span class="s">/em&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
-</span><span class='line'>
-</span><span class='line'><span class="nd">@Override</span>
-</span><span class='line'><span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationFailureBadCredentialsEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">failLogin</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
-</span><span class='line'><span class="o">}&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> next we have to create listener for successful logins in same package <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**</span> <span class="n">Listener</span> <span class="k">for</span> <span class="n">successfull</span> <span class="n">logins</span><span class="o">.</span> <span class="n">Used</span> <span class="k">for</span> <span class="n">reseting</span> <span class="n">number</span> <span class="n">on</span> <span class="n">unsuccessfull</span> <span class="n">logins</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">account</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="s">/ class AuthenticationSuccessEventListener implements ApplicationListener{&lt;/</span><span class="n">em</span><span class="o">&gt;&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;LoginAttemptCacheService loginAttemptCacheService</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">@Override</span>
-</span><span class='line'><span class="s">void onApplicationEvent(AuthenticationSuccessEvent e) {</span>
-</span><span class='line'><span class="s">    loginAttemptCacheService.loginSuccess(e.authentication.name)</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> We were not putting them in our grails-app folder so we need to register these classes as spring beans. Add next lines into grails-app/conf/spring/resources.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;beans = { authenticationFailureListener(AuthenticationFailureListener) { loginAttemptCacheService = ref(&amp;#8216;loginAttemptCacheService&amp;#8217;) }&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">authenticationSuccessEventListener</span><span class="o">(</span><span class="n">AuthenticationSuccessEventListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">39</span><span class="o">;</span><span class="n">loginAttemptCacheService</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">39</span><span class="o">;)</span>
-</span><span class='line'><span class="o">}&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> You&#8217;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService Let&#8217;s implement it. This would be typical grails service <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;package com.grygoriy&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheBuilder</span> <span class="kn">import</span> <span class="nn">com.google.common.cache.CacheLoader</span> <span class="kn">import</span> <span class="nn">com.google.common.cache.LoadingCache</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;import java.util.concurrent.TimeUnit import org.apache.commons.lang.math.NumberUtils import javax.annotation.PostConstruct&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">class</span> <span class="nc">LoginAttemptCacheService</span> <span class="o">{&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;private LoadingCache attempts;</span>
-</span><span class='line'><span class="s">private int allowedNumberOfAttempts</span>
-</span><span class='line'><span class="s">def grailsApplication</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">@PostConstruct</span>
-</span><span class='line'><span class="s">void init() {</span>
-</span><span class='line'><span class="s">    allowedNumberOfAttempts = grailsApplication.config.brutforce.loginAttempts.allowedNumberOfAttempts</span>
-</span><span class='line'><span class="s">    int time = grailsApplication.config.brutforce.loginAttempts.time</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">    log.info &amp;quot;account block configured for $time minutes&amp;quot;</span>
-</span><span class='line'><span class="s">    attempts = CacheBuilder.newBuilder()</span>
-</span><span class='line'><span class="s">               .expireAfterWrite(time, TimeUnit.MINUTES)</span>
-</span><span class='line'><span class="s">               .build({0} as CacheLoader);</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">/</span><span class="o">**</span>
-</span><span class='line'> <span class="o">*</span> <span class="n">Triggers</span> <span class="n">on</span> <span class="n">each</span> <span class="n">unsuccessful</span> <span class="n">login</span> <span class="n">attempt</span> <span class="n">and</span> <span class="n">increases</span> <span class="n">number</span> <span class="n">of</span> <span class="n">attempts</span> <span class="k">in</span> <span class="n">local</span> <span class="n">accumulator</span>
-</span><span class='line'> <span class="o">*</span> <span class="nd">@param</span> <span class="n">login</span> <span class="o">-</span> <span class="n">username</span> <span class="n">which</span> <span class="n">is</span> <span class="n">trying</span> <span class="n">to</span> <span class="n">login</span>
-</span><span class='line'> <span class="o">*</span> <span class="nd">@return</span>
-</span><span class='line'> <span class="o">*</span><span class="s">/</span>
-</span><span class='line'><span class="s">def failLogin(String login) {</span>
-</span><span class='line'><span class="s">    def numberOfAttempts = attempts.get(login)</span>
-</span><span class='line'><span class="s">    log.debug &amp;quot;fail login $login previous number for attempts $numberOfAttempts&amp;quot;</span>
-</span><span class='line'><span class="s">    numberOfAttempts++</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">    if (numberOfAttempts &amp;amp;gt; allowedNumberOfAttempts) {</span>
-</span><span class='line'><span class="s">        blockUser(login)</span>
-</span><span class='line'><span class="s">        attempts.invalidate(login)</span>
-</span><span class='line'><span class="s">    } else {</span>
-</span><span class='line'><span class="s">        attempts.put(login, numberOfAttempts)</span>
-</span><span class='line'><span class="s">    }</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">/</span><span class="o">**</span>
-</span><span class='line'> <span class="o">*</span> <span class="n">Triggers</span> <span class="n">on</span> <span class="n">each</span> <span class="n">successful</span> <span class="n">login</span> <span class="n">attempt</span> <span class="n">and</span> <span class="n">resets</span> <span class="n">number</span> <span class="n">of</span> <span class="n">attempts</span> <span class="k">in</span> <span class="n">local</span> <span class="n">accumulator</span>
-</span><span class='line'> <span class="o">*</span> <span class="nd">@param</span> <span class="n">login</span> <span class="o">-</span> <span class="n">username</span> <span class="n">which</span> <span class="n">is</span> <span class="n">login</span>
-</span><span class='line'> <span class="o">*</span><span class="s">/</span>
-</span><span class='line'><span class="s">def loginSuccess(String login) {</span>
-</span><span class='line'><span class="s">    log.debug &amp;quot;successfull login for $login&amp;quot;</span>
-</span><span class='line'><span class="s">    attempts.invalidate(login)</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">/</span><span class="o">**</span>
-</span><span class='line'> <span class="o">*</span> <span class="n">Disable</span> <span class="n">user</span> <span class="n">account</span> <span class="n">so</span> <span class="n">it</span> <span class="n">would</span> <span class="n">not</span> <span class="n">able</span> <span class="n">to</span> <span class="n">login</span>
-</span><span class='line'> <span class="o">*</span> <span class="nd">@param</span> <span class="n">login</span> <span class="o">-</span> <span class="n">username</span> <span class="n">that</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">disabled</span>
-</span><span class='line'> <span class="o">*</span><span class="s">/</span>
-</span><span class='line'><span class="s">private void blockUser(String login) {</span>
-</span><span class='line'><span class="s">    log.debug &amp;quot;blocking user: $login&amp;quot;</span>
-</span><span class='line'><span class="s">    def user = User.findByUsername(login)</span>
-</span><span class='line'><span class="s">    if (user) {</span>
-</span><span class='line'><span class="s">        user.accountLocked = true;</span>
-</span><span class='line'><span class="s">        user.save(flush: true)</span>
-</span><span class='line'><span class="s">    }</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;dependencies {</span>
-</span><span class='line'><span class="s">    runtime &amp;#39;com.google.guava:guava:11.0.1&amp;#39;</span>
-</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> And the last step we will add service configuration to Config.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">brutforce</span> <span class="o">{</span> <span class="n">loginAttempts</span> <span class="o">{</span> <span class="n">time</span> <span class="o">=</span> <span class="mi">5</span> <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> That is it, you ready to run you application. For typical java project almost everything will be the same. Same listeners and same services.</p>
+<p>then implement listeners in /src/bruteforce create classes {% codeblock lang:groovy %}</p>
+
+<p>/** Registers all failed attempts to login. Main purpose to count attempts for particular account ant block user</p>
+
+<p><em>/ class AuthenticationFailureListener implements ApplicationListener {</em></p>
+
+<pre><code>LoginAttemptCacheService loginAttemptCacheService
+
+@Override
+void onApplicationEvent(AuthenticationFailureBadCredentialsEvent e) {
+    loginAttemptCacheService.failLogin(e.authentication.name)
+}</code></pre>
+
+<p>} {% endcodeblock %} next we have to create listener for successful logins in same package {% codeblock lang:groovy %}</p>
+
+<p>/** Listener for successfull logins. Used for reseting number on unsuccessfull logins for specific account <em>/ class AuthenticationSuccessEventListener implements ApplicationListener{</em></p>
+
+<pre><code>LoginAttemptCacheService loginAttemptCacheService
+
+@Override
+void onApplicationEvent(AuthenticationSuccessEvent e) {
+    loginAttemptCacheService.loginSuccess(e.authentication.name)
+}</code></pre>
+
+<p>} {% endcodeblock %} We were not putting them in our grails-app folder so we need to register these classes as spring beans. Add next lines into grails-app/conf/spring/resources.groovy {% codeblock lang:groovy %}</p>
+
+<p>beans = { authenticationFailureListener(AuthenticationFailureListener) { loginAttemptCacheService = ref(&#8216;loginAttemptCacheService&#8217;) }</p>
+
+<pre><code>authenticationSuccessEventListener(AuthenticationSuccessEventListener) {
+    loginAttemptCacheService = ref(&#39;loginAttemptCacheService&#39;)
+}</code></pre>
+
+<p>} {% endcodeblock %} You&#8217;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService Let&#8217;s implement it. This would be typical grails service {% codeblock lang:groovy %}</p>
+
+<p>package com.grygoriy</p>
+
+<p>import com.google.common.cache.CacheBuilder import com.google.common.cache.CacheLoader import com.google.common.cache.LoadingCache</p>
+
+<p>import java.util.concurrent.TimeUnit import org.apache.commons.lang.math.NumberUtils import javax.annotation.PostConstruct</p>
+
+<p>class LoginAttemptCacheService {</p>
+
+<pre><code>private LoadingCache attempts;
+private int allowedNumberOfAttempts
+def grailsApplication
+
+@PostConstruct
+void init() {
+    allowedNumberOfAttempts = grailsApplication.config.brutforce.loginAttempts.allowedNumberOfAttempts
+    int time = grailsApplication.config.brutforce.loginAttempts.time
+
+    log.info &quot;account block configured for $time minutes&quot;
+    attempts = CacheBuilder.newBuilder()
+               .expireAfterWrite(time, TimeUnit.MINUTES)
+               .build({0} as CacheLoader);
+}
+
+/**
+ * Triggers on each unsuccessful login attempt and increases number of attempts in local accumulator
+ * @param login - username which is trying to login
+ * @return
+ */
+def failLogin(String login) {
+    def numberOfAttempts = attempts.get(login)
+    log.debug &quot;fail login $login previous number for attempts $numberOfAttempts&quot;
+    numberOfAttempts++
+
+    if (numberOfAttempts &amp;gt; allowedNumberOfAttempts) {
+        blockUser(login)
+        attempts.invalidate(login)
+    } else {
+        attempts.put(login, numberOfAttempts)
+    }
+}
+
+/**
+ * Triggers on each successful login attempt and resets number of attempts in local accumulator
+ * @param login - username which is login
+ */
+def loginSuccess(String login) {
+    log.debug &quot;successfull login for $login&quot;
+    attempts.invalidate(login)
+}
+
+/**
+ * Disable user account so it would not able to login
+ * @param login - username that has to be disabled
+ */
+private void blockUser(String login) {
+    log.debug &quot;blocking user: $login&quot;
+    def user = User.findByUsername(login)
+    if (user) {
+        user.accountLocked = true;
+        user.save(flush: true)
+    }
+}</code></pre>
+
+<p>} {% endcodeblock %} We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy {% codeblock lang:groovy %}</p>
+
+<pre><code>dependencies {
+    runtime &#39;com.google.guava:guava:11.0.1&#39;
+}</code></pre>
+
+<p>{% endcodeblock %} And the last step we will add service configuration to Config.groovy {% codeblock lang:groovy %}</p>
+
+<p>brutforce { loginAttempts { time = 5 allowedNumberOfAttempts = 3 } {% endcodeblock %} That is it, you ready to run you application. For typical java project almost everything will be the same. Same listeners and same services.</p>
 
 <p>More about Spring Security Events More about caching with Google guava</p>
 
@@ -298,19 +165,11 @@
     <link href="http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/"/>
     <updated>2012-02-13T18:33:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
-    <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /> <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">from</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">to</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">subject</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">body</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> typical java call would be <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">john</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">mike</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;)</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+    <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /> {% codeblock lang:groovy %} send(String from, String to, String subject, String body) { println &#8220;sender ${from}&#8221; println &#8220;sender ${to}&#8221; println &#8220;sender ${subject}&#8221; println &#8220;sender ${body}&#8221; } {% endcodeblock %} typical java call would be {% codeblock lang:groovy %} send(&#8220;john@example.com&#8221;, &#8220;mike@example.com&#8221;, &#8220;greetings&#8221;, &#8220;Hello Goodbye&#8221;) {% endcodeblock %}</p>
 
 <p>Too many strings, don&#8217;t you think? I have to check java docs all the time I&#8217;m writing this method.<br /> Groovy allows us to pass parameters as map without <span />. If we pass map into method groovy set it to the first parameter. Let&#8217;s look into other exampl</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">john</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">to:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">mike</span><span class="nd">@example.com</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">subject:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;,</span> <span class="nl">body:</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> Much more readable as for me. And method will looks like <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">from</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">to</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">subject</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="n">println</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8220</span><span class="o">;</span><span class="n">sender</span> <span class="n">$</span><span class="o">{</span><span class="n">params</span><span class="o">.</span><span class="na">body</span><span class="o">}&amp;</span><span class="err">#</span><span class="mi">8221</span><span class="o">;</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>]]></content>
+<p>{% codeblock lang:groovy %} send from:&#8221;john@example.com&#8221;, to:&#8221;mike@example.com&#8221;, subject:&#8221;greetings&#8221;, body:&#8221;Hello Goodbye&#8221; {% endcodeblock %} Much more readable as for me. And method will looks like {% codeblock lang:groovy %} send(params) { println &#8220;sender ${params.from}&#8221; println &#8220;sender ${params.to}&#8221; println &#8220;sender ${params.subject}&#8221; println &#8220;sender ${params.body}&#8221; } {% endcodeblock %}</p>]]></content>
   </entry>
   
   <entry>
