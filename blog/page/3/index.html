@@ -9,13 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="How do you call typical method with few parameters. Lets assume we have method that sends email with signature 1
-2
-3
-4
-5
-6
-send(String from, String &hellip;">
+  <meta name="description" content="At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -94,6 +88,131 @@ send(String from, String &hellip;">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/10/04/how-to-filter-blogger-rss/">How to Filter Blogger Rss</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-04T18:51:00+03:00" pubdate data-updated="true">Oct 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required. Few tips how to hack RSS in <a href='http://blogger.com'>blogger.com</a> To get all posts with specific label use http://blog.blogspot.com/feeds/posts/default/-/labelname</p>
+
+<p>Other nice things that can be done with url can be found on <a href='http://support.google.com/blogger/bin/answer.py?hl=en&amp;answer=97933'>official google page</a></p></div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/">Working With More Then One Grails Version on Same Environment</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T19:04:00+03:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go.</p>
+
+<p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
+
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu). Usually I install all applications to /usr/local/. Let&#8217;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period) So after unpacking we have</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local/grails-2.0.0
+</span><span class='line'>/usr/local/grails-2.1.1
+</span></code></pre></td></tr></table></div></figure>
+<p>Let&#8217;s create link to any version of Grails</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt;ln -s /usr/local/grails-2.1.1 grails
+</span></code></pre></td></tr></table></div></figure>
+<p>Now we have</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class='nv'>$ </span>ls -ld grails*
+</span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails -&amp;gt; /usr/local/grails-2.1.1
+</span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
+</span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
+</span></code></pre></td></tr></table></div></figure>
+<p>and variable</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='nb'>echo</span> <span class='nv'>$GRAILS_HOME</span>
+</span><span class='line'>/usr/local/grails
+</span></code></pre></td></tr></table></div></figure>
+<p>Let&#8217;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='c'>#!/bin/bash</span>
+</span><span class='line'><span class='c'>#Script for changing grails version</span>
+</span><span class='line'>
+</span><span class='line'><span class='nv'>grailsVersion</span><span class='o'>=</span><span class='nv'>$1</span>
+</span><span class='line'><span class='nv'>rootPath</span><span class='o'>=</span><span class='s2'>&quot;/usr/local&quot;</span>
+</span><span class='line'><span class='nv'>grailsLinkPath</span><span class='o'>=</span><span class='nv'>$rootPath</span><span class='s2'>&quot;/grails&quot;</span>
+</span><span class='line'><span class='nv'>grailsPath</span><span class='o'>=</span><span class='nv'>$grailsLinkPath</span><span class='s2'>&quot;-&quot;</span><span class='nv'>$grailsVersion</span>
+</span><span class='line'>
+</span><span class='line'><span class='nb'>echo </span>stitching to version <span class='nv'>$1</span>
+</span><span class='line'><span class='c'>#Check if directory with new grails version exists before doing anything</span>
+</span><span class='line'><span class='o'>[</span> -d <span class='nv'>$grailsPath</span> <span class='o'>]</span> &amp;amp;&amp;amp; rm <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class='nv'>$grailsPath</span> <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; <span class='nb'>echo</span> <span class='s2'>&quot;version switched to &quot;</span><span class='nv'>$grailsVersion</span> <span class='o'>||</span> <span class='nb'>echo</span> <span class='s1'>&#39;Directory &#39;</span><span class='nv'>$grailsPath</span><span class='s1'>&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure></div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/02/13/awesomeness-of-groovy-named-parameters/">Awesomeness of Groovy Named Parameters</a></h1>
     
     
@@ -165,141 +284,6 @@ send(String from, String &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/06/how-to-run-grails-application-on-separate-port/">How to Run Grails Application on Separate Port</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-06T18:30:00+02:00" pubdate data-updated="true">Feb 6<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&#8217;s allows you to run both applications in same time, work with them and debug</p>
-
-<p>So we can change port with command <br /> <strong>grails run-app -Dserver.port=8081</strong></p>
-
-<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br /> <strong>grails.server.port.http=&#8221;8081&#8221;</strong></p>
-
-<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br /> <strong>app.context=/</strong></p></div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/">Drop All Foreing Key for MS SQL Tables</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-09T18:55:00+02:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&#8217;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
-
-<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br /> For MS SQL I&#8217;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br /> can be deleted without any errors&lt;</p>
-
-<p>Here is stored procedure</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>CREATE</span> <span class='k'>PROCEDURE</span> <span class='n'>drop_foreign_keys</span>
-</span><span class='line'><span class='o'>@</span><span class='k'>table</span> <span class='n'>nvarchar</span><span class='p'>(</span><span class='mf'>50</span><span class='p'>)</span>
-</span><span class='line'><span class='k'>AS</span>
-</span><span class='line'>    <span class='k'>DECLARE</span> <span class='n'>tables_cursor</span> <span class='k'>CURSOR</span>
-</span><span class='line'>    <span class='k'>FOR</span>
-</span><span class='line'>      <span class='k'>SELECT</span>
-</span><span class='line'>        <span class='s1'>&#39;ALTER TABLE &#39;</span> <span class='o'>+</span> <span class='n'>OBJECT_NAME</span><span class='p'>(</span><span class='n'>parent_object_id</span><span class='p'>)</span> <span class='o'>+</span>
-</span><span class='line'>        <span class='s1'>&#39; DROP CONSTRAINT &#39;</span> <span class='o'>+</span> <span class='k'>name</span> <span class='k'>as</span> <span class='n'>dropkey</span>
-</span><span class='line'>      <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>foreign_keys</span>
-</span><span class='line'>    <span class='k'>WHERE</span> <span class='n'>referenced_object_id</span> <span class='o'>=</span> <span class='n'>object_id</span><span class='p'>(</span><span class='o'>@</span><span class='k'>table</span><span class='p'>)</span>
-</span><span class='line'>    <span class='n'>OPEN</span> <span class='n'>tables_cursor</span><span class='p'>;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    DECLARE @dropkey sysname;</span>
-</span><span class='line'><span class='go'>    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
-</span><span class='line'><span class='go'>    BEGIN;</span>
-</span><span class='line'><span class='go'>      EXECUTE (@dropkey);</span>
-</span><span class='line'><span class='go'>      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    END;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    CLOSE tables_cursor;</span>
-</span><span class='line'><span class='go'>    DEALLOCATE tables_cursor;</span>
-</span><span class='line'><span class='go'>GO</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>And how to use it</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>EXECUTE</span> <span class='n'>drop_foreign_keys</span> <span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span>
-</span><span class='line'><span class='k'>IF</span> <span class='k'>EXISTS</span><span class='p'>(</span><span class='k'>SELECT</span> <span class='mf'>1</span> <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>objects</span> <span class='k'>WHERE</span> <span class='n'>OBJECT_ID</span> <span class='o'>=</span> <span class='n'>OBJECT_ID</span><span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span><span class='p'>)</span> <span class='k'>AND</span> <span class='k'>type</span> <span class='o'>=</span> <span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;U&#39;</span><span class='p'>))</span>
-</span><span class='line'><span class='k'>DROP</span> <span class='k'>TABLE</span> <span class='n'>TableName</span>
-</span></code></pre></td></tr></table></div></figure></div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -325,7 +309,7 @@ send(String from, String &hellip;">
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+        <a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do not repeat yourself</a>
       </li>
     
   </ul>

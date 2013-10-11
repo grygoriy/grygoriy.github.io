@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>File Templates in IntellijIdea. Do not repeat yourself - Grygoriy Mykhalyuno</title>
+  <meta name="author" content="Grygoriy Mykhalyuno">
+
+  
+  <meta name="description" content="How may times are you creating typical files with pretty common structure? I can say a lot. Most test classes has pretty much same things inside. At &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://feeds.feedburner.com/Grygoriy" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28214893-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+<a href="https://github.com/grygoriy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>  
+
+  <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
+  
+    <h2>Thoughts to share</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/Grygoriy" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grygoriy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/presentations/">Presentations</a></li>
+  <li><a href="/blog/categories/magic/">Magic</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">File Templates in IntellijIdea. Do Not Repeat Yourself</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-11T23:22:00+03:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>How may times are you creating typical files with pretty common structure? I can say a lot. Most test classes has pretty much same things inside. At least for me this is most visible on tests. Usually things that are repeated are class extension (and I am always forgetting what to extend), static imports for Assert.assertThat() and CommonMatchers. Maybe your also have some test heplers, that you will be adding too. My example will be bases in junit classe for Selenium WebDriver. But this is does not really metters. So my typical test class usually looks like this:</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='kn'>package</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>test</span>
+</span><span class='line'>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.grygoriy.example.test.imdb.page.MainPage</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Before</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Test</span>
+</span><span class='line'>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>at</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>go</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>hamcrest</span><span class='o'>.</span><span class='na'>collection</span><span class='o'>.</span><span class='na'>IsCollectionWithSize</span><span class='o'>.</span><span class='na'>hasSize</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>junit</span><span class='o'>.</span><span class='na'>Assert</span><span class='o'>.</span><span class='na'>assertThat</span>
+</span><span class='line'>
+</span><span class='line'><span class='cm'>/**</span>
+</span><span class='line'><span class='cm'> * User: Grygoriy Mykhalyuno</span>
+</span><span class='line'><span class='cm'> * Date: 6/22/13</span>
+</span><span class='line'><span class='cm'> * Time: 4:05 PM</span>
+</span><span class='line'><span class='cm'> */</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>MainPageTest</span> <span class='kd'>extends</span> <span class='n'>AbstractUITest</span> <span class='o'>{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='n'>MainPage</span> <span class='n'>mainPage</span><span class='o'>;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Before</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>init</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>mainPage</span> <span class='o'>=</span> <span class='n'>go</span> <span class='n'>MainPage</span>
+</span><span class='line'>        <span class='n'>at</span> <span class='n'>mainPage</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Test</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>MainPageShouldBeInSpecificState</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>assertThat</span> <span class='s1'>&#39;box office has 5 items &#39;</span><span class='o'>,</span> <span class='n'>mainPage</span><span class='o'>.</span><span class='na'>boxOfficeWidget</span><span class='o'>.</span><span class='na'>top</span><span class='o'>,</span> <span class='n'>hasSize</span><span class='o'>(</span><span class='mi'>5</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>This is dummy test that is testing IMDB.com main page. I would like to save its structure as a template. Goto Idea menu Tools-&gt;Save File as Template. You should see template <img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/01.png' /></p>
+
+<p>Lets make it looks like a template. First of all I will change template name to UITest. Second template content to <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;pre&gt;</pre></p>
+
+<h1 id='if_package_name__package_name__package_package_nameend'>if (${PACKAGE_NAME} &amp;&amp; ${PACKAGE_NAME} != &#8221;&#8221;)package ${PACKAGE_NAME};#end</h1>
+
+<p>import org.junit.* import static com.grygoriy.example.test.imdb.util.UITestHelper.* import static org.junit.Assert.assertThat</p>
+
+<h1 id='parsefile_headerjava'>parse(&#8220;File Header.java&#8221;)</h1>
+
+<p>class ${NAME} extends AbstractUITest { }</p>
+<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;/pre&gt;</pre>
+<p>Documentation about functions you can use in your template you can find in <a href='http://www.jetbrains.com/idea/webhelp/file-templates.html'>JetBrains Documentation</a> To use this template just press</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ALT+INSERT</span></code></pre></td></tr></table></div></figure>
+<p>to create new file and find you template name in drop down.</p>
+<img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/02.png' /><img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/03.png' /></div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grygoriy Mykhalyuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-11T23:22:00+03:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/intellij/'>Intellij</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/" data-via="" data-counturl="http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+
+  <script type="text/javascript">var dzone_url = 'http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/';</script>
+  <script type="text/javascript">var dzone_title = 'File Templates in IntellijIdea. Do not repeat yourself';</script>
+  <script type="text/javascript">var dzone_blurb = '';</script>
+  <script type="text/javascript">var dzone_style = '2';</script>
+  <script language="javascript" src="http://widgets.dzone.com/links/widgets/zoneit.js"></script>
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/11/presents-from-dzone/" title="Previous Post: Presents from DZone">&laquo; Presents from DZone</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/09/02/add-version-to-your-web-application/" title="Next Post: Add version to your web application">Add version to your web application &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do not repeat yourself</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grygoriy Mykhalyuno -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grygoriy';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/';
+        var disqus_url = 'http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

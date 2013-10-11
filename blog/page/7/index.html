@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Для себе виявив цікавий скрипт у грейлс grails schema-export Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду &hellip;">
+  <meta name="description" content="Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04. At startup you will got &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,7 +88,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/08/27/grails-schema-export/">Grails Schema-export</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/">Ubuntu 11.04 to Create Usb Stick for Ubuntu 10.04</a></h1>
     
     
       <p class="meta">
@@ -104,20 +104,24 @@
   
 
 
-<time datetime="2010-08-27T16:40:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
+<time datetime="2011-06-06T10:00:00+03:00" pubdate data-updated="true">Jun 6<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс <em>grails schema-export</em></p>
+  <div class="entry-content"><p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04. At startup you will got nice error</p>
+<pre>vesamenu.c32: not a COM32R image
+boot:
+vesamenu.c32: not a COM32R image
+boot:
+(...)</pre>
+<p>To be honest that tells nothing to me. This comes from backward compatibility so if you want USB stick with ubuntu 10.04 you have to have same version of ubuntu.</p>
 
-<p>Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &#8220;help&#8221; in prompt. At help menu hit enter, system should run.</p>
 
-<p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></div>
+<p>Workaround is more then strange, but it works</p></div>
   
   
 
@@ -129,7 +133,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2010/08/20/swiching-aces-card-trick/">Swiching Aces Card Trick</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/05/24/it-event-2011-viesna/">IT Event 2011. Весна</a></h1>
     
     
       <p class="meta">
@@ -145,14 +149,27 @@
   
 
 
-<time datetime="2010-08-20T16:37:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2010</time>
+<time datetime="2011-05-24T19:16:00+03:00" pubdate data-updated="true">May 24<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><object height='480' width='853'><param name='movie' value='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object></div>
+  <div class="entry-content"><img class='left' src='/images/2011-05-24-it-event-2011-viesna/poster.jpg' width='240' />
+<p>Вітаємо шановні друзі.</p>
+
+<p>Продовжуючи добру традицію, підняття рівня IT-культури у нашому місті ми пропонуємо завітати на другу конференцію присвячену інформаційним технологіям.</p>
+
+<p>Враховуючи успіх осінньої зустрічі, хороші відгуки і зростаючий інтерес до цього заходу організатори вирішили продовжити цю гарну традицію. IT Event весна 2011 пройде 11 червня 2011 року в Івано-Франківську, у приміщенні першого корпусу (ФАЕ) ІФНТУНГ, вул. Карпатська, 15. Наша мета - спілкування, обмін досвідом, новинки у ІТ-сфері. Будемо старатись додати якість організації і зберегти дружню та невимушену атмосферу попередньої зустрічі. Заплановано три потоки по чотири доповіді. Деталі можна прочитати в нашій програмі. Досвід минулої зустрічі показав, що підтримка відповідного рівня організації і проведення події вимагає істотних вкладень. Тому дуже вдячні за підтримку спонсорам та медіа партнерам.</p>
+
+<p>Спонсори: <a href='http://eleks.com/'>Eleks</a>, <a href='http://www.softserveinc.com/'>SoftServe</a>, <a href='http://www.osf-global.com/'>OSF Global Services</a>, <a href='http://www.softjourn.com/'>SoftJourn</a>, Сіріус, СІНТ-Майстер</p>
+
+<p>Медіа партнери: LyubicStudio</p>
+
+<p>Поспішайте зареєструватися і слідкуйте за нашими новинами у соціальних мережах! Свої відгуки, питання та пропозиції залишайте в будь-якій з соціальних мереж в яких ми є або у нас на сайті. Нам це важливо!</p>
+
+<p>Почув сам - розкажи сусіду! Приходьте самі, приводьте друзів, колег - ми чекаємо на вас! Спілкування обіцяє бути незабутнім! :) <a href='http://itevent.if.ua/content/it-event-2011-vesna'>http://itevent.if.ua/content/it-event-2011-vesna</a></p></div>
   
   
 
@@ -164,7 +181,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/">Квота місця на Ext2/3/4</a></h1>
+      <h1 class="entry-title"><a href="/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/">How to Debug Tests Maven Test via Intellij Idea</a></h1>
     
     
       <p class="meta">
@@ -180,31 +197,28 @@
   
 
 
-<time datetime="2009-10-08T12:04:00+03:00" pubdate data-updated="true">Oct 8<span>th</span>, 2009</time>
+<time datetime="2011-01-20T23:11:00+02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &#8220;свої&#8221; дані. Уявімо що партиція забита - тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
+  <div class="entry-content"><p>Not always you can run tests via IDE. Sometimes configs are complected and it is much easier just to type <pre> $ mvn test </pre></p>
 
-<p>Змінити це можна командою tune2fs</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
-<p>tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
+<p>If you want to debug them, you can connect via remote.</p>
 
-<p>цікавиити нас будуть два параметри -m reserved-blocks-percentage -r reserved-blocks-count</p>
+<ol>
+<li>run you test <pre>$ mvn test -Dmaven.surefire.debug </pre> maven will prepare environment and will wait for remote connection</li>
 
-<p>-m вказує відсоток блоків у відсотках -r вказує їх абсолютну величину</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-<p>- змінить ліміт до двох відотків</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-<ul>
-<li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul></div>
+<li>connect via Idea <img src='/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/01.png' /></li>
+
+<li>start debug <br /> <p>
+<img src='/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/02.png' />
+</p></li>
+
+<li>Now test will stop at your breakpoints. Profit!</li>
+</ol></div>
   
   
 
@@ -236,7 +250,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+        <a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do not repeat yourself</a>
       </li>
     
   </ul>

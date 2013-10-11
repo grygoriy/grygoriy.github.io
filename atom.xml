@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T15:06:59+03:00</updated>
+  <updated>2013-10-11T23:51:05+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -147,6 +147,106 @@
 <p>Deploy and check under url <a href='http://localhost:8080/version.txt'>http://localhost:8080/version.txt</a></p>
 
 <p>Output should look like this <img src='http://grygoriy.github.io/images/2013-09-02-add-version-to-your-web-application/version_view.png' /> Enjoy.</p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[File Templates in IntellijIdea. Do not repeat yourself]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/"/>
+    <updated>2013-06-11T23:22:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself</id>
+    <content type="html"><![CDATA[<p>How may times are you creating typical files with pretty common structure? I can say a lot. Most test classes has pretty much same things inside. At least for me this is most visible on tests. Usually things that are repeated are class extension (and I am always forgetting what to extend), static imports for Assert.assertThat() and CommonMatchers. Maybe your also have some test heplers, that you will be adding too. My example will be bases in junit classe for Selenium WebDriver. But this is does not really metters. So my typical test class usually looks like this:</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='kn'>package</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>test</span>
+</span><span class='line'>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.grygoriy.example.test.imdb.page.MainPage</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Before</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Test</span>
+</span><span class='line'>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>at</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>go</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>hamcrest</span><span class='o'>.</span><span class='na'>collection</span><span class='o'>.</span><span class='na'>IsCollectionWithSize</span><span class='o'>.</span><span class='na'>hasSize</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>junit</span><span class='o'>.</span><span class='na'>Assert</span><span class='o'>.</span><span class='na'>assertThat</span>
+</span><span class='line'>
+</span><span class='line'><span class='cm'>/**</span>
+</span><span class='line'><span class='cm'> * User: Grygoriy Mykhalyuno</span>
+</span><span class='line'><span class='cm'> * Date: 6/22/13</span>
+</span><span class='line'><span class='cm'> * Time: 4:05 PM</span>
+</span><span class='line'><span class='cm'> */</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>MainPageTest</span> <span class='kd'>extends</span> <span class='n'>AbstractUITest</span> <span class='o'>{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='n'>MainPage</span> <span class='n'>mainPage</span><span class='o'>;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Before</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>init</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>mainPage</span> <span class='o'>=</span> <span class='n'>go</span> <span class='n'>MainPage</span>
+</span><span class='line'>        <span class='n'>at</span> <span class='n'>mainPage</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Test</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>MainPageShouldBeInSpecificState</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>assertThat</span> <span class='s1'>&#39;box office has 5 items &#39;</span><span class='o'>,</span> <span class='n'>mainPage</span><span class='o'>.</span><span class='na'>boxOfficeWidget</span><span class='o'>.</span><span class='na'>top</span><span class='o'>,</span> <span class='n'>hasSize</span><span class='o'>(</span><span class='mi'>5</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
+</span></code></pre></td></tr></table></div></figure>
+<p>This is dummy test that is testing IMDB.com main page. I would like to save its structure as a template. Goto Idea menu Tools-&gt;Save File as Template. You should see template <img src='http://grygoriy.github.io/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/01.png' /></p>
+
+<p>Lets make it looks like a template. First of all I will change template name to UITest. Second template content to <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;pre&gt;</pre></p>
+
+<h1 id='if_package_name__package_name__package_package_nameend'>if (${PACKAGE_NAME} &amp;&amp; ${PACKAGE_NAME} != &#8221;&#8221;)package ${PACKAGE_NAME};#end</h1>
+
+<p>import org.junit.* import static com.grygoriy.example.test.imdb.util.UITestHelper.* import static org.junit.Assert.assertThat</p>
+
+<h1 id='parsefile_headerjava'>parse(&#8220;File Header.java&#8221;)</h1>
+
+<p>class ${NAME} extends AbstractUITest { }</p>
+<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;/pre&gt;</pre>
+<p>Documentation about functions you can use in your template you can find in <a href='http://www.jetbrains.com/idea/webhelp/file-templates.html'>JetBrains Documentation</a> To use this template just press</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ALT+INSERT</span></code></pre></td></tr></table></div></figure>
+<p>to create new file and find you template name in drop down.</p>
+<img src='http://grygoriy.github.io/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/02.png' /><img src='http://grygoriy.github.io/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/03.png' />]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Presents from DZone]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/02/11/presents-from-dzone/"/>
+    <updated>2013-02-11T23:39:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/02/11/presents-from-dzone</id>
+    <content type="html"><![CDATA[<p>Few days ago I&#8217;ve received awesome present from <a href='http://dzone.com/'>DZone.com</a> team for contribution. Not sure if there are anything that can motivates more to contribute and write. Presents are really nice but I would say the most valuable for me was such interest and acknowledgment. From the letter it is seen that currently there are 650K members and audience over 3 millions visitors. I am reading DZone for years and always was exited about quality of content, but now I am exited to be part of contributors team. With all my respect I want to say thank you to DZone team for creating, maintaining and making better such great resource.</p>
+<img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/01.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/02.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/03.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/04.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/05.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/06.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/07.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/08.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/09.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/10.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/11.jpg' /><img src='http://grygoriy.github.io/images/2013-02-11-presents-from-dzone/12.jpg' />
+<p>One of the most interesting presents can not be pictured. It is discount from amazing publisher Manning for their Early Access Program.</p>]]></content>
   </entry>
   
   <entry>
@@ -751,6 +851,41 @@
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[itBooze. Ще одне місце щоб поділитись досвідом]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/09/itbooze/"/>
+    <updated>2011-08-09T18:50:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/09/itbooze</id>
+    <content type="html"><![CDATA[<img class='left' src='http://grygoriy.github.io/images/2011-08-09-itbooze/logo.jpg' width='260' />
+<p>Після проведення успішних <a href='http://itevent.if.ua'>IT Event</a> де ми збирали всіх бажаючих щоб поділитись досвідом в ІТ, послухати чужий досвід та просто познайомитись, почали приходити люди які хотіли провести або почути доповіді призначені для дещо меншої аудиторії. Більш спеціалізовані. Отже зараз, можна сказати, що під началом <a href='http://halyph.blogspot.com/'>Ореста Івасіва</a> (twitter @halyph) в Івано-Франківську почала діяти юзер група ІТ спеціалістів. Ми вирішили назвати її <a href='http://www.itbooze.com.ua/'>itBooze</a>.</p>
+
+<p>Сама суть групи приходити і ділитись практичним досвідом на будь-яку тематику. Будь-яка проблема, задача чи ситуація може бути висвітлена на зустрічі групи. Насправді дуже популярна ситуація коли програмісту випадає нетривіальна задача або ж доводиться працювати з технологіями які ще не попали до числа популярних. Потрапляючи в таку ситуацію ми приймаємо виклик і сідаємо за документації та блоги. Нам простіше знайти Джона Смітта та почати переписку з ним, ніж людину яка в тому ж місті, а можливо навіть в сусідньому будинку. Ми можемо не знати що в місті є люди які вже мають досвід з такими задачами або ж просто цікавляться ними. Учасники групи перш за все мають нагоду знайти однодумців, з якими можна поділитись власними думками та подискутувати.</p>
+
+<p>На даний момент ми провели вже дві зустрічі і шалено задоволені що до нас приєднуються. Люди з великим практичним досвідом знаходять час щоб приходити і ділитись. На самих зустрічах можна зустріти програмістів, менеджерів, тестерів. Це працівники практично всіх ІТ компаній міста: <a href='http://eleks.com/'>Eleks</a>, <a href='http://www.softserveinc.com/'>SoftServe</a>, <a href='http://www.osf-global.com/'>OSF Global Services</a>, <a href='http://www.softjourn.com/'>SoftJourn</a></p>
+
+<p>Відео доповідей з першої зустрічі <a href='http://www.itbooze.com.ua/2012/02/meetup-2.html'>http://www.itbooze.com.ua/2012/02/meetup-1.html</a></p>
+
+<ul>
+<li>Topic1: Time Management: the Hidden Power of Pomodoroby Orest Ivasiv, SoftServe</li>
+
+<li>Topic2: Selenium UI Testing Frameworkby Sergiy Beley, SoftServe</li>
+</ul>
+
+<p>Відео доповідей з другої зустрічі <a href='http://www.itbooze.com.ua/2012/02/meetup-2.html'>http://www.itbooze.com.ua/2012/02/meetup-2.html</a></p>
+
+<ul>
+<li>Topic 1: Scala - The Scalable Language by Lyubomyr Vovk, Eleks</li>
+
+<li>Topic 2: Clojure concepts by Serhiy Yakovyn, SoftServe</li>
+
+<li>Topic 3: Groovy in daily use by Grygoriy Mykhalyuno, SoftServe</li>
+</ul>
+
+<p>Офіційний сайт групи <a href='http://www.itbooze.com.ua/'>http://www.itbooze.com.ua/</a></p>
+
+<p>Написати тему яку ви би хотіли почути або поділитись можна тут <a href='https://sites.google.com/site/itboozeinif/meetup-topic-proposal'>https://sites.google.com/site/itboozeinif/meetup-topic-proposal</a></p>]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Mute Skype notifications at Linux]]></title>
     <link href="http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/"/>
     <updated>2011-08-09T18:24:00+03:00</updated>
@@ -785,47 +920,24 @@ boot:
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[gradle використання groovy i java в одному проекті]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/"/>
-    <updated>2010-11-12T16:42:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti</id>
-    <content type="html"><![CDATA[<p>gradle using groovy and java in single project.</p>
+    <title type="html"><![CDATA[IT Event 2011. Весна]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/05/24/it-event-2011-viesna/"/>
+    <updated>2011-05-24T19:16:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/05/24/it-event-2011-viesna</id>
+    <content type="html"><![CDATA[<img class='left' src='http://grygoriy.github.io/images/2011-05-24-it-event-2011-viesna/poster.jpg' width='240' />
+<p>Вітаємо шановні друзі.</p>
 
-<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+<p>Продовжуючи добру традицію, підняття рівня IT-культури у нашому місті ми пропонуємо завітати на другу конференцію присвячену інформаційним технологіям.</p>
 
-<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+<p>Враховуючи успіх осінньої зустрічі, хороші відгуки і зростаючий інтерес до цього заходу організатори вирішили продовжити цю гарну традицію. IT Event весна 2011 пройде 11 червня 2011 року в Івано-Франківську, у приміщенні першого корпусу (ФАЕ) ІФНТУНГ, вул. Карпатська, 15. Наша мета - спілкування, обмін досвідом, новинки у ІТ-сфері. Будемо старатись додати якість організації і зберегти дружню та невимушену атмосферу попередньої зустрічі. Заплановано три потоки по чотири доповіді. Деталі можна прочитати в нашій програмі. Досвід минулої зустрічі показав, що підтримка відповідного рівня організації і проведення події вимагає істотних вкладень. Тому дуже вдячні за підтримку спонсорам та медіа партнерам.</p>
 
-<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[team organizations or how to build team from scratch]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/"/>
-    <updated>2010-11-06T16:49:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch</id>
-    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' type='application/x-shockwave-flash' width='853' /></object>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Grails schema-export]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
-    <updated>2010-08-27T16:40:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
-    <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс <em>grails schema-export</em></p>
+<p>Спонсори: <a href='http://eleks.com/'>Eleks</a>, <a href='http://www.softserveinc.com/'>SoftServe</a>, <a href='http://www.osf-global.com/'>OSF Global Services</a>, <a href='http://www.softjourn.com/'>SoftJourn</a>, Сіріус, СІНТ-Майстер</p>
 
-<p>Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+<p>Медіа партнери: LyubicStudio</p>
 
-<p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[swiching aces card trick]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/"/>
-    <updated>2010-08-20T16:37:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick</id>
-    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object>]]></content>
+<p>Поспішайте зареєструватися і слідкуйте за нашими новинами у соціальних мережах! Свої відгуки, питання та пропозиції залишайте в будь-якій з соціальних мереж в яких ми є або у нас на сайті. Нам це важливо!</p>
+
+<p>Почув сам - розкажи сусіду! Приходьте самі, приводьте друзів, колег - ми чекаємо на вас! Спілкування обіцяє бути незабутнім! :) <a href='http://itevent.if.ua/content/it-event-2011-vesna'>http://itevent.if.ua/content/it-event-2011-vesna</a></p>]]></content>
   </entry>
   
 </feed>

@@ -164,7 +164,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting Grails Domain Entity Without Fetching It</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do Not Repeat Yourself</a></h1>
     
     
       <p class="meta">
@@ -180,26 +180,14 @@
   
 
 
-<time datetime="2012-10-24T15:52:00+03:00" pubdate data-updated="true">Oct 24<span>th</span>, 2012</time>
+<time datetime="2013-06-11T23:22:00+03:00" pubdate data-updated="true">Jun 11<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>comment</span> <span class='o'>=</span> <span class='n'>Comment</span><span class='o'>.</span><span class='na'>findById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
-</span><span class='line'>        <span class='n'>comment</span><span class='o'>?.</span><span class='na'>delete</span><span class='o'>()</span>
-</span><span class='line'>    <span class='o'>}</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
+  <div class="entry-content"><p>How may times are you creating typical files with pretty common structure? I can say a lot. Most test classes has pretty much same things inside. At least for me this is most visible on tests. Usually things that are repeated are class extension (and I am always forgetting what to extend), static imports for Assert.assertThat() and CommonMatchers. Maybe your also have some test heplers, that you will be adding too. My example will be bases in junit classe for Selenium WebDriver. But this is does not really metters. So my typical test class usually looks like this:</p>
 <figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -209,27 +197,79 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='n'>grailsApplication</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='kn'>package</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>test</span>
 </span><span class='line'>
-</span><span class='line'>    <span class='kt'>def</span> <span class='n'>init</span> <span class='o'>=</span> <span class='o'>{</span> <span class='n'>servletContext</span> <span class='o'>-&gt;</span>
-</span><span class='line'>        <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>domainClasses</span><span class='o'>.</span><span class='na'>each</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>domain</span> <span class='o'>-&gt;</span>
-</span><span class='line'>            <span class='n'>domain</span><span class='o'>.</span><span class='na'>metaClass</span><span class='o'>.</span><span class='na'>static</span><span class='o'>.</span><span class='na'>deleteById</span> <span class='o'>=</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>id</span> <span class='o'>-&gt;</span>
-</span><span class='line'>                <span class='n'>executeUpdate</span><span class='o'>(</span><span class='s2'>&quot;delete from ${domain.name} where id = :id&quot;</span><span class='o'>,</span> <span class='o'>[</span><span class='nl'>id:</span><span class='n'>id</span><span class='o'>])</span>
-</span><span class='line'>            <span class='o'>}</span>
-</span><span class='line'>        <span class='o'>}</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>com.grygoriy.example.test.imdb.page.MainPage</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Before</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>org.junit.Test</span>
+</span><span class='line'>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>at</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>com</span><span class='o'>.</span><span class='na'>grygoriy</span><span class='o'>.</span><span class='na'>example</span><span class='o'>.</span><span class='na'>test</span><span class='o'>.</span><span class='na'>imdb</span><span class='o'>.</span><span class='na'>util</span><span class='o'>.</span><span class='na'>UITestHelper</span><span class='o'>.</span><span class='na'>go</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>hamcrest</span><span class='o'>.</span><span class='na'>collection</span><span class='o'>.</span><span class='na'>IsCollectionWithSize</span><span class='o'>.</span><span class='na'>hasSize</span>
+</span><span class='line'><span class='kn'>import</span> <span class='nn'>static</span> <span class='n'>org</span><span class='o'>.</span><span class='na'>junit</span><span class='o'>.</span><span class='na'>Assert</span><span class='o'>.</span><span class='na'>assertThat</span>
+</span><span class='line'>
+</span><span class='line'><span class='cm'>/**</span>
+</span><span class='line'><span class='cm'> * User: Grygoriy Mykhalyuno</span>
+</span><span class='line'><span class='cm'> * Date: 6/22/13</span>
+</span><span class='line'><span class='cm'> * Time: 4:05 PM</span>
+</span><span class='line'><span class='cm'> */</span>
+</span><span class='line'><span class='kd'>class</span> <span class='nc'>MainPageTest</span> <span class='kd'>extends</span> <span class='n'>AbstractUITest</span> <span class='o'>{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='n'>MainPage</span> <span class='n'>mainPage</span><span class='o'>;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Before</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>init</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>mainPage</span> <span class='o'>=</span> <span class='n'>go</span> <span class='n'>MainPage</span>
+</span><span class='line'>        <span class='n'>at</span> <span class='n'>mainPage</span>
 </span><span class='line'>    <span class='o'>}</span>
-</span></code></pre></td></tr></table></div></figure>
-<p>Now each of your domain class has the method deleteById, and our example became</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
-</span><span class='line'>        <span class='n'>Comment</span><span class='o'>.</span><span class='na'>deleteById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class='nd'>@Test</span>
+</span><span class='line'>    <span class='kt'>void</span> <span class='nf'>MainPageShouldBeInSpecificState</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='n'>assertThat</span> <span class='s1'>&#39;box office has 5 items &#39;</span><span class='o'>,</span> <span class='n'>mainPage</span><span class='o'>.</span><span class='na'>boxOfficeWidget</span><span class='o'>.</span><span class='na'>top</span><span class='o'>,</span> <span class='n'>hasSize</span><span class='o'>(</span><span class='mi'>5</span><span class='o'>)</span>
 </span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'><span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p></div>
+<p>This is dummy test that is testing IMDB.com main page. I would like to save its structure as a template. Goto Idea menu Tools-&gt;Save File as Template. You should see template <img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/01.png' /></p>
+
+<p>Lets make it looks like a template. First of all I will change template name to UITest. Second template content to <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;pre&gt;</pre></p>
+
+<h1 id='if_package_name__package_name__package_package_nameend'>if (${PACKAGE_NAME} &amp;&amp; ${PACKAGE_NAME} != &#8221;&#8221;)package ${PACKAGE_NAME};#end</h1>
+
+<p>import org.junit.* import static com.grygoriy.example.test.imdb.util.UITestHelper.* import static org.junit.Assert.assertThat</p>
+
+<h1 id='parsefile_headerjava'>parse(&#8220;File Header.java&#8221;)</h1>
+
+<p>class ${NAME} extends AbstractUITest { }</p>
+<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
+&lt;/pre&gt;</pre>
+<p>Documentation about functions you can use in your template you can find in <a href='http://www.jetbrains.com/idea/webhelp/file-templates.html'>JetBrains Documentation</a> To use this template just press</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ALT+INSERT</span></code></pre></td></tr></table></div></figure>
+<p>to create new file and find you template name in drop down.</p>
+<img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/02.png' /><img src='/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/03.png' /></div>
   
   
 
@@ -259,7 +299,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+        <a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do not repeat yourself</a>
       </li>
     
   </ul>

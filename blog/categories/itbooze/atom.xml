@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ITBooze | Grygoriy Mykhalyuno]]></title>
+  <title><![CDATA[Category: itbooze | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/itbooze/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-09T15:06:59+03:00</updated>
+  <updated>2013-10-11T23:51:05+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -14,11 +14,37 @@
 
   
   <entry>
-    <title type="html"><![CDATA[My presentation at it booze about some features of Groovy]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
-    <updated>2011-08-07T18:28:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy</id>
-    <content type="html"><![CDATA[<object height='480' width='853'><param name='movie' value='//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='http://grygoriy.github.io//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object>]]></content>
+    <title type="html"><![CDATA[itBooze. Ще одне місце щоб поділитись досвідом]]></title>
+    <link href="http://grygoriy.github.io/blog/2011/08/09/itbooze/"/>
+    <updated>2011-08-09T18:50:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2011/08/09/itbooze</id>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/2011-08-09-itbooze/logo.jpg" width="260"> Після проведення успішних <a href='http://itevent.if.ua'>IT Event</a> де ми збирали всіх бажаючих щоб поділитись досвідом в ІТ, послухати чужий досвід та просто познайомитись, почали приходити люди які хотіли провести або почути доповіді призначені для дещо меншої аудиторії. Більш спеціалізовані. Отже зараз, можна сказати, що під началом <a href='http://halyph.blogspot.com/'>Ореста Івасіва</a> (twitter @halyph) в Івано-Франківську почала діяти юзер група ІТ спеціалістів. Ми вирішили назвати її <a href='http://www.itbooze.com.ua/'>itBooze</a>.</p>
+
+<p>Сама суть групи приходити і ділитись практичним досвідом на будь-яку тематику. Будь-яка проблема, задача чи ситуація може бути висвітлена на зустрічі групи. Насправді дуже популярна ситуація коли програмісту випадає нетривіальна задача або ж доводиться працювати з технологіями які ще не попали до числа популярних. Потрапляючи в таку ситуацію ми приймаємо виклик і сідаємо за документації та блоги. Нам простіше знайти Джона Смітта та почати переписку з ним, ніж людину яка в тому ж місті, а можливо навіть в сусідньому будинку. Ми можемо не знати що в місті є люди які вже мають досвід з такими задачами або ж просто цікавляться ними. Учасники групи перш за все мають нагоду знайти однодумців, з якими можна поділитись власними думками та подискутувати.</p>
+
+<p>На даний момент ми провели вже дві зустрічі і шалено задоволені що до нас приєднуються. Люди з великим практичним досвідом знаходять час щоб приходити і ділитись. На самих зустрічах можна зустріти програмістів, менеджерів, тестерів. Це працівники практично всіх ІТ компаній міста: <a href='http://eleks.com/'>Eleks</a>, <a href='http://www.softserveinc.com/'>SoftServe</a>, <a href='http://www.osf-global.com/'>OSF Global Services</a>, <a href='http://www.softjourn.com/'>SoftJourn</a></p>
+
+<p>Відео доповідей з першої зустрічі <a href='http://www.itbooze.com.ua/2012/02/meetup-2.html'>http://www.itbooze.com.ua/2012/02/meetup-1.html</a></p>
+
+<ul>
+<li>Topic1: Time Management: the Hidden Power of Pomodoroby Orest Ivasiv, SoftServe</li>
+
+<li>Topic2: Selenium UI Testing Frameworkby Sergiy Beley, SoftServe</li>
+</ul>
+
+<p>Відео доповідей з другої зустрічі <a href='http://www.itbooze.com.ua/2012/02/meetup-2.html'>http://www.itbooze.com.ua/2012/02/meetup-2.html</a></p>
+
+<ul>
+<li>Topic 1: Scala - The Scalable Language by Lyubomyr Vovk, Eleks</li>
+
+<li>Topic 2: Clojure concepts by Serhiy Yakovyn, SoftServe</li>
+
+<li>Topic 3: Groovy in daily use by Grygoriy Mykhalyuno, SoftServe</li>
+</ul>
+
+<p>Офіційний сайт групи <a href='http://www.itbooze.com.ua/'>http://www.itbooze.com.ua/</a></p>
+
+<p>Написати тему яку ви би хотіли почути або поділитись можна тут <a href='https://sites.google.com/site/itboozeinif/meetup-topic-proposal'>https://sites.google.com/site/itboozeinif/meetup-topic-proposal</a></p>]]></content>
   </entry>
   
 </feed>

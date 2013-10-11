@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="You need to configure subversion &#8220;server&#8221; file You can find it: At windows platform at Linux based platform If you want common proxy &hellip;">
+  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,7 +88,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/">How Access SVN Though HTTP When You Are Under Proxy</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/">Gradle використання Groovy I Java в одному проекті</a></h1>
     
     
       <p class="meta">
@@ -104,48 +104,20 @@
   
 
 
-<time datetime="2008-08-28T10:14:00+03:00" pubdate data-updated="true">Aug 28<span>th</span>, 2008</time>
+<time datetime="2010-11-12T16:42:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>You need to configure subversion &#8220;server&#8221; file You can find it:</p>
+  <div class="entry-content"><p>gradle using groovy and java in single project.</p>
 
-<p>At windows platform</p>
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
 
-<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[global]
-</span><span class='line'>http-proxy-host=proxyhost
-</span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
-<p>If you want separed proxy setting for each svn server</p>
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
 
-<p>Find group called <figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure></p>
-
-<p>Add new line</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
-<p>Add new group with name groupName (previously added)</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groupName]
-</span><span class='line'>http-proxy-host = proxy1.some-domain-name.com
-</span><span class='line'>http-proxy-port = 80
-</span><span class='line'>http-proxy-username = blah
-</span><span class='line'>http-proxy-password = doubleblah
-</span><span class='line'>http-timeout = 60
-</span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
-<p>That&#8217;s all, just save your file and use it</p></div>
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p></div>
   
   
 
@@ -157,7 +129,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2008/01/20/goto-is-cool/">GOTO Is Cool</a></h1>
+      <h1 class="entry-title"><a href="/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/">Team Organizations or How to Build Team From Scratch</a></h1>
     
     
       <p class="meta">
@@ -173,14 +145,55 @@
   
 
 
-<time datetime="2008-01-20T09:49:00+02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2008</time>
+<time datetime="2010-11-06T16:49:00+02:00" pubdate data-updated="true">Nov 6<span>th</span>, 2010</time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><img src='/images/SoThenITypedGoto500.jpg' /></div>
+  <div class="entry-content"><object height='480' width='853'><param name='movie' value='//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='//www.youtube.com/v/lB0wJQGHWOM?version=3&amp;hl=en_US' type='application/x-shockwave-flash' width='853' /></object></div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2010/08/27/grails-schema-export/">Grails Schema-export</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-27T16:40:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс <em>grails schema-export</em></p>
+
+<p>Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+
+<p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></div>
   
   
 
@@ -188,6 +201,8 @@
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/9/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -210,7 +225,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/">Deleting grails domain entity without fetching it</a>
+        <a href="/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/">File Templates in IntellijIdea. Do not repeat yourself</a>
       </li>
     
   </ul>
