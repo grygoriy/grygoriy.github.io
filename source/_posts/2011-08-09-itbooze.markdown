@@ -1,0 +1,29 @@
+---
+layout: post
+title: "itBooze. Ще одне місце щоб поділитись досвідом"
+date: 2011-08-09 18:50
+comments: true
+categories: itbooze
+---
+{% img left /images/2011-08-09-itbooze/logo.jpg 260 %}
+Після проведення успішних [IT Event](http://itevent.if.ua) де ми збирали всіх бажаючих щоб поділитись досвідом в ІТ, послухати чужий досвід та просто познайомитись, почали приходити люди які хотіли провести або почути доповіді призначені для дещо меншої аудиторії. Більш спеціалізовані. Отже зараз, можна сказати, що під началом [Ореста Івасіва](http://halyph.blogspot.com/) (twitter @halyph) в Івано-Франківську почала діяти юзер група ІТ спеціалістів. Ми вирішили назвати її [itBooze](http://www.itbooze.com.ua/).
+
+Сама суть групи приходити і ділитись практичним досвідом на будь-яку тематику. Будь-яка проблема, задача чи ситуація може бути висвітлена на зустрічі групи. Насправді дуже популярна ситуація коли програмісту випадає нетривіальна задача або ж доводиться працювати з технологіями які ще не попали до числа популярних. Потрапляючи в таку ситуацію ми приймаємо виклик і сідаємо за документації та блоги. Нам простіше знайти Джона Смітта та почати переписку з ним, ніж людину яка в тому ж місті, а можливо навіть в сусідньому будинку. Ми можемо не знати що в місті є люди які вже мають досвід з такими задачами або ж просто цікавляться ними. Учасники групи перш за все мають нагоду знайти однодумців, з якими можна поділитись власними думками та подискутувати.
+
+На даний момент ми провели вже дві зустрічі і шалено задоволені що до нас приєднуються. Люди з великим практичним досвідом знаходять час щоб приходити і ділитись. На самих зустрічах можна зустріти програмістів, менеджерів, тестерів. Це працівники практично всіх ІТ компаній міста: [Eleks](http://eleks.com/), [SoftServe](http://www.softserveinc.com/), [OSF Global Services](http://www.osf-global.com/), [SoftJourn](http://www.softjourn.com/)
+
+Відео доповідей з першої зустрічі
+[http://www.itbooze.com.ua/2012/02/meetup-1.html](http://www.itbooze.com.ua/2012/02/meetup-2.html)
+* Topic1: Time Management: the Hidden Power of Pomodoroby Orest Ivasiv, SoftServe
+* Topic2: Selenium UI Testing Frameworkby Sergiy Beley, SoftServe
+
+Відео доповідей з другої зустрічі
+[http://www.itbooze.com.ua/2012/02/meetup-2.html](http://www.itbooze.com.ua/2012/02/meetup-2.html)
+* Topic 1: Scala - The Scalable Language by Lyubomyr Vovk, Eleks
+* Topic 2: Clojure concepts by Serhiy Yakovyn, SoftServe
+* Topic 3: Groovy in daily use by Grygoriy Mykhalyuno, SoftServe
+
+Офіційний сайт групи [http://www.itbooze.com.ua/](http://www.itbooze.com.ua/)
+
+Написати тему яку ви би хотіли почути або поділитись можна тут
+[https://sites.google.com/site/itboozeinif/meetup-topic-proposal](https://sites.google.com/site/itboozeinif/meetup-topic-proposal)
