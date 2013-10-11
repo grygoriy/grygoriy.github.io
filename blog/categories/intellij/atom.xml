@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Intellij | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/intellij/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-11T23:51:05+03:00</updated>
+  <updated>2013-10-12T00:44:29+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -12,89 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[File Templates in IntellijIdea. Do not repeat yourself]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself/"/>
-    <updated>2013-06-11T23:22:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/06/11/file-templates-in-intellijidea-do-not-repeat-yourself</id>
-    <content type="html"><![CDATA[<p>How may times are you creating typical files with pretty common structure? I can say a lot. Most test classes has pretty much same things inside. At least for me this is most visible on tests. Usually things that are repeated are class extension (and I am always forgetting what to extend), static imports for Assert.assertThat() and CommonMatchers. Maybe your also have some test heplers, that you will be adding too. My example will be bases in junit classe for Selenium WebDriver. But this is does not really metters. So my typical test class usually looks like this:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'> <span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">grygoriy</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">imdb</span><span class="o">.</span><span class="na">test</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;import com.grygoriy.example.test.imdb.page.MainPage import org.junit.Before import org.junit.Test&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">grygoriy</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">imdb</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">UITestHelper</span><span class="o">.</span><span class="na">at</span> <span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">grygoriy</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">test</span><span class="o">.</span><span class="na">imdb</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">UITestHelper</span><span class="o">.</span><span class="na">go</span> <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">collection</span><span class="o">.</span><span class="na">IsCollectionWithSize</span><span class="o">.</span><span class="na">hasSize</span> <span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;ul&gt;</span>
-</span><span class='line'><span class="s">&lt;li&gt;</span>
-</span><span class='line'><span class="s">&lt;p&gt;User: Grygoriy Mykhalyuno&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/li&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;li&gt;</span>
-</span><span class='line'><span class="s">&lt;p&gt;Date: 6/</span><span class="mi">22</span><span class="s">/13&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/li&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;li&gt;</span>
-</span><span class='line'><span class="s">&lt;p&gt;Time: 4:05 PM &lt;em&gt;/</span> <span class="kd">class</span> <span class="nc">MainPageTest</span> <span class="kd">extends</span> <span class="n">AbstractUITest</span> <span class="o">{&lt;</span><span class="s">/em&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">MainPage</span> <span class="n">mainPage</span><span class="o">;&lt;</span><span class="s">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;@Before void init() { mainPage = go MainPage at mainPage }&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="nd">@Test</span> <span class="kt">void</span> <span class="n">MainPageShouldBeInSpecificState</span><span class="o">()</span> <span class="o">{</span> <span class="n">assertThat</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;</span><span class="n">box</span> <span class="n">office</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">items</span> <span class="o">&amp;</span><span class="err">#</span><span class="mi">8216</span><span class="o">;,</span> <span class="n">mainPage</span><span class="o">.</span><span class="na">boxOfficeWidget</span><span class="o">.</span><span class="na">top</span><span class="o">,</span> <span class="n">hasSize</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-</li>
-</ul>
-
-<p>This is dummy test that is testing IMDB.com main page. I would like to save its structure as a template. Goto Idea menu Tools-&gt;Save File as Template. You should see template <img src="/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/01.png"></p>
-
-<p>Lets make it looks like a template. First of all I will change template name to UITest. Second template content to <pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;pre&gt;</pre></p>
-
-<h1 id='if_package_name__package_name__package_package_nameend'>if (${PACKAGE_NAME} &amp;&amp; ${PACKAGE_NAME} != &#8221;&#8221;)package ${PACKAGE_NAME};#end</h1>
-
-<p>import org.junit.* import static com.grygoriy.example.test.imdb.util.UITestHelper.* import static org.junit.Assert.assertThat</p>
-
-<h1 id='parsefile_headerjava'>parse(&#8220;File Header.java&#8221;)</h1>
-
-<p>class ${NAME} extends AbstractUITest { }</p>
-<pre class='markdown-html-error' style='border: solid 3px red; background-color: pink'>REXML could not parse this XML/HTML: 
-&lt;/pre&gt;</pre>
-<p>Documentation about functions you can use in your template you can find in <a href='http://www.jetbrains.com/idea/webhelp/file-templates.html'>JetBrains Documentation</a> To use this template just press <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ALT+INSERT</span></code></pre></td></tr></table></div></figure></notextile></div> to create new file and find you template name in drop down.</p>
-
-<p><img src="/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/02.png"></p>
-
-<p><img src="/images/2013-06-11-file-templates-in-intellijidea-do-not-repeat-yourself/03.png"></p>]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to debug tests maven test via Intellij Idea]]></title>
