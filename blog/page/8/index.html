@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="gradle using groovy and java in single project. Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <link rel="canonical" href="http://grygoriy.github.io/blog/page/8">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <link href="http://feeds.feedburner.com/Grygoriy" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -58,7 +58,7 @@
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="http://feeds.feedburner.com/Grygoriy" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
@@ -88,6 +88,47 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/">Gradle використання Groovy I Java в одному проекті</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-11-12T16:42:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>gradle using groovy and java in single project.</p>
+
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p></div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/">Team Organizations or How to Build Team From Scratch</a></h1>
     
     
@@ -105,8 +146,6 @@
 
 
 <time datetime="2010-11-06T16:49:00+02:00" pubdate data-updated="true">Nov 6<span>th</span>, 2010</time>
-        
-         | <a href="/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/#disqus_thread">Comments</a>
         
       </p>
     
@@ -143,8 +182,6 @@
 
 <time datetime="2010-08-27T16:40:00+03:00" pubdate data-updated="true">Aug 27<span>th</span>, 2010</time>
         
-         | <a href="/blog/2010/08/27/grails-schema-export/#disqus_thread">Comments</a>
-        
       </p>
     
   </header>
@@ -157,43 +194,6 @@
 <p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
 <figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/08/20/swiching-aces-card-trick/">Swiching Aces Card Trick</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-20T16:37:00+03:00" pubdate data-updated="true">Aug 20<span>th</span>, 2010</time>
-        
-         | <a href="/blog/2010/08/20/swiching-aces-card-trick/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><object height='480' width='853'><param name='movie' value='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' /><param name='allowFullScreen' value='true' /><param name='allowscriptaccess' value='always' /><embed allowfullscreen='true' allowscriptaccess='always' height='480' src='//www.youtube.com/v/ANBTWcXDO6M?hl=en_US&amp;version=3' type='application/x-shockwave-flash' width='853' /></object></div>
   
   
 
@@ -217,15 +217,15 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/12/blog-migration/">Blog migration</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
       </li>
     
       <li class="post">
         <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/11/presents-from-dzone/">Presents from DZone</a>
       </li>
     
   </ul>
@@ -249,7 +249,7 @@
   
 
 <script type="text/javascript">
-      var disqus_shortname = 'grygoriycom';
+      var disqus_shortname = 'grygoriy';
       
         
         var disqus_script = 'count.js';

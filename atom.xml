@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T12:42:40+03:00</updated>
+  <updated>2013-10-12T13:03:50+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -12,6 +12,14 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Blog migration]]></title>
+    <link href="http://grygoriy.github.io/blog/2013/10/12/blog-migration/"/>
+    <updated>2013-10-12T13:02:00+03:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/10/12/blog-migration</id>
+    <content type="html"><![CDATA[<p>Blog has been moved to github pages. From now to use rss please resubscribe to <a href='http://www.grygoriy.com/atom.xml'>http://www.grygoriy.com/atom.xml</a></p>]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
@@ -848,28 +856,6 @@ boot:
 <p>Поспішайте зареєструватися і слідкуйте за нашими новинами у соціальних мережах! Свої відгуки, питання та пропозиції залишайте в будь-якій з соціальних мереж в яких ми є або у нас на сайті. Нам це важливо!</p>
 
 <p>Почув сам - розкажи сусіду! Приходьте самі, приводьте друзів, колег - ми чекаємо на вас! Спілкування обіцяє бути незабутнім! :) <a href='http://itevent.if.ua/content/it-event-2011-vesna'>http://itevent.if.ua/content/it-event-2011-vesna</a></p>]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to debug tests maven test via Intellij Idea]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/"/>
-    <updated>2011-01-20T23:11:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea</id>
-    <content type="html"><![CDATA[<p>Not always you can run tests via IDE. Sometimes configs are complected and it is much easier just to type <pre> $ mvn test </pre></p>
-
-<p>If you want to debug them, you can connect via remote.</p>
-
-<ol>
-<li>run you test <pre>$ mvn test -Dmaven.surefire.debug </pre> maven will prepare environment and will wait for remote connection</li>
-
-<li>connect via Idea <img src='http://grygoriy.github.io/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/01.png' /></li>
-
-<li>start debug <br /> <p>
-<img src='http://grygoriy.github.io/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/02.png' />
-</p></li>
-
-<li>Now test will stop at your breakpoints. Profit!</li>
-</ol>]]></content>
   </entry>
   
 </feed>
