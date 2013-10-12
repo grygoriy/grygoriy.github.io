@@ -79,6 +79,6 @@ mvn package
 Deploy and check under url [http://localhost:8080/version.txt](http://localhost:8080/version.txt)
 
 Output should look like this
-{% img /images/2013-09-02-add-version-to-your-web-application/version_view.png %}
+{% img https://lh4.googleusercontent.com/-r0SbSmLtXKA/UiGdaPeTbHI/AAAAAAAAQGI/264kpUHB1SU/w979-h560-no/Screenshot+from+2013-08-31+09%253A37%253A10.png %}
 Enjoy.
 

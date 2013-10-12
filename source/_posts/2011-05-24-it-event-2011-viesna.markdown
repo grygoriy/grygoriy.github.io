@@ -5,7 +5,7 @@ date: 2011-05-24 19:16
 comments: true
 categories: itevent
 ---
-{% img left /images/2011-05-24-it-event-2011-viesna/poster.jpg 240 %}
+{% img left https://lh6.googleusercontent.com/-VUOUp91xI28/TdtCDrGZ06I/AAAAAAAADK0/0O3LCI3unjg/w418-h591-no/ITevent-sponsor-2011-spring.jpg 240 %}
 
 Вітаємо шановні друзі.
 
