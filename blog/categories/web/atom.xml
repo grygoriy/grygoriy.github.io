@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/web/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T13:52:42+03:00</updated>
+  <updated>2013-10-12T15:22:20+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -136,7 +136,7 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div> This is it. Now you can build your application <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>mvn package</span></code></pre></td></tr></table></div></figure></notextile></div> Deploy and check under url <a href='http://localhost:8080/version.txt'>http://localhost:8080/version.txt</a></p>
 
-<p>Output should look like this <img src="/images/2013-09-02-add-version-to-your-web-application/version_view.png"> Enjoy.</p>]]></content>
+<p>Output should look like this <img src="https://lh4.googleusercontent.com/-r0SbSmLtXKA/UiGdaPeTbHI/AAAAAAAAQGI/264kpUHB1SU/w979-h560-no/Screenshot+from+2013-08-31+09%253A37%253A10.png"> Enjoy.</p>]]></content>
   </entry>
   
 </feed>
