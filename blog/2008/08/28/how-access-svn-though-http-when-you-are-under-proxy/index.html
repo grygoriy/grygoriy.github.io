@@ -9,7 +9,9 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="You need to configure subversion &#8220;server&#8221; file You can find it: At windows platform at Linux based platform If you want common proxy &hellip;">
+  <meta name="description" content="You need to configure subversion &ldquo;server&rdquo; file
+You can find it: At windows platform at Linux based platform
+If you want common proxy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,27 +112,40 @@
   </header>
 
 
-<div class="entry-content"><p>You need to configure subversion &#8220;server&#8221; file You can find it:</p>
+<div class="entry-content"><p>You need to configure subversion &ldquo;server&rdquo; file
+You can find it:</p>
 
 <p>At windows platform</p>
 
-<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<p>at Linux based platform
+If you want common proxy setting for all SVN servers
+Find and fix this group</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>[global]
 </span><span class='line'>http-proxy-host=proxyhost
 </span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
+
+
 <p>If you want separed proxy setting for each svn server</p>
 
-<p>Find group called <figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure></p>
+<p>Find group called</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Add new line</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
+
+
 <p>Add new group with name groupName (previously added)</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -144,7 +159,10 @@
 </span><span class='line'>http-proxy-password = doubleblah
 </span><span class='line'>http-timeout = 60
 </span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
-<p>That&#8217;s all, just save your file and use it</p></div>
+
+
+<p>That&rsquo;s all, just save your file and use it</p>
+</div>
 
 
   <footer>

@@ -117,47 +117,62 @@ send(String from, String &hellip;">
 
 
 <div class="entry-content"><p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /></p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='n'>String</span> <span class='n'>from</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>to</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>subject</span><span class='o'>,</span> <span class='n'>String</span> <span class='n'>body</span><span class='o'>)</span> <span class='o'>{</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${from}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${to}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${subject}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${body}&quot;</span>
-</span><span class='line'><span class='o'>}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">String</span> <span class="n">from</span><span class="o">,</span> <span class="n">String</span> <span class="n">to</span><span class="o">,</span> <span class="n">String</span> <span class="n">subject</span><span class="o">,</span> <span class="n">String</span> <span class="n">body</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>typical java call would be</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='s2'>&quot;john@example.com&quot;</span><span class='o'>,</span> <span class='s2'>&quot;mike@example.com&quot;</span><span class='o'>,</span> <span class='s2'>&quot;greetings&quot;</span><span class='o'>,</span> <span class='s2'>&quot;Hello Goodbye&quot;</span><span class='o'>)</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span> <span class="s2">&quot;greetings&quot;</span><span class="o">,</span> <span class="s2">&quot;Hello Goodbye&quot;</span><span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>Too many strings, don&#8217;t you think? I have to check java docs all the time I&#8217;m writing this method.<br /> Groovy allows us to pass parameters as map without <span />. If we pass map into method groovy set it to the first parameter. Let&#8217;s look into other exampl</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
+Groovy allows us to pass parameters as map without []. If we pass map into method groovy set it to the first parameter. Let&rsquo;s look into other exampl</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span> <span class='nl'>from:</span><span class='s2'>&quot;john@example.com&quot;</span><span class='o'>,</span>
-</span><span class='line'>     <span class='nl'>to:</span><span class='s2'>&quot;mike@example.com&quot;</span><span class='o'>,</span>
-</span><span class='line'>     <span class='nl'>subject:</span><span class='s2'>&quot;greetings&quot;</span><span class='o'>,</span>
-</span><span class='line'>     <span class='nl'>body:</span><span class='s2'>&quot;Hello Goodbye&quot;</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="s2">&quot;john@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
+</span><span class='line'>     <span class="nl">body:</span><span class="s2">&quot;Hello Goodbye&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>Much more readable as for me. And method will looks like</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>send</span><span class='o'>(</span><span class='n'>params</span><span class='o'>)</span> <span class='o'>{</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.from}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.to}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.subject}&quot;</span>
-</span><span class='line'>  <span class='n'>println</span> <span class='s2'>&quot;sender ${params.body}&quot;</span>
-</span><span class='line'><span class='o'>}</span>
-</span></code></pre></td></tr></table></div></figure></div>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(</span><span class="n">params</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.from}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.to}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.subject}&quot;</span>
+</span><span class='line'>  <span class="n">println</span> <span class="s2">&quot;sender ${params.body}&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
 
 
   <footer>

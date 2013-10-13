@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Few days ago I&#8217;ve received awesome present from DZone.com team for contribution. Not sure if there are anything that can motivates more to &hellip;">
+  <meta name="description" content="Few days ago I&rsquo;ve received awesome present from DZone.com team for contribution. Not sure if there are anything that can motivates more to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,7 +113,9 @@
   </header>
 
 
-  <div class="entry-content"><p>Few days ago I&#8217;ve received awesome present from <a href='http://dzone.com/'>DZone.com</a> team for contribution. Not sure if there are anything that can motivates more to contribute and write. Presents are really nice but I would say the most valuable for me was such interest and acknowledgment. From the letter it is seen that currently there are 650K members and audience over 3 millions visitors. I am reading DZone for years and always was exited about quality of content, but now I am exited to be part of contributors team. With all my respect I want to say thank you to DZone team for creating, maintaining and making better such great resource. </div>
+  <div class="entry-content"><p>Few days ago I&rsquo;ve received awesome present from <a href="http://dzone.com/">DZone.com</a> team for contribution. Not sure if there are anything that can motivates more to contribute and write. Presents are really nice but I would say the most valuable for me was such interest and acknowledgment. From the letter it is seen that currently there are 650K members and audience over 3 millions visitors. I am reading DZone for years and always was exited about quality of content, but now I am exited to be part of contributors team. With all my respect I want to say thank you to DZone team for creating, maintaining and making better such great resource.</p>
+
+</div>
   
   
     <footer>
@@ -154,20 +156,28 @@
   </header>
 
 
-  <div class="entry-content"><p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+  <div class="entry-content"><p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
+Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
+Implementation of controller usually looks like</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>comment</span> <span class='o'>=</span> <span class='n'>Comment</span><span class='o'>.</span><span class='na'>findById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
-</span><span class='line'>        <span class='n'>comment</span><span class='o'>?.</span><span class='na'>delete</span><span class='o'>()</span>
-</span><span class='line'>    <span class='o'>}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
+</span><span class='line'>        <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
+</span><span class='line'>        <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span>
+</span><span class='line'>    <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
+Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
+Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -176,27 +186,33 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='n'>grailsApplication</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
 </span><span class='line'>
-</span><span class='line'>    <span class='kt'>def</span> <span class='n'>init</span> <span class='o'>=</span> <span class='o'>{</span> <span class='n'>servletContext</span> <span class='o'>-&gt;</span>
-</span><span class='line'>        <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>domainClasses</span><span class='o'>.</span><span class='na'>each</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>domain</span> <span class='o'>-&gt;</span>
-</span><span class='line'>            <span class='n'>domain</span><span class='o'>.</span><span class='na'>metaClass</span><span class='o'>.</span><span class='na'>static</span><span class='o'>.</span><span class='na'>deleteById</span> <span class='o'>=</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>id</span> <span class='o'>-&gt;</span>
-</span><span class='line'>                <span class='n'>executeUpdate</span><span class='o'>(</span><span class='s2'>&quot;delete from ${domain.name} where id = :id&quot;</span><span class='o'>,</span> <span class='o'>[</span><span class='nl'>id:</span><span class='n'>id</span><span class='o'>])</span>
-</span><span class='line'>            <span class='o'>}</span>
-</span><span class='line'>        <span class='o'>}</span>
-</span><span class='line'>    <span class='o'>}</span>
+</span><span class='line'>    <span class="kt">def</span> <span class="n">init</span> <span class="o">=</span> <span class="o">{</span> <span class="n">servletContext</span> <span class="o">-&gt;</span>
+</span><span class='line'>        <span class="n">grailsApplication</span><span class="o">.</span><span class="na">domainClasses</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span><span class="kt">def</span> <span class="n">domain</span> <span class="o">-&gt;</span>
+</span><span class='line'>            <span class="n">domain</span><span class="o">.</span><span class="na">metaClass</span><span class="o">.</span><span class="na">static</span><span class="o">.</span><span class="na">deleteById</span> <span class="o">=</span> <span class="o">{</span><span class="kt">def</span> <span class="n">id</span> <span class="o">-&gt;</span>
+</span><span class='line'>                <span class="n">executeUpdate</span><span class="o">(</span><span class="s2">&quot;delete from ${domain.name} where id = :id&quot;</span><span class="o">,</span> <span class="o">[</span><span class="nl">id:</span><span class="n">id</span><span class="o">])</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>Now each of your domain class has the method deleteById, and our example became</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
-</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
-</span><span class='line'>        <span class='n'>Comment</span><span class='o'>.</span><span class='na'>deleteById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
-</span><span class='line'>    <span class='o'>}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
+</span><span class='line'>        <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
+</span><span class='line'>    <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p></div>
+
+
+<p>You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
+</div>
   
   
 
@@ -235,7 +251,9 @@
 
   <div class="entry-content"><p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
-<p>Let me show you little guide how to do this for Grails application. </div>
+<p>Let me show you little guide how to do this for Grails application.</p>
+
+</div>
   
   
     <footer>

@@ -114,34 +114,49 @@
 
 <p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
 
-<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu). Usually I install all applications to /usr/local/. Let&#8217;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period) So after unpacking we have</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu).
+Usually I install all applications to /usr/local/. Let&rsquo;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period)
+So after unpacking we have</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local/grails-2.0.0
 </span><span class='line'>/usr/local/grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
-<p>Let&#8217;s create link to any version of Grails</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<p>Let&rsquo;s create link to any version of Grails</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt;ln -s /usr/local/grails-2.1.1 grails
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>Now we have</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class='nv'>$ </span>ls -ld grails*
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class="nv">$ </span>ls -ld grails*
 </span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails -&amp;gt; /usr/local/grails-2.1.1
 </span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
 </span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>and variable</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='nb'>echo</span> <span class='nv'>$GRAILS_HOME</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="nv">$GRAILS_HOME</span>
 </span><span class='line'>/usr/local/grails
 </span></code></pre></td></tr></table></div></figure>
-<p>Let&#8217;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<p>Let&rsquo;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -152,18 +167,22 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class='c'>#!/bin/bash</span>
-</span><span class='line'><span class='c'>#Script for changing grails version</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="c">#Script for changing grails version</span>
 </span><span class='line'>
-</span><span class='line'><span class='nv'>grailsVersion</span><span class='o'>=</span><span class='nv'>$1</span>
-</span><span class='line'><span class='nv'>rootPath</span><span class='o'>=</span><span class='s2'>&quot;/usr/local&quot;</span>
-</span><span class='line'><span class='nv'>grailsLinkPath</span><span class='o'>=</span><span class='nv'>$rootPath</span><span class='s2'>&quot;/grails&quot;</span>
-</span><span class='line'><span class='nv'>grailsPath</span><span class='o'>=</span><span class='nv'>$grailsLinkPath</span><span class='s2'>&quot;-&quot;</span><span class='nv'>$grailsVersion</span>
+</span><span class='line'><span class="nv">grailsVersion</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">rootPath</span><span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span>
+</span><span class='line'><span class="nv">grailsLinkPath</span><span class="o">=</span><span class="nv">$rootPath</span><span class="s2">&quot;/grails&quot;</span>
+</span><span class='line'><span class="nv">grailsPath</span><span class="o">=</span><span class="nv">$grailsLinkPath</span><span class="s2">&quot;-&quot;</span><span class="nv">$grailsVersion</span>
 </span><span class='line'>
-</span><span class='line'><span class='nb'>echo </span>stitching to version <span class='nv'>$1</span>
-</span><span class='line'><span class='c'>#Check if directory with new grails version exists before doing anything</span>
-</span><span class='line'><span class='o'>[</span> -d <span class='nv'>$grailsPath</span> <span class='o'>]</span> &amp;amp;&amp;amp; rm <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class='nv'>$grailsPath</span> <span class='nv'>$grailsLinkPath</span> &amp;amp;&amp;amp; <span class='nb'>echo</span> <span class='s2'>&quot;version switched to &quot;</span><span class='nv'>$grailsVersion</span> <span class='o'>||</span> <span class='nb'>echo</span> <span class='s1'>&#39;Directory &#39;</span><span class='nv'>$grailsPath</span><span class='s1'>&#39; not found&#39;</span>
-</span></code></pre></td></tr></table></div></figure></div>
+</span><span class='line'><span class="nb">echo </span>stitching to version <span class="nv">$1</span>
+</span><span class='line'><span class="c">#Check if directory with new grails version exists before doing anything</span>
+</span><span class='line'><span class="o">[</span> -d <span class="nv">$grailsPath</span> <span class="o">]</span> &amp;amp;&amp;amp; rm <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class="nv">$grailsPath</span> <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; <span class="nb">echo</span> <span class="s2">&quot;version switched to &quot;</span><span class="nv">$grailsVersion</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;Directory &#39;</span><span class="nv">$grailsPath</span><span class="s1">&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
 
 
   <footer>

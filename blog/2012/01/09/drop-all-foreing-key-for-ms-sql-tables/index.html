@@ -110,12 +110,15 @@
   </header>
 
 
-<div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&#8217;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
+<div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
 
-<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br /> For MS SQL I&#8217;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br /> can be deleted without any errors&lt;</p>
+<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
+For MS SQL I&rsquo;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br />
+can be deleted without any errors&lt;</p>
 
 <p>Here is stored procedure</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -138,38 +141,45 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>CREATE</span> <span class='k'>PROCEDURE</span> <span class='n'>drop_foreign_keys</span>
-</span><span class='line'><span class='o'>@</span><span class='k'>table</span> <span class='n'>nvarchar</span><span class='p'>(</span><span class='mf'>50</span><span class='p'>)</span>
-</span><span class='line'><span class='k'>AS</span>
-</span><span class='line'>    <span class='k'>DECLARE</span> <span class='n'>tables_cursor</span> <span class='k'>CURSOR</span>
-</span><span class='line'>    <span class='k'>FOR</span>
-</span><span class='line'>      <span class='k'>SELECT</span>
-</span><span class='line'>        <span class='s1'>&#39;ALTER TABLE &#39;</span> <span class='o'>+</span> <span class='n'>OBJECT_NAME</span><span class='p'>(</span><span class='n'>parent_object_id</span><span class='p'>)</span> <span class='o'>+</span>
-</span><span class='line'>        <span class='s1'>&#39; DROP CONSTRAINT &#39;</span> <span class='o'>+</span> <span class='k'>name</span> <span class='k'>as</span> <span class='n'>dropkey</span>
-</span><span class='line'>      <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>foreign_keys</span>
-</span><span class='line'>    <span class='k'>WHERE</span> <span class='n'>referenced_object_id</span> <span class='o'>=</span> <span class='n'>object_id</span><span class='p'>(</span><span class='o'>@</span><span class='k'>table</span><span class='p'>)</span>
-</span><span class='line'>    <span class='n'>OPEN</span> <span class='n'>tables_cursor</span><span class='p'>;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    DECLARE @dropkey sysname;</span>
-</span><span class='line'><span class='go'>    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
-</span><span class='line'><span class='go'>    BEGIN;</span>
-</span><span class='line'><span class='go'>      EXECUTE (@dropkey);</span>
-</span><span class='line'><span class='go'>      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    END;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    CLOSE tables_cursor;</span>
-</span><span class='line'><span class='go'>    DEALLOCATE tables_cursor;</span>
-</span><span class='line'><span class='go'>GO</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">drop_foreign_keys</span>
+</span><span class='line'><span class="o">@</span><span class="k">table</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mf">50</span><span class="p">)</span>
+</span><span class='line'><span class="k">AS</span>
+</span><span class='line'>    <span class="k">DECLARE</span> <span class="n">tables_cursor</span> <span class="k">CURSOR</span>
+</span><span class='line'>    <span class="k">FOR</span>
+</span><span class='line'>      <span class="k">SELECT</span>
+</span><span class='line'>        <span class="s1">&#39;ALTER TABLE &#39;</span> <span class="o">+</span> <span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">parent_object_id</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39; DROP CONSTRAINT &#39;</span> <span class="o">+</span> <span class="k">name</span> <span class="k">as</span> <span class="n">dropkey</span>
+</span><span class='line'>      <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">foreign_keys</span>
+</span><span class='line'>    <span class="k">WHERE</span> <span class="n">referenced_object_id</span> <span class="o">=</span> <span class="n">object_id</span><span class="p">(</span><span class="o">@</span><span class="k">table</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">OPEN</span> <span class="n">tables_cursor</span><span class="p">;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    DECLARE @dropkey sysname;</span>
+</span><span class='line'><span class="go">    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
+</span><span class='line'><span class="go">    BEGIN;</span>
+</span><span class='line'><span class="go">      EXECUTE (@dropkey);</span>
+</span><span class='line'><span class="go">      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    END;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    CLOSE tables_cursor;</span>
+</span><span class='line'><span class="go">    DEALLOCATE tables_cursor;</span>
+</span><span class='line'><span class="go">GO</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>And how to use it</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>EXECUTE</span> <span class='n'>drop_foreign_keys</span> <span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span>
-</span><span class='line'><span class='k'>IF</span> <span class='k'>EXISTS</span><span class='p'>(</span><span class='k'>SELECT</span> <span class='mf'>1</span> <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>objects</span> <span class='k'>WHERE</span> <span class='n'>OBJECT_ID</span> <span class='o'>=</span> <span class='n'>OBJECT_ID</span><span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span><span class='p'>)</span> <span class='k'>AND</span> <span class='k'>type</span> <span class='o'>=</span> <span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;U&#39;</span><span class='p'>))</span>
-</span><span class='line'><span class='k'>DROP</span> <span class='k'>TABLE</span> <span class='n'>TableName</span>
-</span></code></pre></td></tr></table></div></figure></div>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">EXECUTE</span> <span class="n">drop_foreign_keys</span> <span class="n">N</span><span class="s1">&#39;TableТame&#39;</span>
+</span><span class='line'><span class="k">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mf">1</span> <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">objects</span> <span class="k">WHERE</span> <span class="n">OBJECT_ID</span> <span class="o">=</span> <span class="n">OBJECT_ID</span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;TableТame&#39;</span><span class="p">)</span> <span class="k">AND</span> <span class="k">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="s1">&#39;U&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">TableName</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
 
 
   <footer>

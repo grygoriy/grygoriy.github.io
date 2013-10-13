@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Configuration | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/configuration/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-12T15:30:55+03:00</updated>
+  <updated>2013-10-13T13:44:46+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,7 +18,9 @@
     <link href="http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/"/>
     <updated>2011-08-09T18:24:00+03:00</updated>
     <id>http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux</id>
-    <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype - disable notifications. I&#8217;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&#8217;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype. Just type <em>/alertsoff</em> in chat you want to &#8220;mute&#8221;. Other Skype command you can find here https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</p>]]></content>
+    <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&rsquo;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype.
+Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skype command you can find here <a href="https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles">https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</a></p>
+]]></content>
   </entry>
   
 </feed>

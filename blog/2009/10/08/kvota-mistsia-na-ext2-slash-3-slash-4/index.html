@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &#8220;свої&# &hellip;">
+  <meta name="description" content="Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,24 +110,41 @@
   </header>
 
 
-<div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &#8220;свої&#8221; дані. Уявімо що партиція забита - тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
+<div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
 
 <p>Змінити це можна командою tune2fs</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
-<p>tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
 
-<p>цікавиити нас будуть два параметри -m reserved-blocks-percentage -r reserved-blocks-count</p>
 
-<p>-m вказує відсоток блоків у відсотках -r вказує їх абсолютну величину</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
+
+<p>цікавиити нас будуть два параметри
+-m reserved-blocks-percentage
+-r  reserved-blocks-count</p>
+
+<p>-m вказує відсоток блоків у відсотках
+-r вказує їх абсолютну величину</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-<p>- змінить ліміт до двох відотків</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<ul>
+<li>змінить ліміт до двох відотків</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
+
+
 <ul>
 <li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul></div>
+</ul>
+
+</div>
 
 
   <footer>
