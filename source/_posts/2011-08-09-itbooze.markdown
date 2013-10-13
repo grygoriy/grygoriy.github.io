@@ -12,16 +12,16 @@ categories: itbooze
 
 На даний момент ми провели вже дві зустрічі і шалено задоволені що до нас приєднуються. Люди з великим практичним досвідом знаходять час щоб приходити і ділитись. На самих зустрічах можна зустріти програмістів, менеджерів, тестерів. Це працівники практично всіх ІТ компаній міста: [Eleks](http://eleks.com/), [SoftServe](http://www.softserveinc.com/), [OSF Global Services](http://www.osf-global.com/), [SoftJourn](http://www.softjourn.com/)
 
-Відео доповідей з першої зустрічі
-[http://www.itbooze.com.ua/2012/02/meetup-1.html](http://www.itbooze.com.ua/2012/02/meetup-2.html)
-* Topic1: Time Management: the Hidden Power of Pomodoroby Orest Ivasiv, SoftServe
-* Topic2: Selenium UI Testing Frameworkby Sergiy Beley, SoftServe
+Відео доповідей з [першої зустрічі](http://www.itbooze.com.ua/2012/02/meetup-2.html)
 
-Відео доповідей з другої зустрічі
-[http://www.itbooze.com.ua/2012/02/meetup-2.html](http://www.itbooze.com.ua/2012/02/meetup-2.html)
-* Topic 1: Scala - The Scalable Language by Lyubomyr Vovk, Eleks
-* Topic 2: Clojure concepts by Serhiy Yakovyn, SoftServe
-* Topic 3: Groovy in daily use by Grygoriy Mykhalyuno, SoftServe
+* [Topic1: Time Management: the Hidden Power of Pomodoroby Orest Ivasiv, SoftServe](http://www.youtube.com/watch?v=LqbApKn6oY8)
+* [Topic2: Selenium UI Testing Frameworkby Sergiy Beley, SoftServe](http://www.youtube.com/watch?v=umUPWHfMnUo)
+
+Відео доповідей з [другої зустрічі](http://www.itbooze.com.ua/2012/02/meetup-2.html)
+
+* [Topic 1: Scala - The Scalable Language by Lyubomyr Vovk, Eleks](http://www.youtube.com/watch?v=M1JnkYWJNaE)
+* [Topic 2: Clojure concepts by Serhiy Yakovyn, SoftServe](http://www.youtube.com/watch?v=V5xZ--_1UYc)
+* [Topic 3: Groovy in daily use by Grygoriy Mykhalyuno, SoftServe](http://www.youtube.com/watch?v=r3qY_TweglE)
 
 Офіційний сайт групи [http://www.itbooze.com.ua/](http://www.itbooze.com.ua/)
 

@@ -24,6 +24,7 @@ I am Co-founder of local it conference [http://itevent.if.ua](http://itevent.if.
 [My complete CV](https://docs.google.com/file/d/0Bx6AlKBEHkNtNTVyOUpCbWtoN2c/edit?usp=sharing)
 
 You can contact me:
+
 * skype:	Grygoriy.Mykhalyunyo
 * email:	[email@grygoriy.com](mailto:email@grygoriy.com)
 * linkedin: 	[http://linkedin.com/in/grygoriy](http://linkedin.com/in/grygoriy)
