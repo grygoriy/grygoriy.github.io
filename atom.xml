@@ -4,7 +4,7 @@
   <title><![CDATA[Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-13T13:44:46+03:00</updated>
+  <updated>2013-10-16T20:27:58+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Blog migration]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/10/12/blog-migration/"/>
+    <link href="http://grygoriy.github.io/2013/10/blog-migration/"/>
     <updated>2013-10-12T13:02:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/10/12/blog-migration</id>
+    <id>http://grygoriy.github.io/2013/10/blog-migration</id>
     <content type="html"><![CDATA[<p>Blog has been moved to github pages.
 From now to use rss please resubscribe to <a href="http://www.grygoriy.com/atom.xml">http://www.grygoriy.com/atom.xml</a></p>
 ]]></content>
@@ -25,9 +25,9 @@ From now to use rss please resubscribe to <a href="http://www.grygoriy.com/atom.
   
   <entry>
     <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
+    <link href="http://grygoriy.github.io/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
     <updated>2013-10-09T09:15:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
+    <id>http://grygoriy.github.io/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze</id>
     <content type="html"><![CDATA[<object width="640" height="480"><param name="movie" value="//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://grygoriy.github.io//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="640" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>
 
 ]]></content>
@@ -35,9 +35,9 @@ From now to use rss please resubscribe to <a href="http://www.grygoriy.com/atom.
   
   <entry>
     <title type="html"><![CDATA[Add version to your web application]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application/"/>
+    <link href="http://grygoriy.github.io/2013/09/add-version-to-your-web-application/"/>
     <updated>2013-09-02T18:12:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application</id>
+    <id>http://grygoriy.github.io/2013/09/add-version-to-your-web-application</id>
     <content type="html"><![CDATA[<p>For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.</p>
 
 <p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href="http://grails.org/plugin/build-info">http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more.</p>
@@ -181,9 +181,9 @@ Enjoy.</p>
   
   <entry>
     <title type="html"><![CDATA[Presents from DZone]]></title>
-    <link href="http://grygoriy.github.io/blog/2013/02/11/presents-from-dzone/"/>
+    <link href="http://grygoriy.github.io/2013/02/presents-from-dzone/"/>
     <updated>2013-02-11T23:39:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2013/02/11/presents-from-dzone</id>
+    <id>http://grygoriy.github.io/2013/02/presents-from-dzone</id>
     <content type="html"><![CDATA[<p>Few days ago I&rsquo;ve received awesome present from <a href="http://dzone.com/">DZone.com</a> team for contribution. Not sure if there are anything that can motivates more to contribute and write. Presents are really nice but I would say the most valuable for me was such interest and acknowledgment. From the letter it is seen that currently there are 650K members and audience over 3 millions visitors. I am reading DZone for years and always was exited about quality of content, but now I am exited to be part of contributors team. With all my respect I want to say thank you to DZone team for creating, maintaining and making better such great resource.</p>
 
 <!--more-->
@@ -208,9 +208,9 @@ Enjoy.</p>
   
   <entry>
     <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
+    <link href="http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it/"/>
     <updated>2012-10-24T15:52:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
+    <id>http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it</id>
     <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
 Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
 Implementation of controller usually looks like</p>
@@ -272,9 +272,9 @@ Of cause you would like to write such code whenever you will need to delete enti
   
   <entry>
     <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/"/>
+    <link href="http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security/"/>
     <updated>2012-10-06T15:58:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
+    <id>http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
 <p>Let me show you little guide how to do this for Grails application.</p>
@@ -551,9 +551,9 @@ Enjoy :)</p>
   
   <entry>
     <title type="html"><![CDATA[How to filter blogger rss]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/"/>
+    <link href="http://grygoriy.github.io/2012/10/how-to-filter-blogger-rss/"/>
     <updated>2012-10-04T18:51:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss</id>
+    <id>http://grygoriy.github.io/2012/10/how-to-filter-blogger-rss</id>
     <content type="html"><![CDATA[<p>At some point when you would like to introduce you blog into some blog aggregators, you may notice that not of your posts matches aggregators topic. That is nice when you can choose posts manually but sometimes rss link will be required.
 Few tips how to hack RSS in <a href="http://blogger.com">blogger.com</a>
 To get all posts with specific label use <a href="http://blog.blogspot.com/feeds/posts/default/-/labelname">http://blog.blogspot.com/feeds/posts/default/-/labelname</a></p>
@@ -564,9 +564,9 @@ To get all posts with specific label use <a href="http://blog.blogspot.com/feeds
   
   <entry>
     <title type="html"><![CDATA[Working with more then one grails version on same environment]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/"/>
+    <link href="http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/"/>
     <updated>2012-09-23T19:04:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment</id>
+    <id>http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment</id>
     <content type="html"><![CDATA[<p>Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go.</p>
 
 <p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
@@ -644,9 +644,9 @@ So after unpacking we have</p>
   
   <entry>
     <title type="html"><![CDATA[Awesomeness of groovy named parameters]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/"/>
+    <link href="http://grygoriy.github.io/2012/02/awesomeness-of-groovy-named-parameters/"/>
     <updated>2012-02-13T18:33:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
+    <id>http://grygoriy.github.io/2012/02/awesomeness-of-groovy-named-parameters</id>
     <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br /></p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -708,9 +708,9 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
   
   <entry>
     <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
+    <link href="http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port/"/>
     <updated>2012-02-06T18:30:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
+    <id>http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port</id>
     <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
 
 <p>So we can change port with command <br/>
@@ -726,9 +726,9 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
   
   <entry>
     <title type="html"><![CDATA[Drop all foreing key for MS SQL tables]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/"/>
+    <link href="http://grygoriy.github.io/2012/01/drop-all-foreing-key-for-ms-sql-tables/"/>
     <updated>2012-01-09T18:55:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables</id>
+    <id>http://grygoriy.github.io/2012/01/drop-all-foreing-key-for-ms-sql-tables</id>
     <content type="html"><![CDATA[<p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
 
 <p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
@@ -803,9 +803,9 @@ can be deleted without any errors&lt;</p>
   
   <entry>
     <title type="html"><![CDATA[use Grails Domain with string type id]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/"/>
+    <link href="http://grygoriy.github.io/2012/01/use-grails-domain-with-string-type-id/"/>
     <updated>2012-01-03T18:41:00+02:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id</id>
+    <id>http://grygoriy.github.io/2012/01/use-grails-domain-with-string-type-id</id>
     <content type="html"><![CDATA[<p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
 
 <p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
@@ -868,9 +868,9 @@ There is issue in grails jira which was closed with resolution Not A Bug.</p>
   
   <entry>
     <title type="html"><![CDATA[Sport.itevent Quest Paintball]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball/"/>
+    <link href="http://grygoriy.github.io/2011/09/sport-dot-itevent-quest-paintball/"/>
     <updated>2011-09-13T19:09:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball</id>
+    <id>http://grygoriy.github.io/2011/09/sport-dot-itevent-quest-paintball</id>
     <content type="html"><![CDATA[<p>Цими вихідними пройшли другий і третій етапи проекту &ldquo;sport.itevent&rdquo;. Цього разу захід був присвячений дню програміста, тому зробили одразу кілька ігор: Quest і Paintball, а також додатково для всіх бажаючих &ndash; метання мишок та клавіатур. Дуже приємно відмітити, що цей турнір з кожним разом збирає все більше учасників. В Quest-і прийняло участь 7 команд, серед них були як і бувалі гравці, так і новачки які грали вперше. Paintball, в свою чергу, зібрав 11 команд, а це 55 учасників.
 Дякуємо Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Також велика подяка Івану Дячишину за участь в організації всіх трьох ігор та окремо за авторську гру Quest. Окремо хочемо подякувати Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Звичайно всі учасники вдячні Івану Дячишину за організації всіх трьох ігор та за авторську гру Quest.
 Ми вітаємо команд переможців
@@ -908,9 +908,9 @@ Quest:</p>
   
   <entry>
     <title type="html"><![CDATA[Code Quality Tools for Groovy at itBooze]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/"/>
+    <link href="http://grygoriy.github.io/2011/08/code-quality-tools-for-groovy-at-itbooze/"/>
     <updated>2011-08-26T18:53:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze</id>
+    <id>http://grygoriy.github.io/2011/08/code-quality-tools-for-groovy-at-itbooze</id>
     <content type="html"><![CDATA[<object width="640" height="480"><param name="movie" value="//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://grygoriy.github.io//www.youtube.com/v/HKqxexEdL5g?version=3&amp;hl=en_US" type="application/x-shockwave-flash" width="640" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>
 
 
@@ -923,9 +923,9 @@ Quest:</p>
   
   <entry>
     <title type="html"><![CDATA[Grails at Ubuntu rep]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/"/>
+    <link href="http://grygoriy.github.io/2011/08/grails-at-ubuntu-rep/"/>
     <updated>2011-08-20T16:51:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep</id>
+    <id>http://grygoriy.github.io/2011/08/grails-at-ubuntu-rep</id>
     <content type="html"><![CDATA[<p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
 
 <p>First of all we need to add Grails repo</p>
@@ -965,9 +965,9 @@ Grails, a rapid web development platform built on Groovy</p>
   
   <entry>
     <title type="html"><![CDATA[itBooze. Ще одне місце щоб поділитись досвідом]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/09/itbooze/"/>
+    <link href="http://grygoriy.github.io/2011/08/itbooze/"/>
     <updated>2011-08-09T18:50:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/09/itbooze</id>
+    <id>http://grygoriy.github.io/2011/08/itbooze</id>
     <content type="html"><![CDATA[<p><img class="left" src="https://lh5.googleusercontent.com/-diE4pXb6WcQ/TxLY3MDze8I/AAAAAAAAFzU/XRbAJG0hJ54/w588-h502-no/official+logo.jpg" width="260">
 Після проведення успішних <a href="http://itevent.if.ua">IT Event</a> де ми збирали всіх бажаючих щоб поділитись досвідом в ІТ, послухати чужий досвід та просто познайомитись, почали приходити люди які хотіли провести або почути доповіді призначені для дещо меншої аудиторії. Більш спеціалізовані. Отже зараз, можна сказати, що під началом <a href="http://halyph.blogspot.com/">Ореста Івасіва</a> (twitter @halyph) в Івано-Франківську почала діяти юзер група ІТ спеціалістів. Ми вирішили назвати її <a href="http://www.itbooze.com.ua/">itBooze</a>.</p>
 
@@ -1001,9 +1001,9 @@ Grails, a rapid web development platform built on Groovy</p>
   
   <entry>
     <title type="html"><![CDATA[Mute Skype notifications at Linux]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/"/>
+    <link href="http://grygoriy.github.io/2011/08/mute-skype-notifications-at-linux/"/>
     <updated>2011-08-09T18:24:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux</id>
+    <id>http://grygoriy.github.io/2011/08/mute-skype-notifications-at-linux</id>
     <content type="html"><![CDATA[<p>There is awesome feature in windows version of Skype &ndash; disable notifications. I&rsquo;m participant of few chats that sometimes can be too active, in same moment information in these charts is not critical. My solution on windows is to disable notifications for these chats. It means that when somebody writes message to the chart I can see that there is new messages but there are no notifications in task bar. Pretty useful. Linux version of Skype doesn&rsquo;t have UI for such option. Now I found Skype command that allows to do the same with Linux Skype.
 Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skype command you can find here <a href="https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles">https://support.skype.com/en/faq/FA10042/What-are-chat-commands-and-roles</a></p>
 ]]></content>
@@ -1011,9 +1011,9 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
   
   <entry>
     <title type="html"><![CDATA[My presentation at it booze about some features of Groovy]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
+    <link href="http://grygoriy.github.io/2011/08/my-presentation-at-it-booze-about-some-features-of-groovy/"/>
     <updated>2011-08-07T18:28:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy</id>
+    <id>http://grygoriy.github.io/2011/08/my-presentation-at-it-booze-about-some-features-of-groovy</id>
     <content type="html"><![CDATA[<object width="853" height="480"><param name="movie" value="//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://grygoriy.github.io//www.youtube.com/v/HOGQn1d5lbc?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="853" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>
 
 
@@ -1026,9 +1026,9 @@ Just type <em>/alertsoff</em> in chat you want to &ldquo;mute&rdquo;. Other Skyp
   
   <entry>
     <title type="html"><![CDATA[ubuntu 11.04 to create usb stick for ubuntu 10.04]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/"/>
+    <link href="http://grygoriy.github.io/2011/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/"/>
     <updated>2011-06-06T10:00:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04</id>
+    <id>http://grygoriy.github.io/2011/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04</id>
     <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
 At startup you will got nice error</p>
 
@@ -1049,9 +1049,9 @@ boot:
   
   <entry>
     <title type="html"><![CDATA[IT Event 2011. Весна]]></title>
-    <link href="http://grygoriy.github.io/blog/2011/05/24/it-event-2011-viesna/"/>
+    <link href="http://grygoriy.github.io/2011/05/it-event-2011-viesna/"/>
     <updated>2011-05-24T19:16:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2011/05/24/it-event-2011-viesna</id>
+    <id>http://grygoriy.github.io/2011/05/it-event-2011-viesna</id>
     <content type="html"><![CDATA[<p><img class="left" src="https://lh6.googleusercontent.com/-VUOUp91xI28/TdtCDrGZ06I/AAAAAAAADK0/0O3LCI3unjg/w418-h591-no/ITevent-sponsor-2011-spring.jpg" width="240"></p>
 
 <p>Вітаємо шановні друзі.</p>

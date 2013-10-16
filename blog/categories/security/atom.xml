@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Security | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/security/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-13T13:44:46+03:00</updated>
+  <updated>2013-10-16T20:27:58+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
-    <link href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/"/>
+    <link href="http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security/"/>
     <updated>2012-10-06T15:58:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
+    <id>http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
 <p>Let me show you little guide how to do this for Grails application.</p>

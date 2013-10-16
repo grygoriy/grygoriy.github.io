@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Working with more then one grails version on same environment - Grygoriy Mykhalyuno</title>
+  <meta name="author" content="Grygoriy Mykhalyuno">
+
+  
+  <meta name="description" content="Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go. But what if you have &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28214893-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+<a href="https://github.com/grygoriy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>  
+
+  <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
+  
+    <h2>Thoughts to share</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grygoriy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/presentations/">Presentations</a></li>
+  <li><a href="/blog/categories/magic/">Magic</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Working With More Then One Grails Version on Same Environment</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T19:04:00+03:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go.</p>
+
+<p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
+
+<p>Here is short tip how this process can be simplified, example for Linux (Ubuntu).
+Usually I install all applications to /usr/local/. Let&rsquo;s try to work with two grails versions 2.0.0 and 2.1.1(latest for this period)
+So after unpacking we have</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local/grails-2.0.0
+</span><span class='line'>/usr/local/grails-2.1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s create link to any version of Grails</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>&gt;ln -s /usr/local/grails-2.1.1 grails
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/usr/local<span class="nv">$ </span>ls -ld grails*
+</span><span class='line'>lrwxrwxrwx &amp;nbsp;1 root root &amp;nbsp; 23 Sep 23 15:05 grails -&amp;gt; /usr/local/grails-2.1.1
+</span><span class='line'>drwxr-xr-x 12 root root 4096 Dec 15 &amp;nbsp;2011 grails-2.0.0
+</span><span class='line'>drwxr-xr-x 13 root root 4096 Sep 12 10:30 grails-2.1.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and variable</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="nv">$GRAILS_HOME</span>
+</span><span class='line'>/usr/local/grails
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s use simple script to change grails version. Mainly the only thing we have to do is to reassign link /usr/local/grails to version we would like to use</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="c">#Script for changing grails version</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">grailsVersion</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'><span class="nv">rootPath</span><span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span>
+</span><span class='line'><span class="nv">grailsLinkPath</span><span class="o">=</span><span class="nv">$rootPath</span><span class="s2">&quot;/grails&quot;</span>
+</span><span class='line'><span class="nv">grailsPath</span><span class="o">=</span><span class="nv">$grailsLinkPath</span><span class="s2">&quot;-&quot;</span><span class="nv">$grailsVersion</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo </span>stitching to version <span class="nv">$1</span>
+</span><span class='line'><span class="c">#Check if directory with new grails version exists before doing anything</span>
+</span><span class='line'><span class="o">[</span> -d <span class="nv">$grailsPath</span> <span class="o">]</span> &amp;amp;&amp;amp; rm <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; ln -s <span class="nv">$grailsPath</span> <span class="nv">$grailsLinkPath</span> &amp;amp;&amp;amp; <span class="nb">echo</span> <span class="s2">&quot;version switched to &quot;</span><span class="nv">$grailsVersion</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s1">&#39;Directory &#39;</span><span class="nv">$grailsPath</span><span class="s1">&#39; not found&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grygoriy Mykhalyuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-23T19:04:00+03:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/grails/'>Grails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/" data-via="" data-counturl="http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+
+  <script type="text/javascript">var dzone_url = 'http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/';</script>
+  <script type="text/javascript">var dzone_title = 'Working with more then one grails version on same environment';</script>
+  <script type="text/javascript">var dzone_blurb = '';</script>
+  <script type="text/javascript">var dzone_style = '2';</script>
+  <script language="javascript" src="http://widgets.dzone.com/links/widgets/zoneit.js"></script>
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/02/awesomeness-of-groovy-named-parameters/" title="Previous Post: Awesomeness of groovy named parameters">&laquo; Awesomeness of groovy named parameters</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/10/how-to-filter-blogger-rss/" title="Next Post: How to filter blogger rss">How to filter blogger rss &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/10/blog-migration/">Blog migration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/add-version-to-your-web-application/">Add version to your web application</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grygoriy Mykhalyuno -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grygoriycom';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/';
+        var disqus_url = 'http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

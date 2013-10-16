@@ -1,147 +1,137 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://grygoriy.github.io/blog/2008/01/20/goto-is-cool/</loc>
+        <loc>http://grygoriy.github.io/2008/01/goto-is-cool/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2008/08/28/how-access-svn-though-http-when-you-are-under-proxy/
+            http://grygoriy.github.io/2008/08/how-access-svn-though-http-when-you-are-under-proxy/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://grygoriy.github.io/blog/2009/10/08/kvota-mistsia-na-ext2-slash-3-slash-4/
-        </loc>
+        <loc>http://grygoriy.github.io/2009/10/kvota-mistsia-na-ext2-slash-3-slash-4/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2010/08/20/swiching-aces-card-trick/</loc>
+        <loc>http://grygoriy.github.io/2010/08/swiching-aces-card-trick/</loc>
         <lastmod>2013-10-09T15:02:03+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/</loc>
+        <loc>http://grygoriy.github.io/2010/08/grails-schema-export/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2010/11/06/team-organizations-or-how-to-build-team-from-scratch/
+            http://grygoriy.github.io/2010/11/team-organizations-or-how-to-build-team-from-scratch/
         </loc>
         <lastmod>2013-10-12T18:46:51+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/
+            http://grygoriy.github.io/2010/11/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/
+            http://grygoriy.github.io/2011/01/how-to-debug-tests-maven-test-via-intellij-idea/
         </loc>
         <lastmod>2013-10-13T13:36:14+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2011/05/24/it-event-2011-viesna/</loc>
+        <loc>http://grygoriy.github.io/2011/05/it-event-2011-viesna/</loc>
         <lastmod>2013-10-12T15:24:45+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/
+            http://grygoriy.github.io/2011/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2011/08/07/my-presentation-at-it-booze-about-some-features-of-groovy/
+            http://grygoriy.github.io/2011/08/my-presentation-at-it-booze-about-some-features-of-groovy/
         </loc>
         <lastmod>2013-10-12T18:28:34+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2011/08/09/mute-skype-notifications-at-linux/</loc>
+        <loc>http://grygoriy.github.io/2011/08/mute-skype-notifications-at-linux/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2011/08/09/itbooze/</loc>
+        <loc>http://grygoriy.github.io/2011/08/itbooze/</loc>
         <lastmod>2013-10-13T13:41:44+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2011/08/20/grails-at-ubuntu-rep/</loc>
+        <loc>http://grygoriy.github.io/2011/08/grails-at-ubuntu-rep/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://grygoriy.github.io/blog/2011/08/26/code-quality-tools-for-groovy-at-itbooze/
-        </loc>
+        <loc>http://grygoriy.github.io/2011/08/code-quality-tools-for-groovy-at-itbooze/</loc>
         <lastmod>2013-10-12T17:52:20+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2011/09/13/sport-dot-itevent-quest-paintball/</loc>
+        <loc>http://grygoriy.github.io/2011/09/sport-dot-itevent-quest-paintball/</loc>
         <lastmod>2013-10-13T13:43:32+03:00</lastmod>
     </url>
     <url>
+        <loc>http://grygoriy.github.io/2012/01/use-grails-domain-with-string-type-id/</loc>
+        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://grygoriy.github.io/2012/01/drop-all-foreing-key-for-ms-sql-tables/</loc>
+        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/
+            http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
+        <loc>http://grygoriy.github.io/2012/02/awesomeness-of-groovy-named-parameters/</loc>
+        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/
+            http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/
-        </loc>
+        <loc>http://grygoriy.github.io/2012/10/how-to-filter-blogger-rss/</loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/
-        </loc>
-        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/
-        </loc>
-        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
-    </url>
-    <url>
-        <loc>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/</loc>
-        <lastmod>2013-10-09T14:29:57+03:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/
+            http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security/
         </loc>
         <lastmod>2013-10-09T14:52:40+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/
+            http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it/
         </loc>
         <lastmod>2013-10-09T14:29:57+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2013/02/11/presents-from-dzone/</loc>
+        <loc>http://grygoriy.github.io/2013/02/presents-from-dzone/</loc>
         <lastmod>2013-10-12T15:28:37+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application/</loc>
+        <loc>http://grygoriy.github.io/2013/09/add-version-to-your-web-application/</loc>
         <lastmod>2013-10-12T15:19:45+03:00</lastmod>
     </url>
     <url>
         <loc>
-            http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/
+            http://grygoriy.github.io/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze/
         </loc>
         <lastmod>2013-10-09T14:49:48+03:00</lastmod>
     </url>
     <url>
-        <loc>http://grygoriy.github.io/blog/2013/10/12/blog-migration/</loc>
+        <loc>http://grygoriy.github.io/2013/10/blog-migration/</loc>
         <lastmod>2013-10-12T13:03:09+03:00</lastmod>
     </url>
     <url>

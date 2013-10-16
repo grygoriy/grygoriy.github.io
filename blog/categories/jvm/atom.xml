@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JVM | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/jvm/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-13T13:44:46+03:00</updated>
+  <updated>2013-10-16T20:27:58+03:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Grails schema-export]]></title>
-    <link href="http://grygoriy.github.io/blog/2010/08/27/grails-schema-export/"/>
+    <link href="http://grygoriy.github.io/2010/08/grails-schema-export/"/>
     <updated>2010-08-27T16:40:00+03:00</updated>
-    <id>http://grygoriy.github.io/blog/2010/08/27/grails-schema-export</id>
+    <id>http://grygoriy.github.io/2010/08/grails-schema-export</id>
     <content type="html"><![CDATA[<p>Для себе виявив цікавий скрипт у грейлс
 <em>grails schema-export</em></p>
 
