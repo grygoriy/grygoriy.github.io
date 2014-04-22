@@ -3,6 +3,7 @@ layout: post
 title: "Add version to your web application"
 date: 2013-09-02 18:12
 comments: true
+alias: /2013/09/add-version-to-your-web-application.html
 categories: [Java, Maven, Web]
 ---
 For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.

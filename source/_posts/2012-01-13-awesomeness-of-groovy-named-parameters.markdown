@@ -3,6 +3,7 @@ layout: post
 title: "Awesomeness of groovy named parameters"
 date: 2012-02-13 18:33
 comments: true
+alias: /2012/01/awesomeness-of-groovy-names-parameters.html
 categories: [Groovy, DSL]
 ---
 

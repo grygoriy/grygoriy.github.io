@@ -3,6 +3,7 @@ layout: post
 title: "Prevent brute force attack with Spring Security"
 date: 2012-10-06 15:58
 comments: true
+alias: /2012/10/prevent-brut-force-attack-with-spring.html
 categories: [Groovy, Grails, Security, Spring]
 ---
 Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.

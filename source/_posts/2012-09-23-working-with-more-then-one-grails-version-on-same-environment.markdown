@@ -3,6 +3,7 @@ layout: post
 title: "Working with more then one grails version on same environment"
 date: 2012-09-23 19:04
 comments: true
+alias: /2012/09/working-with-more-then-one-grails.html
 categories: Grails
 ---
 

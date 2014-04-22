@@ -3,6 +3,7 @@ layout: post
 title: "use Grails Domain with string type id"
 date: 2012-01-03 18:41
 comments: true
+alias: /2012/01/use-grails-domain-with-string-type-id.html
 categories: [Grails, Groovy]
 ---
 Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.
