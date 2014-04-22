@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grails | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/grails/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-16T20:27:58+03:00</updated>
+  <updated>2014-04-22T12:30:48+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
-    <link href="http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it/"/>
-    <updated>2012-10-24T15:52:00+03:00</updated>
-    <id>http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it</id>
+    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
+    <updated>2012-10-24T15:52:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
     <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
 Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
 Implementation of controller usually looks like
@@ -100,9 +100,9 @@ You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_
   
   <entry>
     <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
-    <link href="http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security/"/>
-    <updated>2012-10-06T15:58:00+03:00</updated>
-    <id>http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security</id>
+    <link href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/"/>
+    <updated>2012-10-06T15:58:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
 <p>Let me show you little guide how to do this for Grails application.</p>
@@ -417,9 +417,9 @@ Enjoy :)</p>
   
   <entry>
     <title type="html"><![CDATA[Working with more then one grails version on same environment]]></title>
-    <link href="http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment/"/>
-    <updated>2012-09-23T19:04:00+03:00</updated>
-    <id>http://grygoriy.github.io/2012/09/working-with-more-then-one-grails-version-on-same-environment</id>
+    <link href="http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/"/>
+    <updated>2012-09-23T19:04:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment</id>
     <content type="html"><![CDATA[<p>Typically you have your grails installed into some directory, created environment variable GRAILS_HOME and you are ready to go.</p>
 
 <p>But what if you have few projects with different grails versions? You can have different reasons for that, but nevertheless you need it.</p>
@@ -501,9 +501,9 @@ Let&rsquo;s use simple script to change grails version. Mainly the only thing we
   
   <entry>
     <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
-    <link href="http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port/"/>
-    <updated>2012-02-06T18:30:00+02:00</updated>
-    <id>http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port</id>
+    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
+    <updated>2012-02-06T18:30:00+01:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
     <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
 
 <p>So we can change port with command <br/>
@@ -519,9 +519,9 @@ Let&rsquo;s use simple script to change grails version. Mainly the only thing we
   
   <entry>
     <title type="html"><![CDATA[use Grails Domain with string type id]]></title>
-    <link href="http://grygoriy.github.io/2012/01/use-grails-domain-with-string-type-id/"/>
-    <updated>2012-01-03T18:41:00+02:00</updated>
-    <id>http://grygoriy.github.io/2012/01/use-grails-domain-with-string-type-id</id>
+    <link href="http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/"/>
+    <updated>2012-01-03T18:41:00+01:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id</id>
     <content type="html"><![CDATA[<p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
 
 <p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>

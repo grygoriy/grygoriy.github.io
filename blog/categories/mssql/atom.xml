@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MSSQL | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/mssql/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-16T20:27:58+03:00</updated>
+  <updated>2014-04-22T12:30:48+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Drop all foreing key for MS SQL tables]]></title>
-    <link href="http://grygoriy.github.io/2012/01/drop-all-foreing-key-for-ms-sql-tables/"/>
-    <updated>2012-01-09T18:55:00+02:00</updated>
-    <id>http://grygoriy.github.io/2012/01/drop-all-foreing-key-for-ms-sql-tables</id>
+    <link href="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/"/>
+    <updated>2012-01-09T18:55:00+01:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables</id>
     <content type="html"><![CDATA[<p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
 
 <p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />

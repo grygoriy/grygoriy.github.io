@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Groovy | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/groovy/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2013-10-16T20:27:58+03:00</updated>
+  <updated>2014-04-22T12:30:48+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Functional testing with Selenium and Groovy for ITBooze]]></title>
-    <link href="http://grygoriy.github.io/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
-    <updated>2013-10-09T09:15:00+03:00</updated>
-    <id>http://grygoriy.github.io/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze</id>
+    <link href="http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/"/>
+    <updated>2013-10-09T09:15:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze</id>
     <content type="html"><![CDATA[<object width="640" height="480"><param name="movie" value="//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://grygoriy.github.io//www.youtube.com/v/gXBOHVYqN-k?hl=en_US&amp;version=3" type="application/x-shockwave-flash" width="640" height="480" allowscriptaccess="always" allowfullscreen="true"></embed></object>
 
 ]]></content>
@@ -25,9 +25,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deleting grails domain entity without fetching it]]></title>
-    <link href="http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it/"/>
-    <updated>2012-10-24T15:52:00+03:00</updated>
-    <id>http://grygoriy.github.io/2012/10/deleting-grails-domain-entity-without-fetching-it</id>
+    <link href="http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it/"/>
+    <updated>2012-10-24T15:52:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/24/deleting-grails-domain-entity-without-fetching-it</id>
     <content type="html"><![CDATA[<p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
 Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
 Implementation of controller usually looks like
@@ -110,9 +110,9 @@ You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_
   
   <entry>
     <title type="html"><![CDATA[Prevent brute force attack with Spring Security]]></title>
-    <link href="http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security/"/>
-    <updated>2012-10-06T15:58:00+03:00</updated>
-    <id>http://grygoriy.github.io/2012/10/prevent-brute-force-attack-with-spring-security</id>
+    <link href="http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/"/>
+    <updated>2012-10-06T15:58:00+02:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
 <p>Let me show you little guide how to do this for Grails application.</p>
@@ -427,9 +427,9 @@ Enjoy :)</p>
   
   <entry>
     <title type="html"><![CDATA[Awesomeness of groovy named parameters]]></title>
-    <link href="http://grygoriy.github.io/2012/02/awesomeness-of-groovy-named-parameters/"/>
-    <updated>2012-02-13T18:33:00+02:00</updated>
-    <id>http://grygoriy.github.io/2012/02/awesomeness-of-groovy-named-parameters</id>
+    <link href="http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/"/>
+    <updated>2012-02-13T18:33:00+01:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters</id>
     <content type="html"><![CDATA[<p>How do you call typical method with few parameters. Lets assume we have method that sends email with signature<br />
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -446,7 +446,7 @@ Enjoy :)</p>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 typical java call would be
 <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#x6a;&amp;#x6f;&amp;#104;&amp;#x6e;&amp;#x40;&amp;#x65;&amp;#x78;&amp;#97;&amp;#109;&amp;#112;&amp;#x6c;&amp;#101;&amp;#46;&amp;#x63;&amp;#111;&amp;#x6d;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="mi">106</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">104</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6e</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">120</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">97</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x70</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6c</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">99</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;, &amp;ldquo;&lt;a href=&quot;&amp;#x6d;&amp;#97;&amp;#x69;&amp;#108;&amp;#x74;&amp;#111;&amp;#58;&amp;#x6d;&amp;#105;&amp;#x6b;&amp;#x65;&amp;#x40;&amp;#101;&amp;#120;&amp;#97;&amp;#x6d;&amp;#x70;&amp;#x6c;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;&gt;&amp;#109;&amp;#x69;&amp;#x6b;&amp;#x65;&amp;#x40;&amp;#x65;&amp;#x78;&amp;#x61;&amp;#109;&amp;#x70;&amp;#108;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#x6d;&lt;/</span><span class="n">a</span><span class="o">&gt;&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;)</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span><span class="o">(&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#x6d;&amp;#x61;&amp;#x69;&amp;#108;&amp;#116;&amp;#x6f;&amp;#58;&amp;#106;&amp;#x6f;&amp;#x68;&amp;#110;&amp;#64;&amp;#x65;&amp;#x78;&amp;#97;&amp;#x6d;&amp;#112;&amp;#x6c;&amp;#x65;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#x6d;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="n">x6a</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x68</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6e</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x40</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">120</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x61</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">109</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x70</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">108</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x2e</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">99</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;, &amp;ldquo;&lt;a href=&quot;&amp;#x6d;&amp;#97;&amp;#x69;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#109;&amp;#x69;&amp;#x6b;&amp;#101;&amp;#64;&amp;#x65;&amp;#120;&amp;#x61;&amp;#109;&amp;#112;&amp;#108;&amp;#x65;&amp;#x2e;&amp;#99;&amp;#x6f;&amp;#109;&quot;&gt;&amp;#109;&amp;#105;&amp;#107;&amp;#x65;&amp;#x40;&amp;#101;&amp;#120;&amp;#97;&amp;#x6d;&amp;#112;&amp;#x6c;&amp;#x65;&amp;#x2e;&amp;#x63;&amp;#x6f;&amp;#109;&lt;/</span><span class="n">a</span><span class="o">&gt;&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">greetings</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;</span><span class="n">Hello</span> <span class="n">Goodbye</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="o">;)</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Too many strings, don&rsquo;t you think? I have to check java docs all the time I&rsquo;m writing this method.<br />
@@ -460,7 +460,7 @@ Groovy allows us to pass parameters as map without []. If we pass map into metho
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#x61;&amp;#x69;&amp;#x6c;&amp;#116;&amp;#x6f;&amp;#58;&amp;#x6a;&amp;#111;&amp;#x68;&amp;#x6e;&amp;#64;&amp;#x65;&amp;#x78;&amp;#97;&amp;#109;&amp;#112;&amp;#108;&amp;#x65;&amp;#x2e;&amp;#x63;&amp;#111;&amp;#109;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="mi">106</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">104</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">110</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x40</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x78</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x61</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">112</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">108</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x63</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;,&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">send</span> <span class="nl">from:</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="o">;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;&amp;#109;&amp;#97;&amp;#105;&amp;#x6c;&amp;#x74;&amp;#111;&amp;#58;&amp;#x6a;&amp;#111;&amp;#x68;&amp;#110;&amp;#x40;&amp;#x65;&amp;#x78;&amp;#x61;&amp;#x6d;&amp;#x70;&amp;#108;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&quot;</span><span class="o">&gt;&amp;</span><span class="err">#</span><span class="mi">106</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">111</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x68</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6e</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">64</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x65</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">120</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">97</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">112</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">108</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">101</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">46</span><span class="o">;&amp;</span><span class="err">#</span><span class="mi">99</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6f</span><span class="o">;&amp;</span><span class="err">#</span><span class="n">x6d</span><span class="o">;&lt;</span><span class="s">/a&gt;&amp;rdquo;,&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span> <span class="nl">to:</span><span class="s2">&quot;mike@example.com&quot;</span><span class="o">,</span>
 </span><span class='line'> <span class="nl">subject:</span><span class="s2">&quot;greetings&quot;</span><span class="o">,</span>
@@ -488,9 +488,9 @@ Much more readable as for me. And method will looks like
   
   <entry>
     <title type="html"><![CDATA[How to run Grails application on separate port]]></title>
-    <link href="http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port/"/>
-    <updated>2012-02-06T18:30:00+02:00</updated>
-    <id>http://grygoriy.github.io/2012/02/how-to-run-grails-application-on-separate-port</id>
+    <link href="http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/"/>
+    <updated>2012-02-06T18:30:00+01:00</updated>
+    <id>http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port</id>
     <content type="html"><![CDATA[<p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
 
 <p>So we can change port with command <br/>

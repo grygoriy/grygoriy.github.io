@@ -97,8 +97,8 @@
 
 <article>
   
-<h1><a href="/2013/02/presents-from-dzone/">Presents from DZone</a></h1>
-<time datetime="2013-02-11T23:39:00+02:00" pubdate><span class='month'>Feb</span> <span class='day'>11</span> <span class='year'>2013</span></time>
+<h1><a href="/blog/2013/02/11/presents-from-dzone/">Presents from DZone</a></h1>
+<time datetime="2013-02-11T23:39:00+01:00" pubdate><span class='month'>Feb</span> <span class='day'>11</span> <span class='year'>2013</span></time>
 
 <footer>
   <span class="categories">posted in <a class='category' href='/blog/categories/dzone/'>DZone</a>, <a class='category' href='/blog/categories/blogging/'>blogging</a></span>
@@ -122,18 +122,47 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/2013/10/blog-migration/">Blog migration</a>
+        <a href="/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
       </li>
     
       <li class="post">
-        <a href="/2013/10/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
+        <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
       </li>
     
       <li class="post">
-        <a href="/2013/09/add-version-to-your-web-application/">Add version to your web application</a>
+        <a href="/blog/2013/02/11/presents-from-dzone/">Presents from DZone</a>
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'grygoriy',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 
@@ -147,7 +176,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Grygoriy Mykhalyuno -
+  Copyright &copy; 2014 - Grygoriy Mykhalyuno -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

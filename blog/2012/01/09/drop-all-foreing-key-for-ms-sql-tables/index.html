@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Drop all foreing key for MS SQL tables - Grygoriy Mykhalyuno</title>
+  <meta name="author" content="Grygoriy Mykhalyuno">
+
+  
+  <meta name="description" content="My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Grygoriy Mykhalyuno" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28214893-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+<a href="https://github.com/grygoriy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>  
+
+  <h1><a href="/">Grygoriy Mykhalyuno</a></h1>
+  
+    <h2>Thoughts to share</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grygoriy.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/categories/presentations/">Presentations</a></li>
+  <li><a href="/blog/categories/magic/">Magic</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Drop All Foreing Key for MS SQL Tables</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-09T18:55:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
+
+<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
+For MS SQL I&rsquo;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br />
+can be deleted without any errors&lt;</p>
+
+<p>Here is stored procedure</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">drop_foreign_keys</span>
+</span><span class='line'><span class="o">@</span><span class="k">table</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mf">50</span><span class="p">)</span>
+</span><span class='line'><span class="k">AS</span>
+</span><span class='line'>    <span class="k">DECLARE</span> <span class="n">tables_cursor</span> <span class="k">CURSOR</span>
+</span><span class='line'>    <span class="k">FOR</span>
+</span><span class='line'>      <span class="k">SELECT</span>
+</span><span class='line'>        <span class="s1">&#39;ALTER TABLE &#39;</span> <span class="o">+</span> <span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">parent_object_id</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39; DROP CONSTRAINT &#39;</span> <span class="o">+</span> <span class="k">name</span> <span class="k">as</span> <span class="n">dropkey</span>
+</span><span class='line'>      <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">foreign_keys</span>
+</span><span class='line'>    <span class="k">WHERE</span> <span class="n">referenced_object_id</span> <span class="o">=</span> <span class="n">object_id</span><span class="p">(</span><span class="o">@</span><span class="k">table</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">OPEN</span> <span class="n">tables_cursor</span><span class="p">;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    DECLARE @dropkey sysname;</span>
+</span><span class='line'><span class="go">    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
+</span><span class='line'><span class="go">    BEGIN;</span>
+</span><span class='line'><span class="go">      EXECUTE (@dropkey);</span>
+</span><span class='line'><span class="go">      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    END;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    CLOSE tables_cursor;</span>
+</span><span class='line'><span class="go">    DEALLOCATE tables_cursor;</span>
+</span><span class='line'><span class="go">GO</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And how to use it</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">EXECUTE</span> <span class="n">drop_foreign_keys</span> <span class="n">N</span><span class="s1">&#39;TableТame&#39;</span>
+</span><span class='line'><span class="k">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mf">1</span> <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">objects</span> <span class="k">WHERE</span> <span class="n">OBJECT_ID</span> <span class="o">=</span> <span class="n">OBJECT_ID</span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;TableТame&#39;</span><span class="p">)</span> <span class="k">AND</span> <span class="k">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="s1">&#39;U&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">TableName</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grygoriy Mykhalyuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-09T18:55:00+01:00" pubdate data-updated="true">Jan 9<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mssql/'>MSSQL</a>, <a class='category' href='/blog/categories/t-sql/'>T-SQL</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/" data-via="" data-counturl="http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+
+  <script type="text/javascript">var dzone_url = 'http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/';</script>
+  <script type="text/javascript">var dzone_title = 'Drop all foreing key for MS SQL tables';</script>
+  <script type="text/javascript">var dzone_blurb = '';</script>
+  <script type="text/javascript">var dzone_style = '2';</script>
+  <script language="javascript" src="http://widgets.dzone.com/links/widgets/zoneit.js"></script>
+
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/01/03/use-grails-domain-with-string-type-id/" title="Previous Post: use Grails Domain with string type id">&laquo; use Grails Domain with string type id</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/02/06/how-to-run-grails-application-on-separate-port/" title="Next Post: How to run Grails application on separate port">How to run Grails application on separate port &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/09/functional-testing-with-selenium-and-groovy-for-itbooze/">Functional testing with Selenium and Groovy for ITBooze</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/02/add-version-to-your-web-application/">Add version to your web application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/11/presents-from-dzone/">Presents from DZone</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'grygoriy',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Grygoriy Mykhalyuno -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grygoriycom';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/';
+        var disqus_url = 'http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
