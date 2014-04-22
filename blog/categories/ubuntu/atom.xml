@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ubuntu | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2014-04-22T13:02:15+02:00</updated>
+  <updated>2014-04-22T14:54:34+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -18,22 +18,17 @@
     <link href="http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04/"/>
     <updated>2011-06-06T10:00:00+02:00</updated>
     <id>http://grygoriy.github.io/blog/2011/06/06/ubuntu-11-dot-04-to-create-usb-stick-for-ubuntu-10-dot-04</id>
-    <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04.
-At startup you will got nice error</p>
-
+    <content type="html"><![CDATA[<p>Threre is crazy bug if you are trying to use Startup Disk Creator form Ubuntu 11.04 to create startup usb for Ubuntu 10.04. At startup you will got nice error</p>
 <pre>vesamenu.c32: not a COM32R image
 boot:
 vesamenu.c32: not a COM32R image
 boot:
 (...)</pre>
-
-
 <p>To be honest that tells nothing to me. This comes from backward compatibility so if you want USB stick with ubuntu 10.04 you have to have same version of ubuntu.</p>
 
-<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &ldquo;help&rdquo; in prompt. At help menu hit enter, system should run.</p>
+<p>Here is pretty strange workaround that works for me. Just create usb stick with any version of StartupDiskCreator, when you got error message type &#8220;help&#8221; in prompt. At help menu hit enter, system should run.</p>
 
-<p>Workaround is more then strange, but it works</p>
-]]></content>
+<p>Workaround is more then strange, but it works</p>]]></content>
   </entry>
   
 </feed>

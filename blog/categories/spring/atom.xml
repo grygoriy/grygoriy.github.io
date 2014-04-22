@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Spring | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/spring/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2014-04-22T13:02:15+02:00</updated>
+  <updated>2014-04-22T14:54:34+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -20,17 +20,9 @@
     <id>http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security</id>
     <content type="html"><![CDATA[<p>Spring Security can do lot of stuff for you. Account blocking, password salt. But what about brute force blocker. That what you have to do by yourself. Fortunately spring is quite flexible framework so it is not a big deal to configure it.</p>
 
-<p>Let me show you little guide how to do this for Grails application.</p>
+<p>Let me show you little guide how to do this for Grails application. <!--more--> First you have to enable springSecurityEventListener in your Config.groovy grails.plugins.springsecurity.useSecurityEventListener = true</p>
 
-<!--more-->
-
-
-<p>First you have to enable springSecurityEventListener in your Config.groovy
-grails.plugins.springsecurity.useSecurityEventListener = true</p>
-
-<p>then implement listeners
-in /src/bruteforce create classes
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>then implement listeners in /src/bruteforce create classes <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -44,30 +36,21 @@ in /src/bruteforce create classes
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**</span>
-</span><span class='line'><span class="n">Registers</span> <span class="n">all</span> <span class="n">failed</span> <span class="n">attempts</span> <span class="n">to</span> <span class="n">login</span><span class="o">.</span> <span class="n">Main</span> <span class="n">purpose</span> <span class="n">to</span> <span class="n">count</span> <span class="n">attempts</span> <span class="k">for</span> <span class="n">particular</span> <span class="n">account</span> <span class="n">ant</span> <span class="n">block</span> <span class="n">user</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**</span> <span class="n">Registers</span> <span class="n">all</span> <span class="n">failed</span> <span class="n">attempts</span> <span class="n">to</span> <span class="n">login</span><span class="o">.</span> <span class="n">Main</span> <span class="n">purpose</span> <span class="n">to</span> <span class="n">count</span> <span class="n">attempts</span> <span class="k">for</span> <span class="n">particular</span> <span class="n">account</span> <span class="n">ant</span> <span class="n">block</span> <span class="n">user</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;*/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationFailureListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span> <span class="o">{&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'><span class="s">&lt;p&gt;&lt;em&gt;/</span> <span class="kd">class</span> <span class="nc">AuthenticationFailureListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span> <span class="o">{&lt;</span><span class="s">/em&gt;&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;LoginAttemptCacheService loginAttemptCacheService</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">LoginAttemptCacheService</span> <span class="n">loginAttemptCacheService</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">@Override</span>
-</span><span class='line'><span class="s">void onApplicationEvent(AuthenticationFailureBadCredentialsEvent e) {</span>
-</span><span class='line'><span class="s">    loginAttemptCacheService.failLogin(e.authentication.name)</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'><span class="nd">@Override</span>
+</span><span class='line'><span class="kt">void</span> <span class="nf">onApplicationEvent</span><span class="o">(</span><span class="n">AuthenticationFailureBadCredentialsEvent</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">loginAttemptCacheService</span><span class="o">.</span><span class="na">failLogin</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">authentication</span><span class="o">.</span><span class="na">name</span><span class="o">)</span>
+</span><span class='line'><span class="o">}&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-next we have to create listener for successful logins
-in same package
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> next we have to create listener for successful logins in same package <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -79,30 +62,19 @@ in same package
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;*</span>
-</span><span class='line'> <span class="n">Listener</span> <span class="k">for</span> <span class="n">successfull</span> <span class="n">logins</span><span class="o">.</span> <span class="n">Used</span> <span class="k">for</span> <span class="n">reseting</span> <span class="n">number</span> <span class="n">on</span> <span class="n">unsuccessfull</span> <span class="n">logins</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">account</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/em&gt;/</span>
-</span><span class='line'><span class="kd">class</span> <span class="nc">AuthenticationSuccessEventListener</span> <span class="kd">implements</span> <span class="n">ApplicationListener</span><span class="o">{&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'><span class="s">&lt;p&gt;/</span><span class="o">**</span> <span class="n">Listener</span> <span class="k">for</span> <span class="n">successfull</span> <span class="n">logins</span><span class="o">.</span> <span class="n">Used</span> <span class="k">for</span> <span class="n">reseting</span> <span class="n">number</span> <span class="n">on</span> <span class="n">unsuccessfull</span> <span class="n">logins</span> <span class="k">for</span> <span class="n">specific</span> <span class="n">account</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="s">/ class AuthenticationSuccessEventListener implements ApplicationListener{&lt;/</span><span class="n">em</span><span class="o">&gt;&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;LoginAttemptCacheService loginAttemptCacheService</span>
 </span><span class='line'>
 </span><span class='line'><span class="s">@Override</span>
 </span><span class='line'><span class="s">void onApplicationEvent(AuthenticationSuccessEvent e) {</span>
 </span><span class='line'><span class="s">    loginAttemptCacheService.loginSuccess(e.authentication.name)</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-We were not putting them in our grails-app folder so we need to register these classes as spring beans.
-Add next lines into grails-app/conf/spring/resources.groovy
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> We were not putting them in our grails-app folder so we need to register these classes as spring beans. Add next lines into grails-app/conf/spring/resources.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -111,29 +83,16 @@ Add next lines into grails-app/conf/spring/resources.groovy
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;beans = {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="s">&lt;p&gt;beans = { authenticationFailureListener(AuthenticationFailureListener) { loginAttemptCacheService = ref(&amp;#8216;loginAttemptCacheService&amp;#8217;) }&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">authenticationFailureListener</span><span class="o">(</span><span class="n">AuthenticationFailureListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">authenticationSuccessEventListener</span><span class="o">(</span><span class="n">AuthenticationSuccessEventListener</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(</span><span class="s1">&#39;loginAttemptCacheService&#39;</span><span class="o">)</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">authenticationSuccessEventListener</span><span class="o">(</span><span class="n">AuthenticationSuccessEventListener</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">loginAttemptCacheService</span> <span class="o">=</span> <span class="n">ref</span><span class="o">(&amp;</span><span class="err">#</span><span class="mi">39</span><span class="o">;</span><span class="n">loginAttemptCacheService</span><span class="o">&amp;</span><span class="err">#</span><span class="mi">39</span><span class="o">;)</span>
+</span><span class='line'><span class="o">}&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-You&rsquo;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService
-Let&rsquo;s implement it. This would be typical grails service
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> You&#8217;ve probably notice usage of LoginAttemptCacheService loginAttemptCacheService Let&#8217;s implement it. This would be typical grails service <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -199,22 +158,13 @@ Let&rsquo;s implement it. This would be typical grails service
 <span class='line-number'>64</span>
 <span class='line-number'>65</span>
 <span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="s">&lt;p&gt;package com.grygoriy&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheBuilder</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheLoader</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.cache.LoadingCache</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kn">import</span> <span class="nn">com.google.common.cache.CacheBuilder</span> <span class="kn">import</span> <span class="nn">com.google.common.cache.CacheLoader</span> <span class="kn">import</span> <span class="nn">com.google.common.cache.LoadingCache</span><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;import java.util.concurrent.TimeUnit</span>
-</span><span class='line'><span class="s">import org.apache.commons.lang.math.NumberUtils</span>
-</span><span class='line'><span class="s">import javax.annotation.PostConstruct&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'><span class="s">&lt;p&gt;import java.util.concurrent.TimeUnit import org.apache.commons.lang.math.NumberUtils import javax.annotation.PostConstruct&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="kd">class</span> <span class="nc">LoginAttemptCacheService</span> <span class="o">{&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
@@ -227,7 +177,7 @@ Let&rsquo;s implement it. This would be typical grails service
 </span><span class='line'><span class="s">    allowedNumberOfAttempts = grailsApplication.config.brutforce.loginAttempts.allowedNumberOfAttempts</span>
 </span><span class='line'><span class="s">    int time = grailsApplication.config.brutforce.loginAttempts.time</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">    log.info &quot;account block configured for $time minutes&quot;</span>
+</span><span class='line'><span class="s">    log.info &amp;quot;account block configured for $time minutes&amp;quot;</span>
 </span><span class='line'><span class="s">    attempts = CacheBuilder.newBuilder()</span>
 </span><span class='line'><span class="s">               .expireAfterWrite(time, TimeUnit.MINUTES)</span>
 </span><span class='line'><span class="s">               .build({0} as CacheLoader);</span>
@@ -240,7 +190,7 @@ Let&rsquo;s implement it. This would be typical grails service
 </span><span class='line'> <span class="o">*</span><span class="s">/</span>
 </span><span class='line'><span class="s">def failLogin(String login) {</span>
 </span><span class='line'><span class="s">    def numberOfAttempts = attempts.get(login)</span>
-</span><span class='line'><span class="s">    log.debug &quot;fail login $login previous number for attempts $numberOfAttempts&quot;</span>
+</span><span class='line'><span class="s">    log.debug &amp;quot;fail login $login previous number for attempts $numberOfAttempts&amp;quot;</span>
 </span><span class='line'><span class="s">    numberOfAttempts++</span>
 </span><span class='line'>
 </span><span class='line'><span class="s">    if (numberOfAttempts &amp;amp;gt; allowedNumberOfAttempts) {</span>
@@ -256,7 +206,7 @@ Let&rsquo;s implement it. This would be typical grails service
 </span><span class='line'> <span class="o">*</span> <span class="nd">@param</span> <span class="n">login</span> <span class="o">-</span> <span class="n">username</span> <span class="n">which</span> <span class="n">is</span> <span class="n">login</span>
 </span><span class='line'> <span class="o">*</span><span class="s">/</span>
 </span><span class='line'><span class="s">def loginSuccess(String login) {</span>
-</span><span class='line'><span class="s">    log.debug &quot;successfull login for $login&quot;</span>
+</span><span class='line'><span class="s">    log.debug &amp;quot;successfull login for $login&amp;quot;</span>
 </span><span class='line'><span class="s">    attempts.invalidate(login)</span>
 </span><span class='line'><span class="s">}</span>
 </span><span class='line'>
@@ -265,69 +215,40 @@ Let&rsquo;s implement it. This would be typical grails service
 </span><span class='line'> <span class="o">*</span> <span class="nd">@param</span> <span class="n">login</span> <span class="o">-</span> <span class="n">username</span> <span class="n">that</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">disabled</span>
 </span><span class='line'> <span class="o">*</span><span class="s">/</span>
 </span><span class='line'><span class="s">private void blockUser(String login) {</span>
-</span><span class='line'><span class="s">    log.debug &quot;blocking user: $login&quot;</span>
+</span><span class='line'><span class="s">    log.debug &amp;quot;blocking user: $login&amp;quot;</span>
 </span><span class='line'><span class="s">    def user = User.findByUsername(login)</span>
 </span><span class='line'><span class="s">    if (user) {</span>
 </span><span class='line'><span class="s">        user.accountLocked = true;</span>
 </span><span class='line'><span class="s">        user.save(flush: true)</span>
 </span><span class='line'><span class="s">    }</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> We will be using CacheBuilder from google guava library. So please add next lines to BuildConfig.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
 </pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="s">&lt;pre&gt;&lt;code&gt;dependencies {</span>
-</span><span class='line'><span class="s">    runtime &#39;com.google.guava:guava:11.0.1&#39;</span>
-</span><span class='line'><span class="s">}</span>
-</span><span class='line'><span class="s">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'><span class="s">    runtime &amp;#39;com.google.guava:guava:11.0.1&amp;#39;</span>
+</span><span class='line'><span class="s">}&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
 </span><span class='line'>
 </span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-And the last step we will add service configuration to Config.groovy
-<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> And the last step we will add service configuration to Config.groovy <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;</span><span class="s">/p&gt;</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="s">&lt;p&gt;brutforce {&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">loginAttempts</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">time</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span class='line'>    <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'><span class="o">&lt;</span><span class="s">/code&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-That is it, you ready to run you application.
-For typical java project almost everything will be the same. Same listeners and same services.</p>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">brutforce</span> <span class="o">{</span> <span class="n">loginAttempts</span> <span class="o">{</span> <span class="n">time</span> <span class="o">=</span> <span class="mi">5</span> <span class="n">allowedNumberOfAttempts</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div> That is it, you ready to run you application. For typical java project almost everything will be the same. Same listeners and same services.</p>
 
-<p>More about Spring Security Events
-More about caching with Google guava</p>
+<p>More about Spring Security Events More about caching with Google guava</p>
 
-<p>Grails users can simple use this plugin <a href="https://github.com/grygoriy/bruteforcedefender">https://github.com/grygoriy/bruteforcedefender</a>
-UPD: Plugin now at <a href="http://grails.org/plugin/bruteforce-defender">http://grails.org/plugin/bruteforce-defender</a>
-Enjoy :)</p>
-]]></content>
+<p>Grails users can simple use this plugin https://github.com/grygoriy/bruteforcedefender UPD: Plugin now at http://grails.org/plugin/bruteforce-defender Enjoy :)</p>]]></content>
   </entry>
   
 </feed>

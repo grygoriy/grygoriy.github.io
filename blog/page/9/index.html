@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої& &hellip;">
+  <meta name="description" content="Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &#8220;свої&# &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,41 +113,24 @@
   </header>
 
 
-  <div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &ldquo;свої&rdquo; дані. Уявімо що партиція забита &ndash; тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
+  <div class="entry-content"><p>Дані файлові системи резервують 5% місця для потреб root. Робиться це для того що ви ніколи не змогли повністю зайняти все пісце під &#8220;свої&#8221; дані. Уявімо що партиція забита - тоді програма не зможе записати лог у /var/log що приведе, у більшості випадків, до краху. Власне для того щоб система не падала з невідомих причин і зроблене таки обмеження, тепер ми працюємо із системо без навичок системного даміністратора. Правда при сучасних об&#8217;ємах дисків (250/320/1тб) 5% утворюють дуже значний об&#8217;єм. І якщо на / або /var ліміти мають зміст, то /home віддвати шкода.</p>
 
 <p>Змінити це можна командою tune2fs</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>man tune2fs</span></code></pre></td></tr></table></div></figure>
+<p>tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
 
+<p>цікавиити нас будуть два параметри -m reserved-blocks-percentage -r reserved-blocks-count</p>
 
-<p>tune2fs &ndash; adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems</p>
-
-<p>цікавиити нас будуть два параметри
--m reserved-blocks-percentage
--r  reserved-blocks-count</p>
-
-<p>-m вказує відсоток блоків у відсотках
--r вказує їх абсолютну величину</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>-m вказує відсоток блоків у відсотках -r вказує їх абсолютну величину</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -m 2 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>змінить ліміт до двох відотків</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>- змінить ліміт до двох відотків</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tune2fs -r 0 /dev/sdaX</span></code></pre></td></tr></table></div></figure>
-
-
 <ul>
 <li>вимкне ліміт взагалі, є зміст використовувати тільки для /home</li>
-</ul>
-
-</div>
+</ul></div>
   
   
 
@@ -184,40 +167,27 @@
   </header>
 
 
-  <div class="entry-content"><p>You need to configure subversion &ldquo;server&rdquo; file
-You can find it:</p>
+  <div class="entry-content"><p>You need to configure subversion &#8220;server&#8221; file You can find it:</p>
 
 <p>At windows platform</p>
 
-<p>at Linux based platform
-If you want common proxy setting for all SVN servers
-Find and fix this group</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>at Linux based platform If you want common proxy setting for all SVN servers Find and fix this group</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>[global]
 </span><span class='line'>http-proxy-host=proxyhost
 </span><span class='line'>http-proxy-port=3128</span></code></pre></td></tr></table></div></figure>
-
-
 <p>If you want separed proxy setting for each svn server</p>
 
-<p>Find group called</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure>
-
+<p>Find group called <figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[groups].</span></code></pre></td></tr></table></div></figure></p>
 
 <p>Add new line</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>groupName =</span></code></pre></td></tr></table></div></figure>
-
-
 <p>Add new group with name groupName (previously added)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -231,10 +201,7 @@ Find and fix this group</p>
 </span><span class='line'>http-proxy-password = doubleblah
 </span><span class='line'>http-timeout = 60
 </span><span class='line'>neon-debug-mask = 130</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That&rsquo;s all, just save your file and use it</p>
-</div>
+<p>That&#8217;s all, just save your file and use it</p></div>
   
   
 
@@ -271,8 +238,7 @@ Find and fix this group</p>
   </header>
 
 
-  <div class="entry-content"><p><img src="/images/SoThenITypedGoto500.jpg"></p>
-</div>
+  <div class="entry-content"><img src='/images/SoThenITypedGoto500.jpg' /></div>
   
   
 
@@ -306,35 +272,6 @@ Find and fix this group</p>
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'grygoriy',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

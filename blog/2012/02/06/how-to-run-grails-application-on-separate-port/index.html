@@ -110,17 +110,13 @@
   </header>
 
 
-<div class="entry-content"><p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&rsquo;s allows you to run both applications in same time, work with them and debug</p>
+<div class="entry-content"><p>Some times you need to run your Grails app on different port and different context during development. Typical example when you are developing application that is divided into two or more apps (Services or other) So one application will run on 8080 and other for example 8081. That&#8217;s allows you to run both applications in same time, work with them and debug</p>
 
-<p>So we can change port with command <br/>
-<strong>grails run-app -Dserver.port=8081</strong></p>
+<p>So we can change port with command <br /> <strong>grails run-app -Dserver.port=8081</strong></p>
 
-<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br/>
-<strong>grails.server.port.http=&ldquo;8081&rdquo;</strong></p>
+<p>But it is not very convenient to do it all the time, so I prefer to change it in BuildConfig.groovy, just put next line somewhere in file <br /> <strong>grails.server.port.http=&#8221;8081&#8221;</strong></p>
 
-<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br/>
-<strong>app.context=/</strong></p>
-</div>
+<p>and to change running context (default is localhost:8080/appname) add app.context= to application.properties. Next line will run Grails application at root context <br /> <strong>app.context=/</strong></p></div>
 
 
   <footer>
@@ -213,35 +209,6 @@
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'grygoriy',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

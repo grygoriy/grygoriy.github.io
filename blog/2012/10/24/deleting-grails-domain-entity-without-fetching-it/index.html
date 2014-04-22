@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about &hellip;">
+  <meta name="description" content="So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,28 +110,20 @@
   </header>
 
 
-<div class="entry-content"><p>So many times I&rsquo;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured.
-Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. <a href="http://localhost/comments/delete/1">http://localhost/comments/delete/1</a>
-Implementation of controller usually looks like</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class="entry-content"><p>So many times I&#8217;ve seen how people working with Hibernate and complaining how slow it is. What I actually see, is how people do not care about tools that they are using. They have strange assumption if tool supposed to their life easier then it supposes to 100% easier and no reason to read posts about such tool or investigate how it can be configured. Here is only on tip how to avoid useless selects hibernate or Grails GORM. Imaging you have an application that manipulates some data, lets say Comments. There is also controller or some API to delete one comment. If request comes from somewhere outside you application usually it looks like delete something with id=1. http://localhost/comments/delete/1 Implementation of controller usually looks like</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">comment</span> <span class="o">=</span> <span class="n">Comment</span><span class="o">.</span><span class="na">findById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">comment</span><span class="o">?.</span><span class="na">delete</span><span class="o">()</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>comment</span> <span class='o'>=</span> <span class='n'>Comment</span><span class='o'>.</span><span class='na'>findById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
+</span><span class='line'>        <span class='n'>comment</span><span class='o'>?.</span><span class='na'>delete</span><span class='o'>()</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&rsquo;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query.
-Comments.executeUpdate(&ldquo;delete from Comments where id = :id&rdquo;, [id:commentId])
-Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p>So bad part on this example is that we fetch from database entity that we do not need at all. We want to delete it. Hibernate and so GORM are working objects and not with parts of its fields. But it doesn&#8217;t mean that you cannot do it, just use HQL. Here is simple HQL that will generates pure delete SQL query. Comments.executeUpdate(&#8220;delete from Comments where id = :id&#8221;, <span>id:commentId</span>) Of cause you would like to write such code whenever you will need to delete entity, so we will add dynamic method to each Domain class in our application. Please add next code to your BootStrap.groovy</p>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -140,33 +132,27 @@ Of cause you would like to write such code whenever you will need to delete enti
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="n">grailsApplication</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='n'>grailsApplication</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="kt">def</span> <span class="n">init</span> <span class="o">=</span> <span class="o">{</span> <span class="n">servletContext</span> <span class="o">-&gt;</span>
-</span><span class='line'>        <span class="n">grailsApplication</span><span class="o">.</span><span class="na">domainClasses</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span><span class="kt">def</span> <span class="n">domain</span> <span class="o">-&gt;</span>
-</span><span class='line'>            <span class="n">domain</span><span class="o">.</span><span class="na">metaClass</span><span class="o">.</span><span class="na">static</span><span class="o">.</span><span class="na">deleteById</span> <span class="o">=</span> <span class="o">{</span><span class="kt">def</span> <span class="n">id</span> <span class="o">-&gt;</span>
-</span><span class='line'>                <span class="n">executeUpdate</span><span class="o">(</span><span class="s2">&quot;delete from ${domain.name} where id = :id&quot;</span><span class="o">,</span> <span class="o">[</span><span class="nl">id:</span><span class="n">id</span><span class="o">])</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">}</span>
-</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class='kt'>def</span> <span class='n'>init</span> <span class='o'>=</span> <span class='o'>{</span> <span class='n'>servletContext</span> <span class='o'>-&gt;</span>
+</span><span class='line'>        <span class='n'>grailsApplication</span><span class='o'>.</span><span class='na'>domainClasses</span><span class='o'>.</span><span class='na'>each</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>domain</span> <span class='o'>-&gt;</span>
+</span><span class='line'>            <span class='n'>domain</span><span class='o'>.</span><span class='na'>metaClass</span><span class='o'>.</span><span class='na'>static</span><span class='o'>.</span><span class='na'>deleteById</span> <span class='o'>=</span> <span class='o'>{</span><span class='kt'>def</span> <span class='n'>id</span> <span class='o'>-&gt;</span>
+</span><span class='line'>                <span class='n'>executeUpdate</span><span class='o'>(</span><span class='s2'>&quot;delete from ${domain.name} where id = :id&quot;</span><span class='o'>,</span> <span class='o'>[</span><span class='nl'>id:</span><span class='n'>id</span><span class='o'>])</span>
+</span><span class='line'>            <span class='o'>}</span>
+</span><span class='line'>        <span class='o'>}</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
 <p>Now each of your domain class has the method deleteById, and our example became</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class="kt">def</span> <span class="nf">deleteComment</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="kt">def</span> <span class="n">commentId</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="na">long</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">)</span>
-</span><span class='line'>        <span class="n">Comment</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">commentId</span><span class="o">)</span>
-</span><span class='line'>    <span class="o">}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'>    <span class='kt'>def</span> <span class='nf'>deleteComment</span><span class='o'>()</span> <span class='o'>{</span>
+</span><span class='line'>        <span class='kt'>def</span> <span class='n'>commentId</span> <span class='o'>=</span> <span class='n'>params</span><span class='o'>.</span><span class='na'>long</span><span class='o'>(</span><span class='s1'>&#39;id&#39;</span><span class='o'>)</span>
+</span><span class='line'>        <span class='n'>Comment</span><span class='o'>.</span><span class='na'>deleteById</span><span class='o'>(</span><span class='n'>commentId</span><span class='o'>)</span>
+</span><span class='line'>    <span class='o'>}</span>
 </span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can use this Grails plugin <a href="https://github.com/grygoriy/grails_gorm_utils">https://github.com/grygoriy/grails_gorm_utils</a> that adds this method for you. Enjoy!</p>
-</div>
+<p>You can use this Grails plugin https://github.com/grygoriy/grails_gorm_utils that adds this method for you. Enjoy!</p></div>
 
 
   <footer>
@@ -259,35 +245,6 @@ Of cause you would like to write such code whenever you will need to delete enti
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'grygoriy',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

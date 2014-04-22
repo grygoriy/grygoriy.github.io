@@ -9,8 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Для себе виявив цікавий скрипт у грейлс
-grails schema-export Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. &hellip;">
+  <meta name="description" content="Для себе виявив цікавий скрипт у грейлс grails schema-export Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,22 +110,13 @@ grails schema-export Власне все що він робить &ndash; це �
   </header>
 
 
-<div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс
-<em>grails schema-export</em></p>
+<div class="entry-content"><p>Для себе виявив цікавий скрипт у грейлс <em>grails schema-export</em></p>
 
-<p>Власне все що він робить &ndash; це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
+<p>Власне все що він робить - це генерує скрипт на основі мапінгів доменних класів. Правду кажучи я люблю сам писаті але кілька роз довелось будувати вручну на основі існоючої системи і тоді дуже би знадобився. Але як то кажуть, досвід це та річ яка прихоить коли ти вже все зробив :)</p>
 
-<p>Якщо виконати
-<em>grails schema-export</em>
-то схема бази даних буде екпортована у target/ddl.sql
-Можна екпортувати окремі доменні класи</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
+<p>Якщо виконати <em>grails schema-export</em> то схема бази даних буде екпортована у target/ddl.sql Можна екпортувати окремі доменні класи</p>
+<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>grails schema-export com.User</span></code></pre></td></tr></table></div></figure></div>
 
 
   <footer>
@@ -219,35 +209,6 @@ grails schema-export Власне все що він робить &ndash; це �
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'grygoriy',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

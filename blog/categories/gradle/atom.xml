@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gradle | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/gradle/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2014-04-22T13:02:15+02:00</updated>
+  <updated>2014-04-22T14:54:34+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -20,13 +20,11 @@
     <id>http://grygoriy.github.io/blog/2010/11/12/gradle-vikoristannia-groovy-i-java-v-odnomu-proiekti</id>
     <content type="html"><![CDATA[<p>gradle using groovy and java in single project.</p>
 
-<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо.
-Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
+<p>Перейшов недавно в своїх проектах на gradle. Враження супер, але це окремо. Захотів я використовувати одночасно і groovy і java в пректі. Ну поперше тести а по друге щонайменше перевести доменні сутності.. просто набридло getters; setters генерувати. І так проблема gradle має підтримку groovyб там все просто і в прикладах все навіть працює. В мене ні.</p>
 
-<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві &ndash; ви отримаєте помилку що компіляція не вдалась &ndash; клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
+<p>Суть проблеми що gradle пешре виконує компіляцію java класів з src/main/java а тільки потім groovy з src/main/groovy. І якщо у вас явові класи використовую класи з груві - ви отримаєте помилку що компіляція не вдалась - клас не знайшло. Благо gradle дозволяє тримати в src/main/groovy обидва види класів.</p>
 
-<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля &ndash; воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>
-]]></content>
+<p>Рішення банальне перенести весь проект в src/main/groovy і вуаля - воно працює. Не саме елегантне рішення але очевидніше і простіше ніж міняти послідовність тасків в білді.</p>]]></content>
   </entry>
   
 </feed>

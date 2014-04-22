@@ -110,45 +110,21 @@
   </header>
 
 
-<div class="entry-content"><p>Not always you can run tests via IDE. Sometimes configs are complected and it is much easier just to type</p>
+<div class="entry-content"><p>Not always you can run tests via IDE. Sometimes configs are complected and it is much easier just to type <pre> $ mvn test </pre></p>
 
-<pre> $ mvn test </pre>
+<p>If you want to debug them, you can connect via remote.</p>
 
+<ol>
+<li>run you test <pre>$ mvn test -Dmaven.surefire.debug </pre> maven will prepare environment and will wait for remote connection</li>
 
-<p>If you want to debug them, you can connect via remote. <br/></p>
+<li>connect via Idea <img src='/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/01.png' /></li>
 
-<!--more-->
+<li>start debug <br /> <p>
+<img src='/images/2011-01-20-how-to-debug-tests-maven-test-via-intellij-idea/02.png' />
+</p></li>
 
-
-<ul>
-<li>run you test <br/></li>
-</ul>
-
-
-<pre>$ mvn test -Dmaven.surefire.debug </pre>
-
-
-<p>maven will prepare environment and will wait for remote connection <br/></p>
-
-<ul>
-<li>connect via Idea <br/></li>
-</ul>
-
-
-<p><img src="https://lh5.googleusercontent.com/-d2GmgIvfhOQ/TxkmO-2ErvI/AAAAAAAAFz0/LduWaxnFOpk/w694-h592-no/Untitled.png"> <br/></p>
-
-<ul>
-<li>start debug <br/></li>
-</ul>
-
-
-<p><img src="https://lh3.googleusercontent.com/-Xe-YoYmMITg/Txkm1OSUWYI/AAAAAAAAFz8/LKBvgNDOAUM/w219-h53-no/run.png"><br/></p>
-
-<ul>
 <li>Now test will stop at your breakpoints. Profit!</li>
-</ul>
-
-</div>
+</ol></div>
 
 
   <footer>
@@ -241,35 +217,6 @@
       </li>
     
   </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'grygoriy',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 
