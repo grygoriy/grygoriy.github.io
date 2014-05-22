@@ -9,7 +9,8 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +111,8 @@
   </header>
 
 
-<div class="entry-content"><img src='/images/SoThenITypedGoto500.jpg' /></div>
+<div class="entry-content"><p><img src="/images/SoThenITypedGoto500.jpg"></p>
+</div>
 
 
   <footer>
@@ -195,6 +197,35 @@
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'grygoriy',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

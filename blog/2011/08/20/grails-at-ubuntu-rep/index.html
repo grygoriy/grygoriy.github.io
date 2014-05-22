@@ -9,7 +9,7 @@
   <meta name="author" content="Grygoriy Mykhalyuno">
 
   
-  <meta name="description" content="Maybe it is not new to anyone, it became pleasant surprise to me that I don&#8217;t have to download Grails manually any more. Now I use &#8220; &hellip;">
+  <meta name="description" content="Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,19 +110,41 @@
   </header>
 
 
-<div class="entry-content"><p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&#8217;t have to download Grails manually any more. Now I use &#8220;Ubuntu way&#8221;.</p>
+<div class="entry-content"><p>Maybe it is not new to anyone, it became pleasant surprise to me that I don&rsquo;t have to download Grails manually any more. Now I use &ldquo;Ubuntu  way&rdquo;.</p>
 
 <p>First of all we need to add Grails repo</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo add-apt-repository ppa:groovy-dev/grails
 </span><span class='line'>sudo apt-get update</span></code></pre></td></tr></table></div></figure>
-<p>That&#8217;s all, now you can install latest stable release of Grails</p>
-<figure class='code'><div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
-<p>The thing I&#8217;m exiting a lot is that you can install any version of Grails. Usually you don&#8217;t migrate to new version right after it has been released.</p>
 
-<p>So here is list of available Grails versions sudo aptitude search grails <br /> p grails - A rapid web development platform built on Groovy <br /> p grails-1.2.5 - A rapid web development platform on Groovy <br /> p grails-1.3.0 - A rapid web development platform on Groovy <br /> p grails-1.3.1 - A rapid web development platform on Groovy <br /> p grails-1.3.2 - A rapid web development platform on Groovy <br /> p grails-1.3.3 - A rapid web development platform on Groovy <br /> p grails-1.3.4 - A rapid web development platform on Groovy <br /> p grails-1.3.5 - A rapid web development platform on Groovy <br /> p grails-1.3.6 - A rapid web development platform on Groovy <br /> p grails-1.3.7 - A rapid web development platform on Groovy <br /> p grails-1.4.0 - A rapid web development platform on Groovy <br /> p grails-2.0.0 - A rapid web development platform on Groovy <br /> p grails-bash-completion - Provides bash autocompletion for <br /> Grails, a rapid web development platform built on Groovy</p></div>
+
+<p>That&rsquo;s all,  now you can install latest stable release of Grails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install grails</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thing I&rsquo;m exiting a lot is that you can install any version of Grails. Usually you don&rsquo;t migrate to new version right after it has been released.</p>
+
+<p>So here is list of available Grails versions
+sudo aptitude search grails <br/>
+p grails &ndash; A rapid web development platform built on Groovy <br/>
+p grails-1.2.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.1 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.2 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.3 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.4 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.5 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.6 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.3.7 &ndash; A rapid web development platform on Groovy <br/>
+p grails-1.4.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-2.0.0 &ndash; A rapid web development platform on Groovy <br/>
+p grails-bash-completion &ndash; Provides bash autocompletion for  <br/>
+Grails, a rapid web development platform built on Groovy</p>
+</div>
 
 
   <footer>
@@ -215,6 +237,35 @@
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'grygoriy',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

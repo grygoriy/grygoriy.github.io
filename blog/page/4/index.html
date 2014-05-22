@@ -113,12 +113,15 @@
   </header>
 
 
-  <div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&#8217;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
+  <div class="entry-content"><p>My typical database development process usually looks like this of sql scripts for creating table, populating with test data and dropping tables. Creating tables usually goes pretty smoothly. I just run all script files to create schema and populate it with test data. When want to drop all tables to revert schema to previous version I have to execute scripts that drops tables, columns etc. Looks pretty simple, but using foreign keys force you to drop table in concrete order to resolve all foreign keys dependencies. I&rsquo;m not exiting to have db script were I should be over careful and remember order how can I drop my tables.</p>
 
-<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br /> For MS SQL I&#8217;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br /> can be deleted without any errors&lt;</p>
+<p>For MySQL solution was to disable foreign key check for build operation and enable it after<br />
+For MS SQL I&rsquo;ve create simple stored procedure that drops all foreign keys point to this table. After it table<br />
+can be deleted without any errors&lt;</p>
 
 <p>Here is stored procedure</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -141,38 +144,45 @@
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
 <span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>CREATE</span> <span class='k'>PROCEDURE</span> <span class='n'>drop_foreign_keys</span>
-</span><span class='line'><span class='o'>@</span><span class='k'>table</span> <span class='n'>nvarchar</span><span class='p'>(</span><span class='mf'>50</span><span class='p'>)</span>
-</span><span class='line'><span class='k'>AS</span>
-</span><span class='line'>    <span class='k'>DECLARE</span> <span class='n'>tables_cursor</span> <span class='k'>CURSOR</span>
-</span><span class='line'>    <span class='k'>FOR</span>
-</span><span class='line'>      <span class='k'>SELECT</span>
-</span><span class='line'>        <span class='s1'>&#39;ALTER TABLE &#39;</span> <span class='o'>+</span> <span class='n'>OBJECT_NAME</span><span class='p'>(</span><span class='n'>parent_object_id</span><span class='p'>)</span> <span class='o'>+</span>
-</span><span class='line'>        <span class='s1'>&#39; DROP CONSTRAINT &#39;</span> <span class='o'>+</span> <span class='k'>name</span> <span class='k'>as</span> <span class='n'>dropkey</span>
-</span><span class='line'>      <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>foreign_keys</span>
-</span><span class='line'>    <span class='k'>WHERE</span> <span class='n'>referenced_object_id</span> <span class='o'>=</span> <span class='n'>object_id</span><span class='p'>(</span><span class='o'>@</span><span class='k'>table</span><span class='p'>)</span>
-</span><span class='line'>    <span class='n'>OPEN</span> <span class='n'>tables_cursor</span><span class='p'>;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    DECLARE @dropkey sysname;</span>
-</span><span class='line'><span class='go'>    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
-</span><span class='line'><span class='go'>    BEGIN;</span>
-</span><span class='line'><span class='go'>      EXECUTE (@dropkey);</span>
-</span><span class='line'><span class='go'>      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
-</span><span class='line'><span class='go'>    END;</span>
-</span><span class='line'><span class='go'> </span>
-</span><span class='line'><span class='go'>    CLOSE tables_cursor;</span>
-</span><span class='line'><span class='go'>    DEALLOCATE tables_cursor;</span>
-</span><span class='line'><span class='go'>GO</span>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">drop_foreign_keys</span>
+</span><span class='line'><span class="o">@</span><span class="k">table</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mf">50</span><span class="p">)</span>
+</span><span class='line'><span class="k">AS</span>
+</span><span class='line'>    <span class="k">DECLARE</span> <span class="n">tables_cursor</span> <span class="k">CURSOR</span>
+</span><span class='line'>    <span class="k">FOR</span>
+</span><span class='line'>      <span class="k">SELECT</span>
+</span><span class='line'>        <span class="s1">&#39;ALTER TABLE &#39;</span> <span class="o">+</span> <span class="n">OBJECT_NAME</span><span class="p">(</span><span class="n">parent_object_id</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>        <span class="s1">&#39; DROP CONSTRAINT &#39;</span> <span class="o">+</span> <span class="k">name</span> <span class="k">as</span> <span class="n">dropkey</span>
+</span><span class='line'>      <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">foreign_keys</span>
+</span><span class='line'>    <span class="k">WHERE</span> <span class="n">referenced_object_id</span> <span class="o">=</span> <span class="n">object_id</span><span class="p">(</span><span class="o">@</span><span class="k">table</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">OPEN</span> <span class="n">tables_cursor</span><span class="p">;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    DECLARE @dropkey sysname;</span>
+</span><span class='line'><span class="go">    FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    WHILE (@@FETCH_STATUS &amp;lt;&amp;gt; -1)</span>
+</span><span class='line'><span class="go">    BEGIN;</span>
+</span><span class='line'><span class="go">      EXECUTE (@dropkey);</span>
+</span><span class='line'><span class="go">      FETCH NEXT FROM tables_cursor INTO @dropkey;</span>
+</span><span class='line'><span class="go">    END;</span>
+</span><span class='line'><span class="go"> </span>
+</span><span class='line'><span class="go">    CLOSE tables_cursor;</span>
+</span><span class='line'><span class="go">    DEALLOCATE tables_cursor;</span>
+</span><span class='line'><span class="go">GO</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>And how to use it</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class='k'>EXECUTE</span> <span class='n'>drop_foreign_keys</span> <span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span>
-</span><span class='line'><span class='k'>IF</span> <span class='k'>EXISTS</span><span class='p'>(</span><span class='k'>SELECT</span> <span class='mf'>1</span> <span class='k'>FROM</span> <span class='n'>sys</span><span class='mf'>.</span><span class='n'>objects</span> <span class='k'>WHERE</span> <span class='n'>OBJECT_ID</span> <span class='o'>=</span> <span class='n'>OBJECT_ID</span><span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;TableТame&#39;</span><span class='p'>)</span> <span class='k'>AND</span> <span class='k'>type</span> <span class='o'>=</span> <span class='p'>(</span><span class='n'>N</span><span class='s1'>&#39;U&#39;</span><span class='p'>))</span>
-</span><span class='line'><span class='k'>DROP</span> <span class='k'>TABLE</span> <span class='n'>TableName</span>
-</span></code></pre></td></tr></table></div></figure></div>
+</pre></td><td class='code'><pre><code class='psql'><span class='line'><span class="k">EXECUTE</span> <span class="n">drop_foreign_keys</span> <span class="n">N</span><span class="s1">&#39;TableТame&#39;</span>
+</span><span class='line'><span class="k">IF</span> <span class="k">EXISTS</span><span class="p">(</span><span class="k">SELECT</span> <span class="mf">1</span> <span class="k">FROM</span> <span class="n">sys</span><span class="mf">.</span><span class="n">objects</span> <span class="k">WHERE</span> <span class="n">OBJECT_ID</span> <span class="o">=</span> <span class="n">OBJECT_ID</span><span class="p">(</span><span class="n">N</span><span class="s1">&#39;TableТame&#39;</span><span class="p">)</span> <span class="k">AND</span> <span class="k">type</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span><span class="s1">&#39;U&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">TableName</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
   
   
 
@@ -211,45 +221,62 @@
 
   <div class="entry-content"><p>Some times you need id with different type then Long. It doesn’t metter you have lagacy database or it requirement from your DBA.</p>
 
-<p>In general all you need is described in official docs <a href='http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html'>http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
+<p>In general all you need is described in official docs <a href="http://grails.org/doc/2.0.x/ref/Database%20Mapping/id.html">http://grails.org/doc/2.0.x/ref/Database Mapping/id.html</a></p>
 
 <p>But there is at least one case with very strange behaviour. When we define key as String type</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span> <span class='o'>{</span>
-</span><span class='line'> <span class='kd'>static</span> <span class='n'>mapping</span> <span class='o'>=</span> <span class='o'>{</span>
-</span><span class='line'>   <span class='n'>id</span> <span class='nl'>name:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>column:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>type:</span> <span class='s1'>&#39;string&#39;</span>
-</span><span class='line'> <span class='o'>}</span>
-</span><span class='line'><span class='o'>}</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'> <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>   <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'> <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>For the first look it works fine Foo.get(‘someKey’) returns exact object I was looking. But when we try to use string that looks like a number</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span><span class='o'>.</span><span class='na'>get</span><span class='o'>(</span><span class='err'>&#39;</span><span class='mi'>4</span><span class='err'>’</span><span class='o'>)</span>
+
+
+<p>For the first look it works fine Foo.get(‘someKey’)
+returns exact object I was looking. But when we try to use string that looks like a number</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="err">&#39;</span><span class="mi">4</span><span class="err">’</span><span class="o">)</span>
 </span></code></pre></td></tr></table></div></figure>
+
+
 <p>we will get</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>org</span><span class='o'>.</span><span class='na'>hibernate</span><span class='o'>.</span><span class='na'>TypeMismatchException</span>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">org</span><span class="o">.</span><span class="na">hibernate</span><span class="o">.</span><span class="na">TypeMismatchException</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property. Workaround is to add explicitly id field to domain class</p>
-<figure class='code'> <div class='highlight'><table><tr><td class='gutter'><pre class='line-numbers'><span class='line-number'>1</span>
+
+
+<p>Provided id of the wrong type for class Foo. Expected: class java.lang.String, got class java.lang.Long
+It looks like id field is still Long and grails first of all trying to cast serializable to Long and only after that it looks for type property.
+Workaround is to add explicitly id field to domain class</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class='n'>Foo</span> <span class='o'>{</span>
-</span><span class='line'>  <span class='n'>String</span> <span class='n'>id</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">Foo</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">String</span> <span class="n">id</span>
 </span><span class='line'>
-</span><span class='line'>  <span class='kd'>static</span> <span class='n'>mapping</span> <span class='o'>=</span> <span class='o'>{</span>
-</span><span class='line'>    <span class='n'>id</span> <span class='nl'>name:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>column:</span> <span class='s1'>&#39;code&#39;</span><span class='o'>,</span> <span class='nl'>type:</span> <span class='s1'>&#39;string&#39;</span>
-</span><span class='line'>  <span class='o'>}</span>
-</span><span class='line'><span class='o'>}</span>
+</span><span class='line'>  <span class="kd">static</span> <span class="n">mapping</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">id</span> <span class="nl">name:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">column:</span> <span class="s1">&#39;code&#39;</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">&#39;string&#39;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
-<p>It is mentioned in documentation but now grails knows what type to use. There is issue in grails jira which was closed with resolution Not A Bug.</p></div>
+
+
+<p>It is mentioned in documentation but now grails knows what type to use.
+There is issue in grails jira which was closed with resolution Not A Bug.</p>
+</div>
   
   
 
@@ -286,27 +313,39 @@
   </header>
 
 
-  <div class="entry-content"><p>Цими вихідними пройшли другий і третій етапи проекту &#8220;sport.itevent&#8221;. Цього разу захід був присвячений дню програміста, тому зробили одразу кілька ігор: Quest і Paintball, а також додатково для всіх бажаючих - метання мишок та клавіатур. Дуже приємно відмітити, що цей турнір з кожним разом збирає все більше учасників. В Quest-і прийняло участь 7 команд, серед них були як і бувалі гравці, так і новачки які грали вперше. Paintball, в свою чергу, зібрав 11 команд, а це 55 учасників. Дякуємо Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Також велика подяка Івану Дячишину за участь в організації всіх трьох ігор та окремо за авторську гру Quest. Окремо хочемо подякувати Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Звичайно всі учасники вдячні Івану Дячишину за організації всіх трьох ігор та за авторську гру Quest. Ми вітаємо команд переможців Quest: <ol>
+  <div class="entry-content"><p>Цими вихідними пройшли другий і третій етапи проекту &ldquo;sport.itevent&rdquo;. Цього разу захід був присвячений дню програміста, тому зробили одразу кілька ігор: Quest і Paintball, а також додатково для всіх бажаючих &ndash; метання мишок та клавіатур. Дуже приємно відмітити, що цей турнір з кожним разом збирає все більше учасників. В Quest-і прийняло участь 7 команд, серед них були як і бувалі гравці, так і новачки які грали вперше. Paintball, в свою чергу, зібрав 11 команд, а це 55 учасників.
+Дякуємо Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Також велика подяка Івану Дячишину за участь в організації всіх трьох ігор та окремо за авторську гру Quest. Окремо хочемо подякувати Андрію Сенику та Анатолію Сєрному за допомогу в організації Paintball турніру, Лілі Микитюк за дизайн афіш. Звичайно всі учасники вдячні Івану Дячишину за організації всіх трьох ігор та за авторську гру Quest.
+Ми вітаємо команд переможців
+Quest:</p>
+
+<ol>
 <li>Жовті коцики</li>
 <li>Енігма SoftServe</li>
 <li>Tornado SoftJourn</li>
-</ol></p>
+</ol>
+
 
 <p>Пейнтбол</p>
 
-<ul>
+<ol>
 <li>бЄшені ЇжАчкі SoftServe</li>
-
 <li>Hell Bells SoftJourn</li>
+<li>HomeAway SoftServe</li>
+</ol>
 
-<li>HomeAway SoftServe Фото звіт</li>
-</ul>
 
-<p>Quest sport.itevent 2011 <embed flashvars='host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651454700771619425%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB' height='400' pluginspage='http://www.macromedia.com/go/getflashplayer' src='https://picasaweb.google.com/s/c/bin/slideshow.swf' type='application/x-shockwave-flash' width='600' /></p>
+<p>Фото звіт</p>
 
-<p>paintball srpot.itevent <embed flashvars='host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651410472176670977%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB' height='400' pluginspage='http://www.macromedia.com/go/getflashplayer' src='https://picasaweb.google.com/s/c/bin/slideshow.swf' type='application/x-shockwave-flash' width='600' /></p>
+<p>Quest sport.itevent 2011</p>
 
-<p>Готуємось до натступної гри :)</p></div>
+<p><embed flashvars="host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651454700771619425%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" type="application/x-shockwave-flash" width="600"></embed></p>
+
+<p>paintball srpot.itevent</p>
+
+<p><embed flashvars="host=picasaweb.google.com&amp;hl=en_GB&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fgrishaster%2Falbumid%2F5651410472176670977%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_GB" height="400" pluginspage="http://www.macromedia.com/go/getflashplayer" src="https://picasaweb.google.com/s/c/bin/slideshow.swf" type="application/x-shockwave-flash" width="600"></embed></p>
+
+<p>Готуємось до натступної гри :)</p>
+</div>
   
   
 
@@ -342,6 +381,35 @@
       </li>
     
   </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/grygoriy">@grygoriy</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'grygoriy',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
 </section>
 
 

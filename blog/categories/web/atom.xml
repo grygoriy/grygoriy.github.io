@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Web | Grygoriy Mykhalyuno]]></title>
   <link href="http://grygoriy.github.io/blog/categories/web/atom.xml" rel="self"/>
   <link href="http://grygoriy.github.io/"/>
-  <updated>2014-04-22T14:54:34+02:00</updated>
+  <updated>2014-05-22T16:52:31+02:00</updated>
   <id>http://grygoriy.github.io/</id>
   <author>
     <name><![CDATA[Grygoriy Mykhalyuno]]></name>
@@ -20,10 +20,22 @@
     <id>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application</id>
     <content type="html"><![CDATA[<p>For many times I was facing issue when developers or QC could not figure out which application was deployed to test environment. There were attempts to guess checking functionality. Also this cause lot of misunderstanding inside of team. Here I will add version for Java web application build by Maven. So you could always check this version with specific URL.</p>
 
-<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href='http://grails.org/plugin/build-info'>http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more. <!--more--> Ok, so we will start with maven web project. Assuming you have one. We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. You can pick up any file name you want, this name will be used to access file with URL. Content of my file is:</p>
+<p>Before describing solution for Maven I would like to mention very useful plugin for Grails in case you are using it. Build-info <a href="http://grails.org/plugin/build-info">http://grails.org/plugin/build-info</a>. This plugin will do everything you want end even more.</p>
+
+<!--more-->
+
+
+<p>Ok, so we will start with maven web project. Assuming you have one.
+We need to put file called <em>version.txt</em> into <em>src/main/webapp/</em>. You can pick up any file name you want, this name will be used to access file with URL. Content of my file is:</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Project version - ${project.version} Last commit hash - ${buildNumber} Build at - ${buildDate}</span></code></pre></td></tr></table></div></figure></notextile></div> This is template which we will be filtering with maven. So here is maven config. <div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Project version &ndash; ${project.version}
+</span><span class='line'>Last commit hash &ndash; ${buildNumber}
+</span><span class='line'>Build at &ndash; ${buildDate}</span></code></pre></td></tr></table></div></figure></notextile></div>
+This is template which we will be filtering with maven. So here is maven config.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -78,65 +90,71 @@
 <span class='line-number'>53</span>
 <span class='line-number'>54</span>
 <span class='line-number'>55</span>
-</pre></td><td class='code'><pre><code class='xml'><span class='line'> <span class="nt">&lt;pre</span> <span class="na">class=</span><span class="s">&#39;markdown-html-error&#39;</span> <span class="na">style=</span><span class="s">&#39;border: solid 3px red; background-color: pink&#39;</span><span class="nt">&gt;</span>REXML could not parse this XML/HTML:
-</span><span class='line'><span class="ni">&amp;lt;</span>project<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>!-- Configuration for Git VCS to grab commit hash --<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>scm<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>connection<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/connection<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>developerconnection<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/developerconnection<span class="ni">&amp;gt;</span>
-</span><span class='line'>        <span class="ni">&amp;lt;</span>url<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/url<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>/scm<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>build<span class="ni">&amp;gt;</span>
-</span><span class='line'>      <span class="ni">&amp;lt;</span>plugins<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>!-- Plugin is used to generate build time --<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>groupid<span class="ni">&amp;gt;</span>org.codehaus.mojo<span class="ni">&amp;lt;</span>/groupid<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>artifactid<span class="ni">&amp;gt;</span>buildnumber-maven-plugin<span class="ni">&amp;lt;</span>/artifactid<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>1.1<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>executions<span class="ni">&amp;gt;</span>
-</span><span class='line'>                    <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
-</span><span class='line'>                        <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>generate-resources<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
-</span><span class='line'>                        <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
-</span><span class='line'>                            <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>create<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
-</span><span class='line'>                        <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
-</span><span class='line'>                    <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>/executions<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>                    <span class="ni">&amp;lt;</span>timestampformat<span class="ni">&amp;gt;</span>{0, date, yyyy-MM-dd HH:mm:ss}<span class="ni">&amp;lt;</span>/timestampformat<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>!-- We need to include version.txt file into filter list. So maven will filter it when will be building *.war --<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>groupid<span class="ni">&amp;gt;</span>org.apache.maven.plugins<span class="ni">&amp;lt;</span>/groupid<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>artifactid<span class="ni">&amp;gt;</span>maven-war-plugin<span class="ni">&amp;lt;</span>/artifactid<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>2.3<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>                    <span class="ni">&amp;lt;</span>webresources<span class="ni">&amp;gt;</span>
-</span><span class='line'>                        <span class="ni">&amp;lt;</span>resource<span class="ni">&amp;gt;</span>
-</span><span class='line'>                            <span class="ni">&amp;lt;</span>filtering<span class="ni">&amp;gt;</span>true<span class="ni">&amp;lt;</span>/filtering<span class="ni">&amp;gt;</span>
-</span><span class='line'>                            <span class="ni">&amp;lt;</span>directory<span class="ni">&amp;gt;</span>src/main/webapp<span class="ni">&amp;lt;</span>/directory<span class="ni">&amp;gt;</span>
-</span><span class='line'>                            <span class="ni">&amp;lt;</span>includes<span class="ni">&amp;gt;</span>
-</span><span class='line'>                                <span class="ni">&amp;lt;</span>include<span class="ni">&amp;gt;</span>version.txt<span class="ni">&amp;lt;</span>/include<span class="ni">&amp;gt;</span>
-</span><span class='line'>                            <span class="ni">&amp;lt;</span>/includes<span class="ni">&amp;gt;</span>
-</span><span class='line'>                        <span class="ni">&amp;lt;</span>/resource<span class="ni">&amp;gt;</span>
-</span><span class='line'>                    <span class="ni">&amp;lt;</span>/webresources<span class="ni">&amp;gt;</span>
-</span><span class='line'>                <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
-</span><span class='line'>            <span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span><span class="nt">&lt;/pre&gt;&lt;/p&gt;</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project&gt;&lt;/p&gt;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span>  <span class="ni">&amp;lt;</span>/plugins<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>!-- Configuration for Git VCS to grab commit hash --<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>scm<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>connection<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/connection<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>developerconnection<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/developerconnection<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>url<span class="ni">&amp;gt;</span>scm:git:file://.<span class="ni">&amp;lt;</span>/url<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>/scm<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="ni">&amp;lt;</span>build<span class="ni">&amp;gt;</span>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>plugins<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>!-- Plugin is used to generate build time --<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>groupid<span class="ni">&amp;gt;</span>org.codehaus.mojo<span class="ni">&amp;lt;</span>/groupid<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>artifactid<span class="ni">&amp;gt;</span>buildnumber-maven-plugin<span class="ni">&amp;lt;</span>/artifactid<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>1.1<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>executions<span class="ni">&amp;gt;</span>
+</span><span class='line'>                <span class="ni">&amp;lt;</span>execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>                    <span class="ni">&amp;lt;</span>phase<span class="ni">&amp;gt;</span>generate-resources<span class="ni">&amp;lt;</span>/phase<span class="ni">&amp;gt;</span>
+</span><span class='line'>                    <span class="ni">&amp;lt;</span>goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>                        <span class="ni">&amp;lt;</span>goal<span class="ni">&amp;gt;</span>create<span class="ni">&amp;lt;</span>/goal<span class="ni">&amp;gt;</span>
+</span><span class='line'>                    <span class="ni">&amp;lt;</span>/goals<span class="ni">&amp;gt;</span>
+</span><span class='line'>                <span class="ni">&amp;lt;</span>/execution<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>/executions<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>                <span class="ni">&amp;lt;</span>timestampformat<span class="ni">&amp;gt;</span>{0, date, yyyy-MM-dd HH:mm:ss}<span class="ni">&amp;lt;</span>/timestampformat<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>!-- We need to include version.txt file into filter list. So maven will filter it when will be building *.war --<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>plugin<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>groupid<span class="ni">&amp;gt;</span>org.apache.maven.plugins<span class="ni">&amp;lt;</span>/groupid<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>artifactid<span class="ni">&amp;gt;</span>maven-war-plugin<span class="ni">&amp;lt;</span>/artifactid<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>version<span class="ni">&amp;gt;</span>2.3<span class="ni">&amp;lt;</span>/version<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>                <span class="ni">&amp;lt;</span>webresources<span class="ni">&amp;gt;</span>
+</span><span class='line'>                    <span class="ni">&amp;lt;</span>resource<span class="ni">&amp;gt;</span>
+</span><span class='line'>                        <span class="ni">&amp;lt;</span>filtering<span class="ni">&amp;gt;</span>true<span class="ni">&amp;lt;</span>/filtering<span class="ni">&amp;gt;</span>
+</span><span class='line'>                        <span class="ni">&amp;lt;</span>directory<span class="ni">&amp;gt;</span>src/main/webapp<span class="ni">&amp;lt;</span>/directory<span class="ni">&amp;gt;</span>
+</span><span class='line'>                        <span class="ni">&amp;lt;</span>includes<span class="ni">&amp;gt;</span>
+</span><span class='line'>                            <span class="ni">&amp;lt;</span>include<span class="ni">&amp;gt;</span>version.txt<span class="ni">&amp;lt;</span>/include<span class="ni">&amp;gt;</span>
+</span><span class='line'>                        <span class="ni">&amp;lt;</span>/includes<span class="ni">&amp;gt;</span>
+</span><span class='line'>                    <span class="ni">&amp;lt;</span>/resource<span class="ni">&amp;gt;</span>
+</span><span class='line'>                <span class="ni">&amp;lt;</span>/webresources<span class="ni">&amp;gt;</span>
+</span><span class='line'>            <span class="ni">&amp;lt;</span>/configuration<span class="ni">&amp;gt;</span>
+</span><span class='line'>        <span class="ni">&amp;lt;</span>/plugin<span class="ni">&amp;gt;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="ni">&amp;lt;</span>/plugins<span class="ni">&amp;gt;</span>
 </span><span class='line'><span class="ni">&amp;lt;</span>/build<span class="ni">&amp;gt;</span>
 </span><span class='line'><span class="ni">&amp;lt;</span>properties<span class="ni">&amp;gt;</span>
 </span><span class='line'>    <span class="ni">&amp;lt;</span>!-- Properties to format date output --<span class="ni">&amp;gt;</span>
-</span><span class='line'>    <span class="ni">&amp;lt;</span>maven .build.timestamp.format=<span class="ni">&amp;quot;&amp;quot;&amp;gt;</span>dd-MM-yy_HH:mm<span class="ni">&amp;lt;</span>/maven<span class="ni">&amp;gt;</span>
+</span><span class='line'>    <span class="ni">&amp;lt;</span>maven .build.timestamp.format=&quot;&quot;<span class="ni">&amp;gt;</span>dd-MM-yy_HH:mm<span class="ni">&amp;lt;</span>/maven<span class="ni">&amp;gt;</span>
 </span><span class='line'>    <span class="ni">&amp;lt;</span>builddate<span class="ni">&amp;gt;</span>${maven.build.timestamp}<span class="ni">&amp;lt;</span>/builddate<span class="ni">&amp;gt;</span>
-</span><span class='line'><span class="ni">&amp;lt;</span>/properties<span class="ni">&amp;gt;</span><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'><span class="nt">&lt;pre</span> <span class="na">class=</span><span class="s">&#39;markdown-html-error&#39;</span> <span class="na">style=</span><span class="s">&#39;border: solid 3px red; background-color: pink&#39;</span><span class="nt">&gt;</span>REXML could not parse this XML/HTML:
-</span><span class='line'><span class="ni">&amp;lt;</span>/project<span class="ni">&amp;gt;</span><span class="nt">&lt;/pre&gt;</span>
-</span><span class='line'><span class="nt">&lt;p&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div> This is it. Now you can build your application <div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mvn package</span></code></pre></td></tr></table></div></figure></notextile></div> Deploy and check under url <a href='http://localhost:8080/version.txt'>http://localhost:8080/version.txt</a></p>
+</span><span class='line'><span class="ni">&amp;lt;</span>/properties<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+This is it. Now you can build your application
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mvn package</span></code></pre></td></tr></table></div></figure></notextile></div>
+Deploy and check under url <a href="http://localhost:8080/version.txt">http://localhost:8080/version.txt</a></p>
 
-<p>Output should look like this <img src="https://lh4.googleusercontent.com/-r0SbSmLtXKA/UiGdaPeTbHI/AAAAAAAAQGI/264kpUHB1SU/w979-h560-no/Screenshot+from+2013-08-31+09%253A37%253A10.png"> Enjoy.</p>]]></content>
+<p>Output should look like this
+<img class="<a" src="href="https://lh4.googleusercontent.com/-r0SbSmLtXKA/UiGdaPeTbHI/AAAAAAAAQGI/264kpUHB1SU/w979-h560-no/Screenshot+from+2013-08-31+09%253A37%253A10.png">https://lh4.googleusercontent.com/-r0SbSmLtXKA/UiGdaPeTbHI/AAAAAAAAQGI/264kpUHB1SU/w979-h560-no/Screenshot+from+2013-08-31+09%253A37%253A10.png</a>">
+Enjoy.</p>
+]]></content>
   </entry>
   
 </feed>
