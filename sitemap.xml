@@ -84,31 +84,31 @@
         <loc>
             http://grygoriy.github.io/blog/2012/01/03/use-grails-domain-with-string-type-id/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
             http://grygoriy.github.io/blog/2012/01/09/drop-all-foreing-key-for-ms-sql-tables/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
             http://grygoriy.github.io/blog/2012/02/06/how-to-run-grails-application-on-separate-port/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
             http://grygoriy.github.io/blog/2012/02/13/awesomeness-of-groovy-named-parameters/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
             http://grygoriy.github.io/blog/2012/09/23/working-with-more-then-one-grails-version-on-same-environment/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/2012/10/04/how-to-filter-blogger-rss/</loc>
@@ -118,7 +118,7 @@
         <loc>
             http://grygoriy.github.io/blog/2012/10/06/prevent-brute-force-attack-with-spring-security/
         </loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
@@ -132,7 +132,7 @@
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/2013/09/02/add-version-to-your-web-application/</loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>
@@ -141,16 +141,20 @@
         <lastmod>2014-04-22T13:01:56+02:00</lastmod>
     </url>
     <url>
+        <loc>http://grygoriy.github.io/2011/08/my-presentation-at-it-booze-about-some.html/</loc>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
+    </url>
+    <url>
         <loc>http://grygoriy.github.io/about/</loc>
         <lastmod>2014-05-21T16:21:11+02:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/blog/archives/</loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/</loc>
-        <lastmod>2014-05-22T16:59:53+02:00</lastmod>
+        <lastmod>2014-05-23T05:41:41+02:00</lastmod>
     </url>
     <url>
         <loc>http://grygoriy.github.io/robots.txt</loc>
